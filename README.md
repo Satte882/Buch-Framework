@@ -18,24 +18,50 @@ Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.
 
 `Buchidee → Story Package → Figuren-/Recherche-Basis → Szenenplanung → Scene Readiness → Prosa → Qualitätsprüfung → Produktion`
 
-Jede Stufe besitzt ein konkretes Arbeitsartefakt und einen menschlichen Gate. Die Framework-Tiefe wird ab jetzt nur dort ausgebaut, wo sie nachweisbar Downstream-Rework spart oder eine irreversible Entscheidung schützt.
+Jede Stufe besitzt ein konkretes Arbeitsartefakt und einen menschlichen Gate. Die Framework-Tiefe wird nur dort ausgebaut, wo sie nachweisbar Downstream-Rework spart oder eine irreversible Entscheidung schützt.
 
 ## Aktueller Status
 
-### Scene Readiness v0.1 – erster Upstream-Baustein
+### G0–G3 v0.1 – erste ausführbare Upstream-Kette
 
-[`SCENE_READINESS.md`](SCENE_READINESS.md) definiert das Gate zwischen Szenenplanung und Prosa.
+Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist jetzt mechanisch ausführbar.
 
 Vorhanden sind:
 
-- `templates/SCENE_PLAN.md` – machine-checkbarer Szenenvertrag,
-- `templates/CHARACTER_STATE.md` – minimaler szenenbezogener Figurenstatus,
-- `templates/RESEARCH_REGISTER.md` – plotrelevante Recherche-Blocker,
-- `templates/GATE_RECORD.md` – einheitliches Format für menschliche Freigaben,
-- `config/scene_readiness.yml` – Pflichtfelder und Blocker,
-- `scripts/scene_readiness.py` – dependency-freier Completeness-Checker,
-- `tests/test_scene_readiness.py` – Regressionstests,
-- `tests/corpus/scene_readiness_normalfall.json` – acht echte retrospektive NORMALFALL-Fälle.
+- `templates/BOOK_IDEA.md` – G0-Vertrag,
+- `templates/STORY_PACKAGE.md` – G1-Vertrag,
+- `templates/CHARACTERS.md` – minimale globale Figuren-Baseline,
+- `templates/RESEARCH_REGISTER.md` – Recherche-Register; offene Recherche darf bestehen, solange sie die konkrete Szene nicht blockiert,
+- `templates/CHARACTER_STATE.md` – szenenbezogener Figurenstatus,
+- `templates/SCENE_PLAN.md` – Scene-Readiness-Vertrag,
+- `templates/GATE_RECORD.md` – explizite menschliche Freigabe,
+- `config/pipeline_contract.yml` – maschinenlesbarer G0–G2-Vertrag,
+- `scripts/pipeline_check.py` – prüft Artefakte, Gate-Reihenfolge, Titel-/Versionskonsistenz, Character-State-Referenzen und Recherche-Referenzen,
+- `tests/test_pipeline_check.py` – synthetischer End-to-End-Test von G0 bis `READY_FOR_G3`.
+
+Der Checker erzeugt **keine** menschliche Freigabe. Ohne vorhandene `G0`, `G1` und `G2`-Records mit `decision: APPROVE`, `decided_by: human` und `open_blockers: no` wird die Kette blockiert. Eine mechanisch vollständige Szene endet nur bei `READY_FOR_G3`.
+
+Aufruf für G0–G2:
+
+```bash
+python scripts/pipeline_check.py project
+```
+
+Aufruf bis zur ersten G3-fähigen Szene:
+
+```bash
+python scripts/pipeline_check.py project --scene scenes/S-001.md
+```
+
+Mögliche Ergebnisse:
+
+- `BLOCK` – Upstream-Entscheidung, Gate oder Referenz fehlt beziehungsweise widerspricht sich.
+- `READY_FOR_SCENE_PLANNING` – G0–G2 sind konsistent und menschlich freigegeben.
+- `READY_FOR_G3` – zusätzlich ist die konkrete Szene mechanisch vollständig; G3 selbst bleibt eine menschliche Entscheidung.
+
+### Scene Readiness v0.1
+
+[`SCENE_READINESS.md`](SCENE_READINESS.md) definiert das Gate zwischen Szenenplanung und Prosa.
 
 Die Priorität ist historisch belegt: Die NORMALFALL-Ausbau-Matrix dokumentierte nach bereits vollständiger Story 27.370 Wörter und einen Ausbauplan von 49.630 Wörtern, weil viele Szenen plot-komplett, aber auf Konflikt, Konsequenz, Figurenreaktion, Suspense und situatives Erleben zu stark verdichtet waren.
 
@@ -50,7 +76,7 @@ Vorhanden sind:
 - `scripts/prosa_audit.py` – Scanner ohne automatische Textänderungen,
 - `tests/test_prosa_audit.py` – Unit-, Development- und Hold-out-Tests,
 - `tests/corpus/normalfall_split.json` – festgeschriebener Dev/Hold-out-Split,
-- `.github/workflows/prosa-audit.yml` – CI für Tests und Vollmanuskript-Rauschtest gegen NORMALFALL.
+- `.github/workflows/prosa-audit.yml` – gemeinsame Framework-CI inklusive Vollmanuskript-Rauschtest gegen NORMALFALL.
 
 Der Vollmanuskript-Rauschtest verhinderte, dass technisch korrekte, aber praktisch zu laute Strukturdetektoren als REVIEW-Regeln bestehen blieben: Stakkato und Dialog-Pingpong wurden nach 403 bzw. 268 Treffern auf INFO zurückgestuft.
 
