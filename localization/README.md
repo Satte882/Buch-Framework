@@ -12,19 +12,18 @@ Localization bedeutet hier nicht wortgetreue Übersetzung, sondern eine kontroll
 
 Der Baustein beginnt erst, wenn eine belastbare Ausgangsfassung existiert. Er verändert die bestehende Buch-Pipeline nicht, sondern ist ein optionaler Downstream-Pfad für zusätzliche Sprach-/Markteditionen.
 
-Nicht Bestandteil dieses Bausteins:
+Nicht Bestandteil des generischen Localization-Kerns:
 
 - Plotentwicklung oder neue Szenen,
 - Änderungen am kanonischen Ausgangsmanuskript,
-- KDP-Metadaten, Cover oder Produktionsformatierung,
 - automatische Veröffentlichung,
 - Multi-Agenten- oder Provider-Infrastruktur.
 
-Publishing bleibt ein eigener Verantwortungsbereich.
+Publishing bleibt fachlich ein eigener Verantwortungsbereich. Für englische Editionen liegt jedoch unter [`english/README.md`](english/README.md) ein **konkreter, wiederverwendbarer Downstream-Produktionspfad**, der die realen Learnings aus `NORMALFALL` → `REASONABLE MEASURES` konserviert: Print-DOCX/TOC, `en-US`-Hyphenation, Runner-PDF-QA, EPUB 3, EPUBCheck, Titel-/Metadaten-Gates und KDP-Submission-Grenzen.
 
 ## Drei verbindliche Projektartefakte
 
-Für eine konkrete Zielausgabe werden nur drei buchbezogene Dateien benötigt:
+Für eine konkrete Zielausgabe werden zunächst nur drei buchbezogene Dateien benötigt:
 
 1. `LOCALIZATION_PROFILE.md` – Source-Version, Zielvariante und verbindliche Lokalisierungsentscheidungen.
 2. `STYLE_GUIDE.md` – aus dem Ausgangsmanuskript abgeleitete Regeln für Stimme, Rhythmus, Dialog und Genre-Wirkung.
@@ -36,6 +35,10 @@ Templates:
 - [`STYLE_GUIDE_TEMPLATE.md`](STYLE_GUIDE_TEMPLATE.md)
 - [`GLOSSARY_TEMPLATE.md`](GLOSSARY_TEMPLATE.md)
 
+Für eine englische Edition kommt vor Publishing Production eine zentrale Config hinzu:
+
+- [`english/PUBLISHING_CONFIG_TEMPLATE.json`](english/PUBLISHING_CONFIG_TEMPLATE.json)
+
 ## Empfohlene Struktur im konkreten Buch
 
 Die bestehende Struktur eines Buch-Repositories muss dafür nicht umgebaut werden. Eine zusätzliche Edition kann beispielsweise so ergänzt werden:
@@ -45,6 +48,7 @@ ENGLISH/
 ├── LOCALIZATION_PROFILE.md
 ├── STYLE_GUIDE.md
 ├── GLOSSARY.md
+├── PUBLISHING_CONFIG.json
 ├── manuscript/
 └── review/
 ```
@@ -61,8 +65,9 @@ Leere Output-Verzeichnisse werden nicht vorsorglich erzeugt, sondern erst wenn s
 6. **Rest übertragen** – nach [`workflows/translate-chapter.md`](workflows/translate-chapter.md).
 7. **Editorial Review** – nach [`workflows/editorial-review.md`](workflows/editorial-review.md), getrennt von der Erstübertragung.
 8. **Gesamtkonsistenz prüfen** – nach [`workflows/final-consistency-review.md`](workflows/final-consistency-review.md).
+9. **Bei englischer Edition:** den wiederverwendbaren Downstream-Pfad aus [`english/README.md`](english/README.md) ausführen.
 
-Es gibt dafür bewusst keine zusätzliche Gate-Kaskade. Der einzige zwingende frühe menschliche Prüfpunkt ist die Freigabe der Zielstimme nach dem Pilot, weil ein falscher Ton sonst über das gesamte Buch skaliert.
+Es gibt dafür bewusst keine zusätzliche Gate-Kaskade. Der einzige zwingende frühe menschliche Prüfpunkt ist die Freigabe der Zielstimme nach dem Pilot, weil ein falscher Ton sonst über das gesamte Buch skaliert. Für den englischen Downstream bleiben nur Markt-/Cover-/Publish-Entscheidungen menschliche Gates.
 
 ## Source-of-Truth-Regel
 
