@@ -12,20 +12,13 @@ Das unveränderliche Projektziel steht in [`ZIEL.md`](ZIEL.md) und ist die obers
 
 Ziel ist nicht, `NORMALFALL` zu kopieren. Ziel ist ein Framework, mit dem weitere eigenständige Bücher reproduzierbar von der Buchidee bis zum produktionsreifen Manuskript entwickelt werden können.
 
-## Betriebsmodell und Architekturleitplanken
+## Betriebsmodell
 
-Das Framework ist bewusst **chat-getrieben** und keine klassische LLM-Anwendung mit eigener API-Runtime.
-
-Verbindlich sind:
-
-- [`BETRIEBSMODELL.md`](BETRIEBSMODELL.md) – ChatGPT-Chat als generative Arbeits-/Orchestrierungsebene, GitHub als Source of Truth, Human Gates und minimaler Chat-Provenienzstandard,
-- [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) – kanonische Artefakte, Ableitungsrichtung, Backtracking und Invalidierung,
-- [`KISS_LEITPLANKEN.md`](KISS_LEITPLANKEN.md) – `Artefakt + ChatGPT + Gate` vor zusätzlicher Infrastruktur; CI bleibt deterministisch,
-- [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) – messbare Kriterien für den ersten vollständigen G0–G6-Testlauf.
-
-Leitbild:
+Das reale Betriebsmodell steht in [`BETRIEBSMODELL.md`](BETRIEBSMODELL.md):
 
 > **ChatGPT erzeugt und analysiert. GitHub hält den gültigen Stand. Der Mensch entscheidet. CI prüft nur das Deterministische.**
+
+Kanonische Ebenen, Backtracking und Invalidierung sind in [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) festgelegt. Neue Technik muss die Leitplanken aus [`KISS_LEITPLANKEN.md`](KISS_LEITPLANKEN.md) erfüllen.
 
 ## End-to-End-Wirbelsäule
 
@@ -35,22 +28,13 @@ Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.
 
 Jede Stufe besitzt ein konkretes Arbeitsartefakt und einen menschlichen Gate. Die Framework-Tiefe wird nur dort ausgebaut, wo sie nachweisbar Downstream-Rework spart oder eine irreversible Entscheidung schützt.
 
+Der erste vollständige Meilenstein wird gegen [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) abgenommen. **M1 beweist die Kette, nicht die Tiefe.**
+
 ## Aktueller Status
-
-### Realer G3→G4-Chat-Probe-Lauf
-
-Der erste reale generative Übergang wurde unter `m1/prose_probe_normalfall/` durchgeführt:
-
-- `SCENE_CONTEXT_PACKAGE.md` – feste, historisch freigegebene NORMALFALL-Szenenarchitektur als Input,
-- `drafts/NF-01.01.01.md` – in ChatGPT neu erzeugter und direkt committeter Prosa-Draft,
-- `provenance/NF-01.01.01.md` – Herkunft und feste Upstream-Referenzen,
-- `G4_REVIEW_REQUEST.md` – vorbereitete menschliche Review-Anfrage.
-
-Der Probe-Lauf simuliert **keinen** menschlichen Gate. Der Draft bleibt aktuell `draft`; `G4` wartet auf eine ausdrückliche menschliche Entscheidung.
 
 ### G0–G3 v0.1 – erste ausführbare Upstream-Kette
 
-Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist mechanisch ausführbar.
+Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist jetzt mechanisch ausführbar.
 
 Vorhanden sind:
 
@@ -85,6 +69,24 @@ Mögliche Ergebnisse:
 - `READY_FOR_SCENE_PLANNING` – G0–G2 sind konsistent und menschlich freigegeben.
 - `READY_FOR_G3` – zusätzlich ist die konkrete Szene mechanisch vollständig; G3 selbst bleibt eine menschliche Entscheidung.
 
+### G3→G4 Chat-Prosa-Probe – realer REWORK-Pfad
+
+Unter `m1/prose_probe_normalfall/` wird der erste reale Chat-/GitHub-Übergang von einer bereits realisierten NORMALFALL-Szenenarchitektur zu neu erzeugter Prosa getestet.
+
+Revision 1 wurde menschlich mit **G4 = REWORK** bewertet. Die Entscheidung ist als Gate-Record gespeichert. Gründe:
+
+- auffällig gleichförmiger Stakkato-Rhythmus,
+- redundantes Nicht-Angriffs-Signal.
+
+Die Nacharbeit wurde gezielt und ohne Storyänderung durchgeführt:
+
+- vorher: 42 Prosaabsätze, davon 27 mit höchstens 7 Wörtern,
+- Revision 2: 18 Prosaabsätze, davon 1 mit höchstens 7 Wörtern,
+- redundantes Signal entfernt,
+- `sondern`: 0.
+
+Revision 2 ist erneut für G4 vorgelegt. Sie bleibt `draft`, bis eine neue menschliche Entscheidung `APPROVE | REWORK | STOP` vorliegt.
+
 ### Scene Readiness v0.1
 
 [`SCENE_READINESS.md`](SCENE_READINESS.md) definiert das Gate zwischen Szenenplanung und Prosa.
@@ -106,7 +108,7 @@ Vorhanden sind:
 
 Der Vollmanuskript-Rauschtest verhinderte, dass technisch korrekte, aber praktisch zu laute Strukturdetektoren als REVIEW-Regeln bestehen blieben: Stakkato und Dialog-Pingpong wurden nach 403 bzw. 268 Treffern auf INFO zurückgestuft.
 
-Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie bleiben bewusst außerhalb mechanischer Entscheidungen. Ein späterer Chat-Kontextreview ist als manueller Freigabe-Schritt vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
+Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie bleiben bewusst außerhalb mechanischer Entscheidungen. Ein späterer LLM-Kontextreview ist als manueller Freigabe-Gate vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
 
 ## Empirische Basis
 
