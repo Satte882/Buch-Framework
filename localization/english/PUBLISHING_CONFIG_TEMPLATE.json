@@ -29,7 +29,13 @@
     "ebook_price": null
   },
   "submission": {
-    "ai_generated_translation_disclosure_checked": false,
+    "ai_translation_gate": {
+      "ai_generated_translation": null,
+      "required_answer_before_kdp_submission": "YES_OR_NO",
+      "kdp_disclosure_required": null,
+      "kdp_disclosure_completed": false,
+      "gate_status": "BLOCKED_UNTIL_EXPLICIT_YES_OR_NO"
+    },
     "translator_contributor_resolved": false,
     "final_publish_approved": false
   }
