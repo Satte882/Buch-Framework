@@ -14,57 +14,30 @@ Ziel ist nicht, `NORMALFALL` zu kopieren. Ziel ist ein Framework, mit dem weiter
 
 ## Aktueller Status
 
-**Phase 1 – Analysebasis vorhanden; Prosa-Audit v0.1 implementiert.**
+**Prosa-Audit v0.1 ist implementiert und automatisiert geprüft.**
 
-Die bisherigen NORMALFALL-Analysen und realen Vorher/Nachher-/Kontrollbeispiele bilden die empirische Basis. Darauf aufbauend ist der erste lauffähige Framework-Baustein umgesetzt:
+Vorhanden sind:
 
-- `PROSA_REGELMATRIX.md` – fachliche Source of Truth für Regeln, Scope, Evidenz und Severity
-- `config/prosa_rules.yml` – buchneutrales Prosa-Profil `de_anti_ki_prosa_v1`
-- `scripts/prosa_audit.py` – deterministischer/heuristischer Scanner ohne automatische Textänderung
-- `tests/test_prosa_audit.py` – Unit-, Development- und Hold-out-Tests
-- `tests/corpus/normalfall_split.json` – feste Dev/Hold-out-Zuordnung mit Small-Sample-Regeln
+- `PROSA_REGELMATRIX.md` – fachliche Source of Truth für Regel-Scope, Evidenz, Severity und Promotion,
+- `config/prosa_rules.yml` – buchneutrale Prosa-Profil-Konfiguration,
+- `scripts/prosa_audit.py` – dependency-freier Scanner ohne automatische Textänderungen,
+- `tests/test_prosa_audit.py` – Unit-, Development- und Hold-out-Tests,
+- `tests/corpus/normalfall_split.json` – festgeschriebener Dev/Hold-out-Split,
+- `.github/workflows/prosa-audit.yml` – CI für Tests und Vollmanuskript-Rauschtest gegen NORMALFALL.
 
-### Prosa-Audit v0.1
+Der erste Vollmanuskript-Rauschtest war bewusst Teil der Validierung. Er zeigte, dass die ursprünglich als REVIEW geführten breiten Detektoren für Stakkato und Dialog-Pingpong auf dem finalen NORMALFALL-Manuskript zu viele Kandidaten erzeugten. Sie wurden deshalb **nicht künstlich auf NORMALFALL hochoptimiert**, sondern auf INFO zurückgestuft. Die Entscheidung und Messwerte stehen in `PROSA_REGELMATRIX.md`.
 
-Der Scanner unterscheidet:
+Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie sind weiterhin bewusst nicht mechanisch entschieden. Ein späterer LLM-Kontextreview ist als manueller Freigabe-Gate vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
 
-- **FAIL** – nur deterministische, explizit konfigurierte Regelverletzungen; aktuell `sondern` im aktiven Prosa-Profil
-- **REVIEW** – strukturelle Kandidaten wie Negationsketten, Stakkato oder Dialog-Pingpong; keine automatische Änderung
-- **INFO** – deskriptive Signale wie Weichmacher- oder Filterwortdichte, solange die Korpuslage keinen belastbaren REVIEW-Schwellenwert trägt
+## Empirische Basis
 
-Die kleinen Musterfamilien werden ausdrücklich nicht als statistisch „stark“ bezeichnet. Der Dev/Hold-out-Split wird nur dort sinnvoll genutzt, wo genügend Fälle vorhanden sind; bei sehr kleinen Gruppen bleiben Ergebnisse deskriptiv.
-
-Der semantische LLM-Kontextreview ist **noch nicht implementiert**. Sein Trigger ist bereits festgelegt: manuell an Prosa-Freigabegates, niemals pro Commit und niemals als automatische Rewrite-Pipeline.
-
-### Ausführen
-
-```bash
-python scripts/prosa_audit.py MANUSKRIPT.md
-```
-
-JSON-Report:
-
-```bash
-python scripts/prosa_audit.py MANUSKRIPT.md --format json --output prosa-audit.json
-```
-
-Tests:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-Der Scanner ist absichtlich dependency-frei. `config/prosa_rules.yml` verwendet JSON-Syntax, die zugleich gültiges YAML 1.2 ist.
-
-## Verbindliche Analysen und Korpus
+Verbindliche Analysen und Korpora:
 
 - `ANALYSE_NORMALFALL.md` – Entwicklungs-, Story-, Qualitäts- und Produktionsprozess
-- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md` – tiefe Analyse der KI-typischen Formulierungs-, Satzbau-, Rhythmus- und Erklärmuster inklusive `Nicht-X-sondern-Y`, Weichmacher, Stakkato, Erklär-Echos und Prosa-Regression
+- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md` – tiefe Analyse der KI-typischen Formulierungs-, Satzbau-, Rhythmus- und Erklärmuster
 - `tests/corpus/normalfall_beispiele.md` – reale Vorher/Nachher-Korrekturen aus der Historie
 - `tests/corpus/normalfall_kontrollbeispiele.md` – reale auffällige Stellen, die nach kontextueller Prüfung bestehen blieben
 - `tests/corpus/normalfall_provenienz.md` – Herkunft und Bestandsprüfung der positiven Korpusbeispiele
-
-Die Anti-KI-Prosa ist **kein optionaler Stilanhang**, sondern ein eigener Qualitätsbaustein des Frameworks. Regeln dürfen aus dem Korpus nur so weit automatisiert werden, wie die Evidenz das trägt.
 
 ## Leitprinzip
 
