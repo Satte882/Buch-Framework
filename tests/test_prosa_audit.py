@@ -89,6 +89,19 @@ class ScannerMechanicsTests(unittest.TestCase):
         self.assertGreaterEqual(totals["INFO"], 1)
         self.assertEqual(totals["FAIL"], 0)
 
+    def test_noisy_structural_detectors_are_info_after_full_manuscript_check(self):
+        cfg = load_config(CONFIG_PATH)
+        self.assertEqual(cfg["rules"]["staccato_sequence"]["severity"], "INFO")
+        self.assertEqual(cfg["rules"]["dialogue_pingpong"]["severity"], "INFO")
+        self.assertEqual(
+            cfg["rules"]["staccato_sequence"]["evidence_status"],
+            "insufficient_for_review_threshold",
+        )
+        self.assertEqual(
+            cfg["rules"]["dialogue_pingpong"]["evidence_status"],
+            "insufficient_for_review_threshold",
+        )
+
 
 class CorpusSplitTests(unittest.TestCase):
     def test_split_is_fixed_and_documents_small_sample_limit(self):
@@ -110,7 +123,7 @@ class RealNormalfallDevelopmentFixtures(unittest.TestCase):
     They verify detector mechanics; they do not claim literary precision/recall.
     """
 
-    def test_dialogue_pingpong_positive_28_is_reviewed(self):
+    def test_dialogue_pingpong_positive_28_is_descriptive_info(self):
         text = (
             "## 1\n\n"
             "„Donnerstag, halb vier.“\n\n"
@@ -121,7 +134,7 @@ class RealNormalfallDevelopmentFixtures(unittest.TestCase):
         )
         hits = findings_for(text, "dialogue_pingpong")
         self.assertTrue(hits)
-        self.assertEqual(hits[0].severity, "REVIEW")
+        self.assertEqual(hits[0].severity, "INFO")
 
     def test_negation_positive_12_is_reviewed(self):
         text = (
@@ -158,11 +171,11 @@ class RealNormalfallDevelopmentFixtures(unittest.TestCase):
 class RealNormalfallHoldoutFixtures(unittest.TestCase):
     """Real hold-out snippets.
 
-    Small families remain descriptive. A legitimate control can be REVIEW,
-    because REVIEW means inspect in context, not rewrite.
+    Small families remain descriptive. Legitimate controls may be surfaced,
+    because INFO/REVIEW mean inspect or observe, never auto-rewrite.
     """
 
-    def test_dialogue_pingpong_holdout_positive_32_is_detected(self):
+    def test_dialogue_pingpong_holdout_positive_32_is_detected_as_info(self):
         text = (
             "## 7\n\n"
             "„Hat jemand heute einen offenen Zugang gemeldet?“\n\n"
@@ -172,9 +185,11 @@ class RealNormalfallHoldoutFixtures(unittest.TestCase):
             "„Fehlermeldung vom Schloss?“\n\n"
             "„Nicht dass ich wüsste.“\n"
         )
-        self.assertTrue(findings_for(text, "dialogue_pingpong"))
+        hits = findings_for(text, "dialogue_pingpong")
+        self.assertTrue(hits)
+        self.assertEqual(hits[0].severity, "INFO")
 
-    def test_dialogue_pingpong_holdout_control_k22_may_still_be_review(self):
+    def test_dialogue_pingpong_holdout_control_k22_is_info(self):
         text = (
             "## 4\n\n"
             "„Wer hat einen Schlüssel?“\n\n"
@@ -184,7 +199,7 @@ class RealNormalfallHoldoutFixtures(unittest.TestCase):
         )
         hits = findings_for(text, "dialogue_pingpong")
         self.assertTrue(hits)
-        self.assertEqual(hits[0].severity, "REVIEW")
+        self.assertEqual(hits[0].severity, "INFO")
 
     def test_negation_holdout_control_k30_is_review_not_fail(self):
         text = (
@@ -198,7 +213,7 @@ class RealNormalfallHoldoutFixtures(unittest.TestCase):
         self.assertTrue(findings_for(text, "negation_sequence"))
         self.assertEqual(counts(result)["FAIL"], 0)
 
-    def test_staccato_holdout_positive_50_is_reviewed(self):
+    def test_staccato_holdout_positive_50_is_descriptive_info(self):
         text = (
             "## Prolog\n\n"
             "Er blieb wieder stehen.\n\n"
@@ -208,7 +223,7 @@ class RealNormalfallHoldoutFixtures(unittest.TestCase):
         )
         hits = findings_for(text, "staccato_sequence")
         self.assertTrue(hits)
-        self.assertEqual(hits[0].severity, "REVIEW")
+        self.assertEqual(hits[0].severity, "INFO")
 
 
 if __name__ == "__main__":

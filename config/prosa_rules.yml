@@ -71,20 +71,22 @@
     "staccato_sequence": {
       "scope": "prose_profile",
       "type": "structural",
-      "severity": "REVIEW",
+      "severity": "INFO",
       "min_run": 3,
       "max_words_per_paragraph": 7,
       "exclude_dialogue": true,
-      "evidence_status": "provisional_small_sample",
+      "note": "Full-manuscript NORMALFALL noise test produced 403 hits at this detector shape. Kept descriptive until the detector is narrowed and revalidated.",
+      "evidence_status": "insufficient_for_review_threshold",
       "auto_rewrite": false
     },
     "dialogue_pingpong": {
       "scope": "prose_profile",
       "type": "structural",
-      "severity": "REVIEW",
+      "severity": "INFO",
       "min_run": 4,
       "max_words_per_paragraph": 10,
-      "evidence_status": "provisional",
+      "note": "Full-manuscript NORMALFALL noise test produced 268 hits at this detector shape. Kept descriptive until a more specific dialogue-pattern detector is validated.",
+      "evidence_status": "insufficient_for_review_threshold",
       "auto_rewrite": false
     },
     "filter_terms": {

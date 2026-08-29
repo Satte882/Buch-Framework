@@ -35,6 +35,23 @@ Ein pauschaler 75/25-Split wird **nicht erzwungen**, wenn die Musterfamilie zu k
 
 Wenn im Hold-out weniger als zwei positive **oder** zwei Kontrollfälle vorhanden sind, werden Trefferquoten nur deskriptiv berichtet und nicht als belastbare Precision-/Recall-Aussage interpretiert. Hold-out-Fälle werden nach Ergebnissen nicht umsortiert.
 
+## Vollmanuskript-Rauschtest
+
+Vor produktivem Einsatz wurde `scripts/prosa_audit.py` am 29.08.2026 in GitHub Actions gegen das vollständige kanonische `Satte882/Buch/AUSNAHMEZUSTAND_FINAL.md` ausgeführt. Der erste Lauf auf Scanner-Stand `577547cee42fb1d9b9a7e9930336dc56f8ef9456` ergab:
+
+- `FAIL`: 0
+- `REVIEW`: 708
+- `INFO`: 43
+- davon `staccato_sequence`: 403
+- davon `dialogue_pingpong`: 268
+- davon `negation_sequence`: 37
+- `softener_density`: 12
+- `filter_terms`: 31
+
+Dieser Lauf war methodisch entscheidend: Die synthetischen Tests waren korrekt, aber die beiden breiten Strukturdetektoren erzeugten auf einem bereits stark überarbeiteten finalen Roman zu viel Rauschen für einen REVIEW-Status.
+
+**Entscheidung:** Die Schwellen werden nicht nachträglich auf NORMALFALL hochoptimiert. Stattdessen werden `staccato_sequence` und `dialogue_pingpong` in v0.1 auf **INFO** zurückgestuft. Ihre Detektoren bleiben als Messinstrument erhalten, bis mehr passendes positives und negatives Material oder ein präziserer Detektor vorliegt. `negation_sequence` bleibt wegen des deutlich kleineren Kandidatenvolumens vorläufig REVIEW.
+
 ---
 
 ## Regelmatrix
@@ -44,8 +61,8 @@ Wenn im Hold-out weniger als zwei positive **oder** zwei Kontrollfälle vorhande
 | `forbidden_sondern` | **Prosa-Profil** | Wort `sondern` | Positiv 01–10; historischer CI-Guard in NORMALFALL | Regex/Wortgrenze | **FAIL** | jedes nicht ausgenommene `\bsondern\b` | `established_project_rule` | nein |
 | `softener_density` | **Prosa-Profil** | Häufung von `vielleicht`, `möglicherweise`, `vermutlich`, `offenbar`, `schien`, `wirkte`, `könnte`, `soweit`, `zumindest` | Positiv 49; zahlreiche akzeptierte Einzel-/Doppelfälle K01–K20 | Rolling word window | **INFO** | 120-Wort-Fenster; `reporting_floor=2` dient nur der Reportbegrenzung, **nicht** als Qualitätsgrenze | `insufficient_for_review_threshold` | nein |
 | `negation_sequence` | **Prosa-Profil** | kurze aufeinanderfolgende `Nicht`/`Kein`-Absätze | positive Negations-/Erklärfälle; Kontrollen K27–K31 | Absatzstruktur | **REVIEW** | ab 2 direkt aufeinanderfolgenden kurzen Negationsabsätzen, max. 12 Wörter je Absatz | `provisional_small_sample` | nein |
-| `staccato_sequence` | **Prosa-Profil** | Kette sehr kurzer narrativer Absätze | mehrere gekürzte Stakkato-Fälle; mehrere akzeptierte kurze Formen | Absatzstruktur | **REVIEW** | ab 3 narrativen Absätzen mit max. 7 Wörtern; Dialog ausgeschlossen | `provisional_small_sample` | nein |
-| `dialogue_pingpong` | **Prosa-Profil** | schnelle kleinteilige Frage-/Antwort-/Bestätigungskette | Positiv 28–35; Kontrollmaterial K21–K26 | Dialogabsatzstruktur | **REVIEW** | ab 4 direkt aufeinanderfolgenden Dialogabsätzen mit max. 10 Wörtern je Absatz | `provisional` | nein |
+| `staccato_sequence` | **Prosa-Profil** | Kette sehr kurzer narrativer Absätze | mehrere gekürzte Stakkato-Fälle; mehrere akzeptierte kurze Formen; Vollmanuskript-Test: 403 Treffer | Absatzstruktur | **INFO** | ab 3 narrativen Absätzen mit max. 7 Wörtern; Dialog ausgeschlossen; rein deskriptiv | `insufficient_for_review_threshold` | nein |
+| `dialogue_pingpong` | **Prosa-Profil** | schnelle kleinteilige Frage-/Antwort-/Bestätigungskette | Positiv 28–35; Kontrollmaterial K21–K26; Vollmanuskript-Test: 268 Treffer | Dialogabsatzstruktur | **INFO** | ab 4 direkt aufeinanderfolgenden Dialogabsätzen mit max. 10 Wörtern; rein deskriptiv | `insufficient_for_review_threshold` | nein |
 | `filter_terms` | **Prosa-Profil** | Dichte von `merkte`, `bemerkte`, `wusste`, `dachte` | Positiv 43–45; wenig exakt passendes Kontrollmaterial | Kapitelzählung | **INFO** | ab 2 Treffern pro Kapitel wird gezählt/berichtet; kein Qualitätsgrenzwert | `insufficient_for_review_threshold` | nein |
 | `binary_contrast_without_sondern` | **Prosa-Profil** | semantische Ausweichform `Nicht X. Y.` u. ä. | mehrere positive Kontrastfälle; gemischte legitime Negationen | – in v0.1 | später REVIEW | kein mechanischer Grenzwert | `semantic_only` | nein |
 | `explanation_echo` | **Prosa-Profil** | bereits verständliche Handlung/Dialog wird nachträglich erklärt | Positiv u. a. 22, 23, 25, 36, 39, 40 | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
@@ -98,7 +115,7 @@ Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
 
 `INFO → REVIEW → FAIL`
 
-- **INFO → REVIEW:** erst wenn positives und negatives Material die Prüfung sinnvoll kalibrierbar macht.
+- **INFO → REVIEW:** erst wenn positives und negatives Material die Prüfung sinnvoll kalibrierbar macht **und** ein Vollmanuskript-Rauschtest ein praktisch nutzbares Kandidatenvolumen zeigt.
 - **REVIEW → FAIL:** nur bei sehr hoher Eindeutigkeit **und** bewusster Projekt-/Profilentscheidung.
 - Ein kleines Hold-out allein macht eine Regel niemals „stark“.
 - False Positives bei REVIEW sind zulässig; REVIEW bedeutet bewusst „ansehen“, nicht „ändern“.
@@ -113,4 +130,5 @@ Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
 - Scanner verändert keinen Text;
 - Dev/Hold-out-Zuordnung ist festgeschrieben;
 - Tests unterscheiden Softwarekorrektheit von literarischer Evidenz;
+- ein Vollmanuskript-Rauschtest ist Teil der Validierung;
 - LLM-Review ist nicht Teil von CI und nicht automatisch aktiv.
