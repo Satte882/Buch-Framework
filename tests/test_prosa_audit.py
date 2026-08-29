@@ -30,6 +30,27 @@ class ScannerMechanicsTests(unittest.TestCase):
         self.assertEqual(paras[0].start_line, 3)
         self.assertEqual(paras[1].start_line, 5)
 
+    def test_all_rules_have_valid_scope_and_fail_is_deterministic(self):
+        cfg = load_config(CONFIG_PATH)
+        allowed = {"core", "prose_profile", "series_profile", "book"}
+        for rule_id, rule in cfg["rules"].items():
+            self.assertIn(rule["scope"], allowed, rule_id)
+            if rule["severity"] == "FAIL":
+                self.assertEqual(rule["type"], "deterministic", rule_id)
+
+    def test_production_config_contains_no_normalfall_character_name(self):
+        raw = CONFIG_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("Daniel", raw)
+        self.assertNotIn("Jonas", raw)
+        self.assertNotIn("Lena Vogt", raw)
+
+    def test_unreasoned_exception_is_rejected(self):
+        cfg = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+        cfg["rules"]["forbidden_sondern"]["exceptions"] = [{"match": "sondern"}]
+        from scripts.prosa_audit import validate_config
+        with self.assertRaises(ValueError):
+            validate_config(cfg)
+
     def test_sondern_is_fail_with_word_boundary(self):
         text = "## 1\n\nEr ging nicht links, sondern rechts.\n\nBesonders blieb alles ruhig.\n"
         hits = findings_for(text, "forbidden_sondern")
