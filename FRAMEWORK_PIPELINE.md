@@ -18,15 +18,28 @@ Diese Priorität ist empirisch für `NORMALFALL` begründet, aber noch keine all
 
 | Stufe | Input | Verbindliches Arbeitsartefakt | Menschlicher Gate | Tiefe v0.1 |
 |---|---|---|---|---|
-| 0 Idee | Buchidee | `project/BOOK_IDEA.md` nach `templates/BOOK_IDEA.md` | **G0 – Idee freigeben** | Contract definiert |
-| 1 Story | freigegebene Idee | `project/STORY_PACKAGE.md` nach `templates/STORY_PACKAGE.md` | **G1 – Storyarchitektur freigeben** | Contract definiert |
-| 2 Figuren + Recherche-Basis | Story Package | `project/CHARACTERS.md` + `project/RESEARCH_REGISTER.md` | **G2 – Voraussetzungen für Szenen freigeben** | Minimal-Stub definiert |
-| 3 Szenen | Story + Figuren-/Recherche-Basis | `project/scenes/<scene_id>.md` nach `templates/SCENE_PLAN.md` + szenenbezogene Character States | **G3 – Scene Readiness** | **v0.1 implementiert** |
+| 0 Idee | Buchidee | `project/BOOK_IDEA.md` nach `templates/BOOK_IDEA.md` | **G0 – Idee freigeben** | **Contract + Pipeline-Check implementiert** |
+| 1 Story | freigegebene Idee | `project/STORY_PACKAGE.md` nach `templates/STORY_PACKAGE.md` | **G1 – Storyarchitektur freigeben** | **Contract + Pipeline-Check implementiert** |
+| 2 Figuren + Recherche-Basis | Story Package | `project/CHARACTERS.md` + `project/RESEARCH_REGISTER.md` | **G2 – Voraussetzungen für Szenen freigeben** | **Minimal-Baseline + Pipeline-Check implementiert** |
+| 3 Szenen | Story + Figuren-/Recherche-Basis | `project/scenes/<scene_id>.md` nach `templates/SCENE_PLAN.md` + szenenbezogene Character States | **G3 – Scene Readiness** | **v0.1 implementiert + Upstream-Referenzen geprüft** |
 | 4 Prosa | freigegebene Szene(n) | kanonisches Manuskript / Prosa-Batch | **G4 – Prosa-Stichprobe bzw. Batch freigeben** | Contract definiert |
 | 5 Qualität | Manuskript | Prosa-Audit-Report + später semantischer Review | **G5 – Manuskriptqualität freigeben** | Prosa-Audit v0.1 implementiert |
 | 6 Produktion | freigegebenes Manuskript | DOCX/PDF/KDP-Produktionsartefakte | **G6 – Veröffentlichung freigeben** | Contract definiert, tiefe Produktion später |
 
 Jeder Gate wird mit `templates/GATE_RECORD.md` dokumentiert. Ein Gate ist eine **menschliche Entscheidung**, kein automatisch erzeugtes Score-Feld.
+
+## Ausführbarer Upstream-Pfad
+
+`scripts/pipeline_check.py` prüft den Pfad von G0 bis vor G3 als zusammenhängende Kette. Dabei werden nicht nur einzelne Dateien auf Pflichtfelder geprüft, sondern auch Übergänge und Referenzen:
+
+- G0, G1 und G2 müssen als menschliche `APPROVE`-Records vorliegen;
+- `working_title` muss zwischen Idee und Story Package konsistent sein;
+- `CHARACTERS.md` muss auf die aktuelle Story-Package-Version zeigen;
+- offene Recherche darf im Register bestehen, aber eine von der konkreten Szene referenzierte Recherche muss `resolved` oder `not_applicable` sein;
+- `character_state_refs` müssen auf reale, zur Szene passende Character-State-Dateien zeigen;
+- eine mechanisch vollständige Szene erhält nur `READY_FOR_G3`, niemals automatisch `APPROVE`.
+
+Damit existiert erstmals ein echter End-to-End-Test der frühen Framework-Kette statt nur einzelner Methodenbeschreibungen.
 
 ## Regel für Human Gates
 
@@ -60,6 +73,8 @@ Neue Automatisierung wird nur gebaut, wenn sie mindestens eine dieser Bedingunge
 
 Ein Baustein wird **nicht** deshalb vertieft, weil er technisch leicht automatisierbar ist.
 
-## Aktueller Schwerpunkt
+## Aktueller Schwerpunkt nach v0.1
 
-Der erste Upstream-Baustein ist `SCENE_READINESS.md` mit einem kleinen mechanischen Completeness-Check und einem expliziten Human Gate. Der Checker beurteilt **nicht**, ob eine Szene literarisch gut ist. Er verhindert, dass fehlende Storyentscheidungen, offene Recherche, ungeklärte Character States oder nicht geplante Erlebnis-/Konsequenzträger unbemerkt in die Prosa weitergereicht werden.
+Der Upstream-Pfad **Idee → G0 → Story → G1 → Figuren/Recherche → G2 → erste Szene → READY_FOR_G3** ist jetzt technisch geschlossen und durch einen synthetischen End-to-End-Test abgesichert.
+
+Der nächste Ausbau sollte deshalb nicht wieder innerhalb G0–G3 neue Detailtiefe erzeugen. Der nächste strukturell offene Übergang ist **G3 → Prosa → G4**: Wie wird aus einer freigegebenen Szene ein kontrollierter Prosa-Batch, dessen narratives Gewicht früh geprüft werden kann, bevor ein kompletter Roman zu dünn oder methodisch übererklärt geschrieben wird?
