@@ -1,49 +1,25 @@
 # G2 Review Request – FEHLALARM
 
-status: AWAITING_HUMAN_G2_DECISION
-artifacts:
-- `m1/e2e_minibook/CHARACTERS.md`
-- `m1/e2e_minibook/RESEARCH_REGISTER.md`
-provenance: `m1/e2e_minibook/provenance/G2_PACKAGE.md`
-upstream_gate: `m1/e2e_minibook/gates/G1.md`
+status: RESOLVED_APPROVE
 
-## Was G2 entscheidet
+## Ergebnis
 
-G2 prüft, ob Figuren-Baseline und Recherchebasis stabil genug sind, um die drei konkreten Szenen zu planen, ohne dabei zentrale Figuren- oder Plausibilitätsentscheidungen zu improvisieren.
+Der Mensch hat `CHARACTERS.md` und `RESEARCH_REGISTER.md` geprüft und mit **G2 = APPROVE** freigegeben.
 
-## Figuren-Baseline – Kurzcheck
+Freigegebene Stände:
 
-- Mara Voss trägt Perspektive und Entscheidung.
-- Nils Berger bleibt legitimer Gegenanreiz und erhält kein verborgenes Täterwissen.
-- Lea Hartmann liefert die reale menschliche Konsequenz, ohne persönliche Abkürzung oder Nebenplot.
-- Maras finale Entscheidung darf nicht aus persönlicher Nähe zu Lea motiviert werden.
-- `open_character_decisions: no`.
+- `CHARACTERS.md` – `8acecd8cc47d707bd3f614e29609602587b3ce14`
+- `RESEARCH_REGISTER.md` – `d0094d9a7a88b43eaf7481e7b357ae93e6d4830c`
+- Gate-Record: `gates/G2.md`
 
-## Recherche R-001 – gelöst
+## Entscheidungsgrund
 
-Die Recherche hat eine potenzielle Plausibilitätsfalle sichtbar gemacht: Eine reale, formal aufgeschaltete Brandmeldeanlage sollte nicht so erzählt werden, als könne eine Mitarbeiterin einen Hauptalarm nach Belieben wegen eines Nachtversuchs zurückhalten.
+- Figuren besitzen klare Ziele und Wissensgrenzen.
+- Nils hat kein verborgenes Mehrwissen.
+- Lea ist keine künstliche Plotfalle.
+- R-001 ist für den Testfall plausibel aufgelöst: internes technisches Rauch-/Prozesswarnsignal statt frei verzögerbarer formaler Haupt-BMA.
+- Keine offenen Figurenentscheidungen oder plotrelevanten Rechercheblocker verbleiben.
 
-Deshalb gilt für FEHLALARM verbindlich:
+## Nächster Schritt
 
-- Das erste Signal ist eine **interne technische Rauch-/Prozesswarnung** des Forschungsbereichs.
-- Diese darf im fiktiven Betriebsmodell eine lokale Verifikation auslösen.
-- Die spätere volle interne Alarm-/Evakuierungskette ist Maras irreversible Entscheidung.
-- Die Geschichte spezifiziert keine detaillierte automatische Feuerwehr-Aufschaltung oder reale BMA-Bedienlogik.
-
-Damit bleibt der Storymechanismus erhalten und die Geschichte vermeidet eine unnötig konkrete technische Falschbehauptung.
-
-## Gate-Fragen
-
-1. Sind Mara, Nils und Lea in Funktion, Eigenziel und Wissensgrenzen ausreichend festgelegt?
-2. Bleibt Nils ein legitimer Gegenpol statt versteckter Antagonist?
-3. Ist Leas Anwesenheit als banaler betrieblicher Nachlauf plausibel genug, ohne neuen Nebenplot zu verlangen?
-4. Ist die Entscheidung zu R-001 für diesen Mini-Testfall ausreichend plausibel und bewusst KISS?
-5. Gibt es noch eine Figuren- oder Rechercheentscheidung, die beim Schreiben der Szenen sonst improvisiert werden müsste?
-
-## Nächste menschliche Entscheidung
-
-- `APPROVE` – G2 ist stabil; danach werden **alle drei Szenen plus Character States in einem Zug** vorbereitet und gemeinsam als G3-Paket vorgelegt.
-- `REWORK` – konkrete Punkte werden zuerst korrigiert.
-- `STOP` – M1-Testfall wird beendet.
-
-Es wurde bewusst noch keine Szene angelegt, weil G2 noch nicht menschlich freigegeben ist.
+Alle drei Szenen und Character States wurden nach der Freigabe als gebündeltes G3-Paket vorbereitet. Die nächste menschliche Entscheidung erfolgt über `G3_REVIEW_REQUEST.md`.
