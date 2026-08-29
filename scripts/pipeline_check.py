@@ -47,6 +47,20 @@ def parse_fields(text: str) -> dict[str, str]:
     return fields
 
 
+def contains_placeholder_marker(folded: str, token: str) -> bool:
+    marker = token.casefold()
+    if marker == "offen":
+        return (
+            folded == "offen"
+            or folded.startswith("offen:")
+            or folded.startswith("offen -")
+            or folded.startswith("[offen]")
+        )
+    if marker in {"todo", "tbd", "unklar"}:
+        return re.search(rf"(?<!\w){re.escape(marker)}(?!\w)", folded) is not None
+    return marker in folded
+
+
 def looks_placeholder(value: str, tokens: list[str]) -> bool:
     stripped = value.strip()
     if not stripped or stripped == "?" or stripped.startswith("<"):
@@ -55,7 +69,7 @@ def looks_placeholder(value: str, tokens: list[str]) -> bool:
     for token in tokens:
         if token in {"<", "?"}:
             continue
-        if token.casefold() in folded:
+        if contains_placeholder_marker(folded, token):
             return True
     return False
 
