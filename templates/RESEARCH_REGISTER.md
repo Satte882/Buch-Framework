@@ -1,5 +1,7 @@
 # RESEARCH_REGISTER
 
+register_status: ready
+
 Dieses Register enthält nur Recherchefragen, die für Plot, Figurenhandlung, Plausibilität oder konkrete Szenenentscheidungen relevant sind.
 
 | ID | Frage | Betroffene Szene(n) | Risiko bei falscher Annahme | Status | Beleg / Quelle | Entscheidung |
@@ -8,6 +10,8 @@ Dieses Register enthält nur Recherchefragen, die für Plot, Figurenhandlung, Pl
 
 ## Gate-Regel
 
-Ein `high`-Risiko-Punkt mit Status `open`, der eine konkrete Szenenhandlung, Rechtslage, Technik, Medizin, Zeitlogik oder Ursache/Wirkung bestimmt, blockiert Scene Readiness.
+`register_status: ready` bedeutet nur: Das Register ist als Arbeitsartefakt angelegt und die bekannten plotrelevanten Recherchefragen sind erfasst. Es bedeutet **nicht**, dass alle Recherche abgeschlossen ist.
 
-Recherche darf nach Scene Readiness offen bleiben, wenn sie nur sprachliche Farbe oder austauschbare Oberflächendetails betrifft und keine relevante Storyentscheidung mehr verändert.
+Ein szenenreferenzierter Recherchepunkt mit Status `open` blockiert Scene Readiness. Ein `resolved`-Punkt benötigt Beleg/Quelle und eine explizite Buchentscheidung.
+
+Recherche darf nach Scene Readiness offen bleiben, wenn sie andere Szenen betrifft oder nur sprachliche Farbe beziehungsweise austauschbare Oberflächendetails liefert und keine relevante Storyentscheidung mehr verändert.
