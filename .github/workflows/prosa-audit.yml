@@ -1,0 +1,96 @@
+name: Prosa Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "config/**"
+      - "tests/**"
+      - "PROSA_REGELMATRIX.md"
+      - ".github/workflows/prosa-audit.yml"
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "config/**"
+      - "tests/**"
+      - "PROSA_REGELMATRIX.md"
+      - ".github/workflows/prosa-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-normalfall-noise-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout framework
+        uses: actions/checkout@v4
+
+      - name: Checkout NORMALFALL benchmark
+        uses: actions/checkout@v4
+        with:
+          repository: Satte882/Buch
+          path: normalfall
+
+      - name: Run scanner tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Audit full NORMALFALL manuscript
+        run: |
+          python scripts/prosa_audit.py \
+            normalfall/AUSNAHMEZUSTAND_FINAL.md \
+            --config config/prosa_rules.yml \
+            --format json \
+            --output normalfall_prosa_audit.json
+
+      - name: Summarize NORMALFALL noise profile
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter, defaultdict
+          from pathlib import Path
+
+          path = Path("normalfall_prosa_audit.json")
+          if not path.exists():
+              raise SystemExit("Audit report was not created")
+
+          data = json.loads(path.read_text(encoding="utf-8"))
+          findings = data["findings"]
+          by_rule = Counter(item["rule_id"] for item in findings)
+          review_by_chapter = defaultdict(int)
+          for item in findings:
+              if item["severity"] == "REVIEW":
+                  review_by_chapter[item["chapter"]] += 1
+
+          summary = [
+              "## NORMALFALL full-manuscript noise check",
+              "",
+              f"- FAIL: {data['counts'].get('FAIL', 0)}",
+              f"- REVIEW: {data['counts'].get('REVIEW', 0)}",
+              f"- INFO: {data['counts'].get('INFO', 0)}",
+              "",
+              "### Findings by rule",
+          ]
+          for rule_id, count in sorted(by_rule.items()):
+              summary.append(f"- `{rule_id}`: {count}")
+
+          summary.extend(["", "### Chapters with most REVIEW candidates"])
+          for chapter, count in sorted(review_by_chapter.items(), key=lambda x: (-x[1], x[0]))[:15]:
+              summary.append(f"- {chapter}: {count}")
+
+          text = "\n".join(summary) + "\n"
+          print(text)
+          with open(Path(__import__('os').environ['GITHUB_STEP_SUMMARY']), 'a', encoding='utf-8') as handle:
+              handle.write(text)
+          PY
+
+      - name: Upload NORMALFALL audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: normalfall-prosa-audit
+          path: normalfall_prosa_audit.json
+          if-no-files-found: error
