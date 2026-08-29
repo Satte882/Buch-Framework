@@ -20,6 +20,8 @@ from typing import Any, Iterable
 WORD_RE = re.compile(r"\b[\wÄÖÜäöüß'-]+\b", re.UNICODE)
 HEADING_RE = re.compile(r"^##\s+(.+?)\s*$")
 DIALOGUE_STARTS = ("„", "»", '"')
+VALID_SCOPES = {"core", "prose_profile", "series_profile", "book"}
+VALID_SEVERITIES = {"FAIL", "REVIEW", "INFO"}
 
 
 @dataclass(frozen=True)
@@ -66,7 +68,36 @@ def load_config(path: str | Path) -> dict[str, Any]:
         data = json.load(handle)
     if str(data.get("version")) != "0.1":
         raise ValueError(f"Unsupported config version: {data.get('version')!r}")
+    validate_config(data)
     return data
+
+
+def validate_config(data: dict[str, Any]) -> None:
+    rules = data.get("rules")
+    if not isinstance(rules, dict) or not rules:
+        raise ValueError("Config must contain at least one rule")
+
+    for rule_id, rule in rules.items():
+        scope = rule.get("scope")
+        severity = rule.get("severity")
+        rule_type = rule.get("type")
+
+        if scope not in VALID_SCOPES:
+            raise ValueError(f"{rule_id}: invalid scope {scope!r}")
+        if severity not in VALID_SEVERITIES:
+            raise ValueError(f"{rule_id}: invalid severity {severity!r}")
+        if severity == "FAIL" and rule_type != "deterministic":
+            raise ValueError(f"{rule_id}: FAIL is allowed only for deterministic rules")
+        if rule.get("auto_rewrite") is not False:
+            raise ValueError(f"{rule_id}: v0.1 rules must set auto_rewrite=false")
+
+        for exception in rule.get("exceptions", []):
+            if not isinstance(exception, dict):
+                raise ValueError(f"{rule_id}: exceptions must be objects with match and reason")
+            if not str(exception.get("match", "")).strip():
+                raise ValueError(f"{rule_id}: exception match must not be empty")
+            if not str(exception.get("reason", "")).strip():
+                raise ValueError(f"{rule_id}: exception reason must not be empty")
 
 
 def parse_paragraphs(text: str) -> list[Paragraph]:
