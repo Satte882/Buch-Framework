@@ -1,0 +1,116 @@
+# PROSA-Regelmatrix v0.1
+
+Diese Datei ist die fachliche Source of Truth für die in Aufgabe 2 implementierten Prosa-Prüfungen.
+
+Sie zahlt direkt auf `ZIEL.md` ein: wiederholbare, mechanisch prüfbare Qualitätsarbeit wird automatisiert; kontextabhängige Stilentscheidungen bleiben REVIEW- bzw. menschliche Freigabeentscheidungen. Der Scanner verändert niemals Manuskripttext.
+
+## Ebenen und Zuständigkeit
+
+Jede Regel besitzt einen eindeutigen **Scope Owner**:
+
+1. **Core** – nur Scanner-Mechanik: Konfiguration laden, Text segmentieren, Treffer lokalisieren, `FAIL`/`REVIEW`/`INFO` ausgeben, Ausnahmen anwenden. Der Core enthält keine literarischen Stilpräferenzen.
+2. **Prosa-Profil** – wiederverwendbare sprachliche Regeln und Warnmuster. v0.1 aktiviert `de_anti_ki_prosa_v1`.
+3. **Serienprofil** – optionale Regeln, die nur für eine konkrete Buchreihe gelten. In v0.1 keine aktive Prosa-Regel.
+4. **Buch** – optionale Buchdaten und begründete Ausnahmen. Figurennamen und Einzelfall-Overrides gehören ausschließlich hierhin.
+
+**Override-Prinzip:** Core-Mechanik kann nicht durch eine Buchregel umdefiniert werden. Prosa-Regeln können durch Serie/Buch nur enger konfiguriert oder über einen expliziten, begründeten Ausnahme-Eintrag behandelt werden. Es gibt keine stillen Overrides.
+
+## Evidenzklassen
+
+Der NORMALFALL-Korpus ist klein und stammt aus einem einzigen Buch. Deshalb werden keine statistisch starken Aussagen vorgetäuscht.
+
+- `established_project_rule` – bewusste Projektregel, historisch bereits produktiv als harter Guard eingesetzt; nicht aus einer kleinen Stichprobe „gelernt“.
+- `provisional` – ausreichend Material für einen ersten reproduzierbaren REVIEW-Detektor, aber noch keine allgemeine Stilregel.
+- `provisional_small_sample` – sinnvoller Kandidat, aber zu wenige Fälle für belastbare Performanceaussagen.
+- `insufficient_for_review_threshold` – nur deskriptive INFO-Ausgabe; kein Qualitätsgrenzwert.
+- `semantic_only` – mit v0.1 nicht deterministisch/heuristisch entschieden.
+
+### Dev/Hold-out-Regel
+
+Die feste Zuordnung steht in `tests/corpus/normalfall_split.json`.
+
+Ein pauschaler 75/25-Split wird **nicht erzwungen**, wenn die Musterfamilie zu klein ist. Insbesondere gilt:
+
+> Eine Kategorie mit weniger als 8 relevanten Fällen erhält aus diesem Korpus allein niemals den Evidenzstatus `strong`.
+
+Wenn im Hold-out weniger als zwei positive **oder** zwei Kontrollfälle vorhanden sind, werden Trefferquoten nur deskriptiv berichtet und nicht als belastbare Precision-/Recall-Aussage interpretiert. Hold-out-Fälle werden nach Ergebnissen nicht umsortiert.
+
+---
+
+## Regelmatrix
+
+| Rule ID | Scope Owner | Muster | Korpus-Evidenz | Detektor v0.1 | Severity | Schwelle / Entscheidung | Evidenzstatus | Auto-Rewrite |
+|---|---|---|---|---|---|---|---|---|
+| `forbidden_sondern` | **Prosa-Profil** | Wort `sondern` | Positiv 01–10; historischer CI-Guard in NORMALFALL | Regex/Wortgrenze | **FAIL** | jedes nicht ausgenommene `\bsondern\b` | `established_project_rule` | nein |
+| `softener_density` | **Prosa-Profil** | Häufung von `vielleicht`, `möglicherweise`, `vermutlich`, `offenbar`, `schien`, `wirkte`, `könnte`, `soweit`, `zumindest` | Positiv 49; zahlreiche akzeptierte Einzel-/Doppelfälle K01–K20 | Rolling word window | **INFO** | 120-Wort-Fenster; `reporting_floor=2` dient nur der Reportbegrenzung, **nicht** als Qualitätsgrenze | `insufficient_for_review_threshold` | nein |
+| `negation_sequence` | **Prosa-Profil** | kurze aufeinanderfolgende `Nicht`/`Kein`-Absätze | positive Negations-/Erklärfälle; Kontrollen K27–K31 | Absatzstruktur | **REVIEW** | ab 2 direkt aufeinanderfolgenden kurzen Negationsabsätzen, max. 12 Wörter je Absatz | `provisional_small_sample` | nein |
+| `staccato_sequence` | **Prosa-Profil** | Kette sehr kurzer narrativer Absätze | mehrere gekürzte Stakkato-Fälle; mehrere akzeptierte kurze Formen | Absatzstruktur | **REVIEW** | ab 3 narrativen Absätzen mit max. 7 Wörtern; Dialog ausgeschlossen | `provisional_small_sample` | nein |
+| `dialogue_pingpong` | **Prosa-Profil** | schnelle kleinteilige Frage-/Antwort-/Bestätigungskette | Positiv 28–35; Kontrollmaterial K21–K26 | Dialogabsatzstruktur | **REVIEW** | ab 4 direkt aufeinanderfolgenden Dialogabsätzen mit max. 10 Wörtern je Absatz | `provisional` | nein |
+| `filter_terms` | **Prosa-Profil** | Dichte von `merkte`, `bemerkte`, `wusste`, `dachte` | Positiv 43–45; wenig exakt passendes Kontrollmaterial | Kapitelzählung | **INFO** | ab 2 Treffern pro Kapitel wird gezählt/berichtet; kein Qualitätsgrenzwert | `insufficient_for_review_threshold` | nein |
+| `binary_contrast_without_sondern` | **Prosa-Profil** | semantische Ausweichform `Nicht X. Y.` u. ä. | mehrere positive Kontrastfälle; gemischte legitime Negationen | – in v0.1 | später REVIEW | kein mechanischer Grenzwert | `semantic_only` | nein |
+| `explanation_echo` | **Prosa-Profil** | bereits verständliche Handlung/Dialog wird nachträglich erklärt | Positiv u. a. 22, 23, 25, 36, 39, 40 | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
+| `method_or_proof_prose` | **Prosa-Profil** | sichtbare Methodik-/Beweisführung in Romanprosa | Positiv u. a. 38, 41 | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
+| `over_symmetry` | **Prosa-Profil** | zu saubere rhetorische Spiegelung/Dreierstruktur | Positiv 11–15, Kontrollen mit legitimer kurzer Parallelität | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
+
+### Warum `sondern` kein Core-Rule ist
+
+Der Core muss jedes Buch analysieren können, ohne selbst zu behaupten, dass ein bestimmtes deutsches Wort „schlecht“ sei. `sondern = 0` ist deshalb Eigentum des **Prosa-Profils `de_anti_ki_prosa_v1`**. Das Framework kann später andere Prosa-Profile laden.
+
+Die Regel bleibt in diesem Profil absichtlich hart, weil NORMALFALL sie bereits produktiv als Zero-Tolerance-Guard verwendet hat. Ausnahmen sind möglich, aber ausschließlich explizit in `config/prosa_rules.yml` mit `match` und `reason`. Es gibt keinen Inline-`noqa`-Marker im Romantext.
+
+## Ausnahmen
+
+Ein legitimer Sonderfall wird nicht durch Änderung des Scanners versteckt, sondern konfiguriert:
+
+```json
+{
+  "match": "exakte unveränderbare Passage",
+  "reason": "Originalzitat; darf nicht redaktionell verändert werden"
+}
+```
+
+Default ist eine leere Ausnahmeliste.
+
+## Figurennamen
+
+NORMALFALL-Namen dürfen in den Korpusdateien vorkommen, aber **nicht in produktiven Regeln**. Der Scanner arbeitet in v0.1 bei Filterwörtern ausschließlich mit Verben. Falls spätere Regeln Figurenbezug benötigen, kommen Namen aus der Buchkonfiguration (`characters`) und nicht aus dem Prosa-Profil.
+
+## Semantischer LLM-Kontextreview
+
+Der LLM-Kontextreview ist in v0.1 **spezifiziert, aber nicht implementiert**.
+
+Er läuft später ausschließlich:
+
+1. manuell, wenn ein Prosa-Batch zur menschlichen Freigabe vorgelegt wird;
+2. manuell, beim finalen Prosa-Gate des Gesamtmanuskripts.
+
+Er läuft **nicht**:
+
+- bei jedem Commit,
+- als CI-API-Aufruf,
+- als automatische Umschreibepipeline.
+
+Input soll später sein: Treffer/Kandidat + lokaler Kontext + passende positive Korpusfälle + passende Kontrollfälle. Output: `wahrscheinlich problematisch`, `wahrscheinlich legitim` oder `unklar`, mit kurzer Begründung. Keine automatische Manuskriptänderung.
+
+## Promotion einer Regel
+
+Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
+
+`INFO → REVIEW → FAIL`
+
+- **INFO → REVIEW:** erst wenn positives und negatives Material die Prüfung sinnvoll kalibrierbar macht.
+- **REVIEW → FAIL:** nur bei sehr hoher Eindeutigkeit **und** bewusster Projekt-/Profilentscheidung.
+- Ein kleines Hold-out allein macht eine Regel niemals „stark“.
+- False Positives bei REVIEW sind zulässig; REVIEW bedeutet bewusst „ansehen“, nicht „ändern`.
+
+## Definition of Done für v0.1
+
+- jede implementierte Regel hat einen `scope`;
+- keine NORMALFALL-Figur ist in produktiven Regeln hardcodiert;
+- `FAIL` wird nur durch deterministische Regeln ausgelöst;
+- REVIEW/INFO blockieren den Prozess nicht;
+- Ausnahmen sind explizit und begründet;
+- Scanner verändert keinen Text;
+- Dev/Hold-out-Zuordnung ist festgeschrieben;
+- Tests unterscheiden Softwarekorrektheit von literarischer Evidenz;
+- LLM-Review ist nicht Teil von CI und nicht automatisch aktiv.
