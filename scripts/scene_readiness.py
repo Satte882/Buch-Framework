@@ -47,12 +47,18 @@ def parse_fields(text: str) -> dict[str, str]:
     return fields
 
 
+def _starts_na(value: str, prefixes: list[str]) -> bool:
+    folded = value.casefold().strip()
+    return any(folded.startswith(prefix.casefold()) for prefix in prefixes)
+
+
 def _na_with_reason(value: str, prefixes: list[str]) -> bool:
     folded = value.casefold().strip()
+    stripped = value.strip()
     for prefix in prefixes:
         p = prefix.casefold()
         if folded.startswith(p):
-            reason = value.strip()[len(prefix):].strip()
+            reason = stripped[len(prefix):].strip()
             return bool(reason)
     return False
 
@@ -85,9 +91,18 @@ def evaluate(text: str, config: dict[str, Any]) -> ReadinessResult:
         if key not in fields:
             issues.append(f"missing required field: {key}")
             continue
+
         value = fields[key]
-        if key in allowed_na and _na_with_reason(value, na_prefixes):
+        if _starts_na(value, na_prefixes):
+            if key not in allowed_na:
+                issues.append(f"not-applicable value is not allowed for: {key}")
+                continue
+            if not _na_with_reason(value, na_prefixes):
+                issues.append(f"not-applicable value requires reason: {key}")
+                continue
+            # Explicit N/A with a reason is a resolved value, not a placeholder.
             continue
+
         if _looks_placeholder(value, placeholders):
             issues.append(f"unresolved or placeholder value: {key}")
 
