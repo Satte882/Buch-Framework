@@ -1,0 +1,105 @@
+{
+  "version": "0.1",
+  "source": {
+    "repository": "Satte882/Buch",
+    "expansion_matrix_commit": "be6a8881f8cfd5ff79e9ce6730b9d58f680eec0c",
+    "scene_map": "ROMAN_MAP.md",
+    "note": "Cases were selected from chapters with substantial documented expansion needs. This is a retrospective single-book check, not a benchmark."
+  },
+  "method": {
+    "case_count": 8,
+    "outcomes": ["BLOCK", "HUMAN_REVIEW", "PASS_FALSE_NEGATIVE"],
+    "no_reclassification_to_make_gate_look_better": true,
+    "principle": "A case is BLOCK only where the historical scene card itself leaves a plot/research/consequence fact materially unresolved under the v0.1 gate. HUMAN_REVIEW is used where completeness exists but experiential adequacy remains judgmental. PASS_FALSE_NEGATIVE is retained when the new gate would likely have let an expansion-heavy scene through."
+  },
+  "cases": [
+    {
+      "chapter": 1,
+      "scene_id": "02_01_01",
+      "scene_card": "BAUSTEINE/02_AUSGANGSWELT_DANIEL/SZENEN/02_01_01.md",
+      "baseline_words": 594,
+      "expansion_target_words": 1600,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["research_or_setting_open", "experiential_specificity"],
+      "basis": "The scene card still places the work in a later-to-be-researched BKA/police setting; the later expansion matrix explicitly required concrete file checks, questions and stronger decision pressure."
+    },
+    {
+      "chapter": 11,
+      "scene_id": "03_04_01",
+      "scene_card": "BAUSTEINE/03_AUSLOESENDES_EREIGNIS/SZENEN/03_04_01.md",
+      "baseline_words": 557,
+      "expansion_target_words": 1750,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["story_decision_open", "consequence_carrier_open"],
+      "basis": "The scene card explicitly says the exact external event form would be fixed later; the later expansion plan required the operations-yard report, operational confusion and injured guard to be concretely enacted."
+    },
+    {
+      "chapter": 14,
+      "scene_id": "04_01_01",
+      "scene_card": "BAUSTEINE/04_ERSTE_ENTSCHEIDUNG/SZENEN/04_01_01.md",
+      "baseline_words": 478,
+      "expansion_target_words": 1800,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["story_fact_open", "research_dependency"],
+      "basis": "The card still leaves the exact identifier/data kind as person/device/vehicle or comparable; the expansion matrix later fixes the existing limited license-plate comparison and requires its boundaries and logging to be concrete."
+    },
+    {
+      "chapter": 24,
+      "scene_id": "05_04_02",
+      "scene_card": "BAUSTEINE/05_ENTDECKUNG_ESKALATION/SZENEN/05_04_02.md",
+      "baseline_words": 497,
+      "expansion_target_words": 1750,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["consequence_carrier_open", "experiential_consequence"],
+      "basis": "The card offers several alternative forms of harm to the wrongly burdened person and explicitly leaves the exact form open; the expansion matrix later requires concrete work/private consequences and Daniel experiencing them rather than only registering them intellectually."
+    },
+    {
+      "chapter": 29,
+      "scene_id": "06_03_01",
+      "scene_card": "BAUSTEINE/06_MORALISCHER_KIPPPUNKT/SZENEN/06_03_01.md",
+      "baseline_words": 584,
+      "expansion_target_words": 1900,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "HUMAN_REVIEW",
+      "gap_classes": ["narrative_weight", "experiential_depth"],
+      "basis": "The scene card is unusually complete on plot and knowledge state. The later expansion need is mainly to spend more scene time on the Weber trade-off, Daniel's counter-hypotheses for Lena and the real consequences of restricting her. A mechanical completeness check should not pretend to decide this."
+    },
+    {
+      "chapter": 34,
+      "scene_id": "07_01_01",
+      "scene_card": "BAUSTEINE/07_REVERSAL_UMDEUTUNG/SZENEN/07_01_01.md",
+      "baseline_words": 858,
+      "expansion_target_words": 1700,
+      "historical_diagnosis": "moderat komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["epistemic_beats_open", "observable_actions_incomplete"],
+      "basis": "The card requires false tracks to go nowhere but does not fix the concrete discarded hypotheses; the expansion matrix later makes rejection of false omission hypotheses a central enactment task."
+    },
+    {
+      "chapter": 38,
+      "scene_id": "08_01_01",
+      "scene_card": "BAUSTEINE/08_FINALE_ENTSCHEIDUNG_KONSEQUENZ/SZENEN/08_01_01.md",
+      "baseline_words": 790,
+      "expansion_target_words": 1800,
+      "historical_diagnosis": "moderat komprimiert",
+      "retrospective_gate": "BLOCK",
+      "gap_classes": ["evidence_chain_open", "research_or_story_fact_open"],
+      "basis": "The card leaves the second independent confirmation as time/place or preparation action; the expansion matrix later requires the independent anchors to be individually verified and weak pieces explicitly discarded."
+    },
+    {
+      "chapter": 40,
+      "scene_id": "08_03_01",
+      "scene_card": "BAUSTEINE/08_FINALE_ENTSCHEIDUNG_KONSEQUENZ/SZENEN/08_03_01.md",
+      "baseline_words": 581,
+      "expansion_target_words": 2000,
+      "historical_diagnosis": "stark komprimiert",
+      "retrospective_gate": "PASS_FALSE_NEGATIVE",
+      "gap_classes": ["pacing_and_narrative_weight_after_readiness"],
+      "basis": "The scene card is already highly concrete about goals, alternatives, access logic, physical options, information boundaries and Cold-Open facts. v0.1 would likely pass it, yet the later expansion matrix still required the last 30–60 seconds and aftermath to be played substantially longer. This is kept as a known limitation rather than tuning the gate to force a failure."
+    }
+  ]
+}
