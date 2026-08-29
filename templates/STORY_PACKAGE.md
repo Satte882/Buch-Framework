@@ -2,6 +2,16 @@
 
 working_title: <Titel>
 version: <v0.x>
+premise_summary: <belastbare Ein-Satz-/Ein-Absatz-Prämisse>
+core_conflict_summary: <welche zwei legitimen Kräfte/Werte kollidieren>
+central_question: <paradoxe moralische/psychologische Frage>
+mechanism_summary: <Kausalkette, die die Lage verschiebt>
+protagonist_arc_summary: <Ausgangshaltung → Verschiebung → Kipppunkt → finale Entscheidung → Nachhall>
+plot_architecture_summary: <welche übergeordnete Struktur trägt den Roman>
+reversal_summary: <welche Fakten bleiben wahr und bekommen neue Bedeutung>
+information_architecture_summary: <Erwartung, Irritation, Zurückhaltung und Payoffs>
+character_functions_summary: <welche Figurenfunktionen und Eigenziele sind gesetzt>
+story_decisions_open: yes
 
 ## Prämisse
 
@@ -62,4 +72,4 @@ version: <v0.x>
 
 - <Punkt oder `none`>
 
-**Gate-Regel:** Solange hier ein plotrelevanter Punkt offen ist, darf die detaillierte Szenenplanung nicht als freigegeben gelten.
+**Gate-Regel:** Vor `G1 = APPROVE` muss `story_decisions_open: no` gelten. Solange ein plotrelevanter Punkt offen ist, darf die detaillierte Szenenplanung nicht als freigegeben gelten.
