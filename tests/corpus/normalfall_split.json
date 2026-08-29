@@ -1,0 +1,89 @@
+{
+  "version": "0.1",
+  "purpose": "Fixed NORMALFALL development/hold-out assignment for prose-rule calibration. IDs refer to normalfall_beispiele.md and normalfall_kontrollbeispiele.md.",
+  "split_policy": {
+    "principle": "group-aware by pattern family, source pass and chapter where possible",
+    "target_ratio": "approximately 75/25 only when sample size supports it",
+    "small_sample_rule": "No category with fewer than 8 relevant examples may receive evidence_status=strong from this corpus alone. If a meaningful hold-out would contain fewer than 2 positive or 2 control examples, quantitative performance is reported as descriptive only.",
+    "no_rebalancing_after_results": true
+  },
+  "families": {
+    "forbidden_sondern": {
+      "development": {
+        "positive": ["01", "02", "03", "04", "05", "06", "07"],
+        "control": []
+      },
+      "holdout": {
+        "positive": ["08", "09", "10"],
+        "control": []
+      },
+      "note": "Deterministic project rule. Hold-out checks implementation recall only; no negative corpus exists because final NORMALFALL intentionally contains zero 'sondern'."
+    },
+    "softener_density": {
+      "development": {
+        "positive": ["49"],
+        "control": ["K01", "K02", "K05", "K06", "K07", "K08", "K09", "K10", "K11", "K16", "K17", "K18"]
+      },
+      "holdout": {
+        "positive": [],
+        "control": ["K13", "K14", "K20"]
+      },
+      "note": "Insufficient positive cluster data. Rule remains INFO; no REVIEW threshold is calibrated."
+    },
+    "negation_sequence": {
+      "development": {
+        "positive": ["12", "13", "16", "18", "40"],
+        "control": ["K27", "K29", "K31"]
+      },
+      "holdout": {
+        "positive": ["50"],
+        "control": ["K28", "K30"]
+      },
+      "note": "Small sample; REVIEW detector is provisional and metrics are descriptive, not strong evidence."
+    },
+    "staccato_sequence": {
+      "development": {
+        "positive": ["13", "18", "20"],
+        "control": ["K27", "K29", "K33", "K36"]
+      },
+      "holdout": {
+        "positive": ["50"],
+        "control": ["K34"]
+      },
+      "note": "Small sample; REVIEW detector is provisional and intentionally allows false positives."
+    },
+    "dialogue_pingpong": {
+      "development": {
+        "positive": ["28", "29", "31", "33", "34", "35"],
+        "control": ["K21", "K23", "K24", "K25"]
+      },
+      "holdout": {
+        "positive": ["30", "32"],
+        "control": ["K22", "K26"]
+      },
+      "note": "Only detector family with enough balanced evidence for a meaningful first descriptive hold-out check; still not a universal literary rule."
+    },
+    "filter_terms": {
+      "development": {
+        "positive": ["43", "44"],
+        "control": ["K32"]
+      },
+      "holdout": {
+        "positive": ["45"],
+        "control": []
+      },
+      "note": "Too little matched control material for threshold calibration. Rule remains INFO."
+    },
+    "semantic_explanation_echo": {
+      "development": {
+        "positive": ["22", "23", "25", "36", "38", "40", "41", "42"],
+        "control": []
+      },
+      "holdout": {
+        "positive": ["39"],
+        "control": []
+      },
+      "note": "No mechanical detector in v0.1. Reserved for later manual/LLM gate review."
+    }
+  }
+}
