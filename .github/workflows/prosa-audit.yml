@@ -1,20 +1,27 @@
-name: Prosa Audit
+name: Framework Validation
 
-# v0.1 validates scanner mechanics and the full NORMALFALL benchmark.
+# v0.1 validates upstream pipeline mechanics, Scene Readiness, prose scanner
+# mechanics and the full NORMALFALL prose-noise benchmark.
 on:
   push:
     branches: [main]
     paths:
       - "scripts/**"
       - "config/**"
+      - "templates/**"
       - "tests/**"
+      - "FRAMEWORK_PIPELINE.md"
+      - "SCENE_READINESS.md"
       - "PROSA_REGELMATRIX.md"
       - ".github/workflows/prosa-audit.yml"
   pull_request:
     paths:
       - "scripts/**"
       - "config/**"
+      - "templates/**"
       - "tests/**"
+      - "FRAMEWORK_PIPELINE.md"
+      - "SCENE_READINESS.md"
       - "PROSA_REGELMATRIX.md"
       - ".github/workflows/prosa-audit.yml"
   workflow_dispatch:
@@ -35,7 +42,7 @@ jobs:
           repository: Satte882/Buch
           path: normalfall
 
-      - name: Run scanner tests
+      - name: Run framework tests
         run: python -m unittest discover -s tests -p "test_*.py" -v
 
       - name: Audit full NORMALFALL manuscript
