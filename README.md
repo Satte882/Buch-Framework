@@ -15,9 +15,15 @@ Zuerst wird bewertet:
 - was unnötige Komplexität erzeugt hat,
 - welche Teile generalisiert werden müssen,
 - welche Teile als Serienprofil sinnvoll sind,
-- welche technischen Bausteine parametriert werden müssen.
+- welche technischen Bausteine parametriert werden müssen,
+- welche sprachlichen Muster aus den späten Leser-/Perplexity-/Anti-KI-Pässen verbindlich verhindert und geprüft werden müssen.
 
-Erste Analyse: `ANALYSE_NORMALFALL.md`
+Verbindliche Analysen:
+
+- `ANALYSE_NORMALFALL.md` – Entwicklungs-, Story-, Qualitäts- und Produktionsprozess
+- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md` – tiefe Analyse der KI-typischen Formulierungs-, Satzbau-, Rhythmus- und Erklärmuster inklusive `Nicht-X-sondern-Y`, Weichmacher, Stakkato, Erklär-Echos und Prosa-Regression
+
+Die Anti-KI-Analyse ist **kein optionaler Stilanhang**, sondern Pflichtinput für Buch-Framework v0.1. Das spätere Framework benötigt dafür ein eigenes Prosa-Profil, konfigurierbare Hard-/Warnregeln, einen Pattern-Audit, einen kontextuellen Anti-Tick-Pass und ein eigenes Qualitätsgate vor Testlesern.
 
 ## Leitprinzip
 
