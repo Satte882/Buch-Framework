@@ -3,9 +3,9 @@
 generated_via: chatgpt_chat
 action: generated
 date: 2026-08-29
-purpose: Drei Szenenpläne und zugehörige Character States nach menschlichem G2-APPROVE als gebündeltes G3-Review-Paket vorbereiten.
-status: draft
-gate_basis: G0 APPROVE + G1 APPROVE + G2 APPROVE
+purpose: Drei Szenenpläne und zugehörige Character States nach menschlichem G2-APPROVE als gebündeltes G3-Paket vorbereiten und nach Human Gate freigeben.
+status: accepted
+gate_basis: G0 APPROVE + G1 APPROVE + G2 APPROVE + G3 APPROVE
 
 ## Kanonische Upstream-Quellen
 
@@ -15,13 +15,15 @@ gate_basis: G0 APPROVE + G1 APPROVE + G2 APPROVE
 - `RESEARCH_REGISTER.md` – Blob `d0094d9a7a88b43eaf7481e7b357ae93e6d4830c`
 - `gates/G2.md` – menschliche Freigabe der Figuren-/Recherchebasis
 
-## Erzeugte Szenenartefakte
+## Freigegebene Szenenartefakte
 
-- `scenes/S1.md` – Die vernünftige Abkürzung
-- `scenes/S2.md` – Das Muster passt nicht mehr
-- `scenes/S3.md` – Der Preis der richtigen Entscheidung
+- `scenes/S1.md` – Blob `ebf8abec6892404e79bfb1741ea9542a27f521ec`
+- `scenes/S2.md` – Blob `281ffd0aaf66a2d31131cd11c15df603449b73a1`
+- `scenes/S3.md` – Blob `32bcda8f1179633eb0be25be0d9ed54845327676`
 
-## Erzeugte Character States
+Alle drei Szenen stehen nach menschlicher Freigabe auf `experience_status: human_reviewed_ready`.
+
+## Character States
 
 - `character_states/S1_MARA.md`
 - `character_states/S1_NILS.md`
@@ -31,10 +33,12 @@ gate_basis: G0 APPROVE + G1 APPROVE + G2 APPROVE
 - `character_states/S3_NILS.md`
 - `character_states/S3_LEA.md`
 
-## Bewusste Grenze vor G3
+## Human Gate
 
-Die drei Szenen stehen aktuell auf `experience_status: pending_human_review`. Damit wird keine menschliche Scene-Readiness-Freigabe vorweggenommen. Bei einem ausdrücklichen gebündelten `G3 = APPROVE` werden die drei konkreten Szenenstände auf `human_reviewed_ready` gesetzt und ein G3-Gate-Record für die dann gültigen Blobs angelegt.
+- `gates/G3.md`
+- Entscheidung: `APPROVE`
+- gilt für die drei oben genannten Szenen-Blobs.
 
 ## Schutz gegen Drift
 
-Die Szenen dürfen keine neue Storywahrheit einführen, die dem freigegebenen Story Package widerspricht. Insbesondere bleiben Nils' fehlendes Mehrwissen, Leas banale Restanwesenheit, die interne Warnsystem-Abgrenzung aus R-001 sowie der reale Verlust des Nachtversuchs verbindlich.
+Die Prosa darf keine neue Storywahrheit einführen, die dem freigegebenen Story Package widerspricht. Insbesondere bleiben Nils' fehlendes Mehrwissen, Leas banale Restanwesenheit, die interne Warnsystem-Abgrenzung aus R-001 sowie der reale Verlust des Nachtversuchs verbindlich.
