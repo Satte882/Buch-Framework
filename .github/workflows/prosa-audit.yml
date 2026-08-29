@@ -1,5 +1,6 @@
 name: Prosa Audit
 
+# v0.1 validates scanner mechanics and the full NORMALFALL benchmark.
 on:
   push:
     branches: [main]
