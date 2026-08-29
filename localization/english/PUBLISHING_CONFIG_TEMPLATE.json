@@ -1,0 +1,36 @@
+{
+  "working_title": "<WORKING_TITLE>",
+  "market_title": null,
+  "market_title_status": "open",
+  "subtitle": null,
+  "language": "en-US",
+  "primary_market": "Amazon.com",
+  "print": {
+    "trim_size": "<inherit approved source-edition geometry or define explicitly>",
+    "ink": "black_and_white",
+    "paper": "white",
+    "bleed": "no_bleed",
+    "manuscript_status": "not_built",
+    "ci_page_count": null,
+    "kdp_confirmed_page_count": null,
+    "cover_status": "blocked_until_kdp_page_count"
+  },
+  "ebook": {
+    "format": "EPUB3",
+    "layout": "reflowable",
+    "epubcheck_status": "not_run",
+    "kdp_preview_status": "not_run"
+  },
+  "metadata": {
+    "description_status": "open",
+    "keywords": [],
+    "categories": [],
+    "paperback_price": null,
+    "ebook_price": null
+  },
+  "submission": {
+    "ai_generated_translation_disclosure_checked": false,
+    "translator_contributor_resolved": false,
+    "final_publish_approved": false
+  }
+}
