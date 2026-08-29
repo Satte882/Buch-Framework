@@ -63,6 +63,22 @@ def _na_with_reason(value: str, prefixes: list[str]) -> bool:
     return False
 
 
+def _contains_placeholder_marker(folded: str, token: str) -> bool:
+    marker = token.casefold()
+    if marker == "offen":
+        # "offen" is common legitimate prose ("Die Spur bleibt offen"). Treat
+        # it as a placeholder only when it is used as an explicit marker.
+        return (
+            folded == "offen"
+            or folded.startswith("offen:")
+            or folded.startswith("offen -")
+            or folded.startswith("[offen]")
+        )
+    if marker in {"todo", "tbd", "unklar"}:
+        return re.search(rf"(?<!\w){re.escape(marker)}(?!\w)", folded) is not None
+    return marker in folded
+
+
 def _looks_placeholder(value: str, tokens: list[str]) -> bool:
     stripped = value.strip()
     if not stripped:
@@ -71,10 +87,9 @@ def _looks_placeholder(value: str, tokens: list[str]) -> bool:
         return True
     folded = stripped.casefold()
     for token in tokens:
-        tf = token.casefold()
         if token in {"<", "?"}:
             continue
-        if tf in folded:
+        if _contains_placeholder_marker(folded, token):
             return True
     return False
 
