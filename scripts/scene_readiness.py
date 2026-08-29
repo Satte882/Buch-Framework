@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""Scene Readiness completeness checker for Buch-Framework v0.1.
+
+The checker deliberately does NOT decide literary quality. It verifies that a
+scene plan has explicit inputs, closed plot/research/character dependencies and
+human-reviewed experiential planning before it reaches the G3 human gate.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any
+
+FIELD_RE = re.compile(r"^([a-z][a-z0-9_]*)\s*:\s*(.*?)\s*$")
+
+
+@dataclass(frozen=True)
+class ReadinessResult:
+    status: str
+    scene_id: str
+    issues: list[str]
+    fields: dict[str, str]
+
+
+def load_config(path: str | Path) -> dict[str, Any]:
+    with Path(path).open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if str(data.get("version")) != "0.1":
+        raise ValueError(f"Unsupported scene-readiness config version: {data.get('version')!r}")
+    if not data.get("required_fields"):
+        raise ValueError("scene-readiness config requires required_fields")
+    return data
+
+
+def parse_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for raw_line in text.splitlines():
+        match = FIELD_RE.match(raw_line.strip())
+        if not match:
+            continue
+        key, value = match.groups()
+        fields[key] = value.strip()
+    return fields
+
+
+def _na_with_reason(value: str, prefixes: list[str]) -> bool:
+    folded = value.casefold().strip()
+    for prefix in prefixes:
+        p = prefix.casefold()
+        if folded.startswith(p):
+            reason = value.strip()[len(prefix):].strip()
+            return bool(reason)
+    return False
+
+
+def _looks_placeholder(value: str, tokens: list[str]) -> bool:
+    stripped = value.strip()
+    if not stripped:
+        return True
+    if stripped == "?" or stripped.startswith("<"):
+        return True
+    folded = stripped.casefold()
+    for token in tokens:
+        tf = token.casefold()
+        if token in {"<", "?"}:
+            continue
+        if tf in folded:
+            return True
+    return False
+
+
+def evaluate(text: str, config: dict[str, Any]) -> ReadinessResult:
+    fields = parse_fields(text)
+    issues: list[str] = []
+    required = list(config["required_fields"])
+    allowed_na = set(config.get("allow_not_applicable_with_reason", []))
+    na_prefixes = list(config.get("not_applicable_prefixes", []))
+    placeholders = list(config.get("placeholder_tokens", []))
+
+    for key in required:
+        if key not in fields:
+            issues.append(f"missing required field: {key}")
+            continue
+        value = fields[key]
+        if key in allowed_na and _na_with_reason(value, na_prefixes):
+            continue
+        if _looks_placeholder(value, placeholders):
+            issues.append(f"unresolved or placeholder value: {key}")
+
+    for key, allowed in config.get("allowed_values", {}).items():
+        if key not in fields:
+            continue
+        value = fields[key].strip().casefold()
+        allowed_folded = {str(item).casefold() for item in allowed}
+        if value not in allowed_folded:
+            issues.append(f"{key} must be one of {sorted(allowed)}; got {fields[key]!r}")
+
+    # Explicit invariants. They are duplicated here intentionally so malformed
+    # configs cannot silently weaken the core gate semantics.
+    if fields.get("story_decisions_open", "").casefold() != "no":
+        issues.append("open story decisions block prose")
+    if fields.get("character_state_status", "").casefold() != "ready":
+        issues.append("character state is not ready")
+    if fields.get("research_status", "").casefold() not in {"ready", "not_applicable"}:
+        issues.append("research blockers are not closed")
+    if fields.get("experience_status", "").casefold() != "human_reviewed_ready":
+        issues.append("experiential plan has not been human-reviewed as ready")
+
+    # Deduplicate while preserving order.
+    unique_issues = list(dict.fromkeys(issues))
+    status = "BLOCK" if unique_issues else "READY_FOR_HUMAN_GATE"
+    return ReadinessResult(
+        status=status,
+        scene_id=fields.get("scene_id", "UNKNOWN"),
+        issues=unique_issues,
+        fields=fields,
+    )
+
+
+def format_text(result: ReadinessResult) -> str:
+    lines = [
+        "SCENE READINESS",
+        "",
+        f"Scene: {result.scene_id}",
+        f"Status: {result.status}",
+    ]
+    if result.issues:
+        lines.extend(["", "Blocking issues:"])
+        lines.extend(f"- {issue}" for issue in result.issues)
+    else:
+        lines.extend(
+            [
+                "",
+                "Mechanical completeness is satisfied.",
+                "This is NOT an approval. G3 still requires a human APPROVE/REWORK/STOP decision.",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def format_json(result: ReadinessResult) -> str:
+    return json.dumps(asdict(result), ensure_ascii=False, indent=2)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Check whether a scene plan is mechanically ready for the human G3 gate.")
+    parser.add_argument("scene_plan", help="Scene plan Markdown file")
+    parser.add_argument("--config", default="config/scene_readiness.yml")
+    parser.add_argument("--format", choices=("text", "json"), default="text")
+    args = parser.parse_args(argv)
+
+    text = Path(args.scene_plan).read_text(encoding="utf-8")
+    config = load_config(args.config)
+    result = evaluate(text, config)
+    print(format_json(result) if args.format == "json" else format_text(result))
+    return 1 if result.status == "BLOCK" else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
