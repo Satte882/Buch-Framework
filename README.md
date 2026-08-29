@@ -12,6 +12,21 @@ Das unveränderliche Projektziel steht in [`ZIEL.md`](ZIEL.md) und ist die obers
 
 Ziel ist nicht, `NORMALFALL` zu kopieren. Ziel ist ein Framework, mit dem weitere eigenständige Bücher reproduzierbar von der Buchidee bis zum produktionsreifen Manuskript entwickelt werden können.
 
+## Betriebsmodell und Architekturleitplanken
+
+Das Framework ist bewusst **chat-getrieben** und keine klassische LLM-Anwendung mit eigener API-Runtime.
+
+Verbindlich sind:
+
+- [`BETRIEBSMODELL.md`](BETRIEBSMODELL.md) – ChatGPT-Chat als generative Arbeits-/Orchestrierungsebene, GitHub als Source of Truth, Human Gates und minimaler Chat-Provenienzstandard,
+- [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) – kanonische Artefakte, Ableitungsrichtung, Backtracking und Invalidierung,
+- [`KISS_LEITPLANKEN.md`](KISS_LEITPLANKEN.md) – `Artefakt + ChatGPT + Gate` vor zusätzlicher Infrastruktur; CI bleibt deterministisch,
+- [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) – messbare Kriterien für den ersten vollständigen G0–G6-Testlauf.
+
+Leitbild:
+
+> **ChatGPT erzeugt und analysiert. GitHub hält den gültigen Stand. Der Mensch entscheidet. CI prüft nur das Deterministische.**
+
 ## End-to-End-Wirbelsäule
 
 Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.md):
@@ -22,9 +37,20 @@ Jede Stufe besitzt ein konkretes Arbeitsartefakt und einen menschlichen Gate. Di
 
 ## Aktueller Status
 
+### Realer G3→G4-Chat-Probe-Lauf
+
+Der erste reale generative Übergang wurde unter `m1/prose_probe_normalfall/` durchgeführt:
+
+- `SCENE_CONTEXT_PACKAGE.md` – feste, historisch freigegebene NORMALFALL-Szenenarchitektur als Input,
+- `drafts/NF-01.01.01.md` – in ChatGPT neu erzeugter und direkt committeter Prosa-Draft,
+- `provenance/NF-01.01.01.md` – Herkunft und feste Upstream-Referenzen,
+- `G4_REVIEW_REQUEST.md` – vorbereitete menschliche Review-Anfrage.
+
+Der Probe-Lauf simuliert **keinen** menschlichen Gate. Der Draft bleibt aktuell `draft`; `G4` wartet auf eine ausdrückliche menschliche Entscheidung.
+
 ### G0–G3 v0.1 – erste ausführbare Upstream-Kette
 
-Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist jetzt mechanisch ausführbar.
+Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist mechanisch ausführbar.
 
 Vorhanden sind:
 
@@ -80,7 +106,7 @@ Vorhanden sind:
 
 Der Vollmanuskript-Rauschtest verhinderte, dass technisch korrekte, aber praktisch zu laute Strukturdetektoren als REVIEW-Regeln bestehen blieben: Stakkato und Dialog-Pingpong wurden nach 403 bzw. 268 Treffern auf INFO zurückgestuft.
 
-Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie bleiben bewusst außerhalb mechanischer Entscheidungen. Ein späterer LLM-Kontextreview ist als manueller Freigabe-Gate vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
+Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie bleiben bewusst außerhalb mechanischer Entscheidungen. Ein späterer Chat-Kontextreview ist als manueller Freigabe-Schritt vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
 
 ## Empirische Basis
 
