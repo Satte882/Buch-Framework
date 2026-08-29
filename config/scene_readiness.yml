@@ -1,0 +1,58 @@
+{
+  "version": "0.1",
+  "format_note": "JSON syntax is used intentionally; JSON is valid YAML 1.2 and keeps the checker dependency-free.",
+  "required_fields": [
+    "scene_id",
+    "title",
+    "story_function",
+    "pov",
+    "location_time",
+    "characters_present",
+    "goal",
+    "conflict",
+    "decision",
+    "consequence",
+    "reader_before",
+    "reader_after",
+    "must_not_reveal",
+    "character_state_status",
+    "research_status",
+    "story_decisions_open",
+    "narrative_weight",
+    "experience_status",
+    "pressure_progression",
+    "observable_actions",
+    "alternatives_in_scene",
+    "consequence_carrier",
+    "space_or_procedure_anchors",
+    "relationship_or_psychology_carrier",
+    "character_state_refs",
+    "research_refs"
+  ],
+  "allowed_values": {
+    "character_state_status": ["ready"],
+    "research_status": ["ready", "not_applicable"],
+    "story_decisions_open": ["no"],
+    "narrative_weight": ["low", "medium", "high"],
+    "experience_status": ["human_reviewed_ready"]
+  },
+  "placeholder_tokens": [
+    "<",
+    "TODO",
+    "TBD",
+    "OFFEN",
+    "UNKLAR",
+    "später festlegen",
+    "noch festlegen",
+    "?"
+  ],
+  "allow_not_applicable_with_reason": [
+    "decision",
+    "must_not_reveal",
+    "alternatives_in_scene",
+    "relationship_or_psychology_carrier",
+    "research_refs"
+  ],
+  "not_applicable_prefixes": ["n/a -", "none -", "not_applicable -"],
+  "principle": "The checker validates completeness and explicit dependency closure. It does not judge literary quality; final Scene Readiness remains a human gate."
+}
