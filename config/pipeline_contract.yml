@@ -1,0 +1,110 @@
+{
+  "version": "0.1",
+  "format_note": "JSON syntax is used intentionally; JSON is valid YAML 1.2 and keeps the checker dependency-free.",
+  "placeholder_tokens": ["<", "TODO", "TBD", "OFFEN", "UNKLAR", "später festlegen", "noch festlegen", "?"],
+  "artifacts": {
+    "book_idea": {
+      "path": "BOOK_IDEA.md",
+      "required_fields": [
+        "working_title",
+        "genre",
+        "core_conflict",
+        "central_question",
+        "mechanism",
+        "promise_to_reader",
+        "non_goals",
+        "irreversible_decisions_open"
+      ],
+      "allowed_values": {
+        "irreversible_decisions_open": ["no"]
+      }
+    },
+    "story_package": {
+      "path": "STORY_PACKAGE.md",
+      "required_fields": [
+        "working_title",
+        "version",
+        "premise_summary",
+        "core_conflict_summary",
+        "central_question",
+        "mechanism_summary",
+        "protagonist_arc_summary",
+        "plot_architecture_summary",
+        "reversal_summary",
+        "information_architecture_summary",
+        "character_functions_summary",
+        "story_decisions_open"
+      ],
+      "allowed_values": {
+        "story_decisions_open": ["no"]
+      }
+    },
+    "characters": {
+      "path": "CHARACTERS.md",
+      "required_fields": [
+        "version",
+        "story_package_version",
+        "roster_summary",
+        "relationship_baseline_summary",
+        "open_character_decisions"
+      ],
+      "allowed_values": {
+        "open_character_decisions": ["no"]
+      }
+    },
+    "research_register": {
+      "path": "RESEARCH_REGISTER.md",
+      "required_fields": ["register_status"],
+      "allowed_values": {
+        "register_status": ["ready"]
+      }
+    }
+  },
+  "gates": {
+    "G0": {
+      "path": "gates/G0.md",
+      "required_artifacts": ["BOOK_IDEA.md"]
+    },
+    "G1": {
+      "path": "gates/G1.md",
+      "required_artifacts": ["STORY_PACKAGE.md"]
+    },
+    "G2": {
+      "path": "gates/G2.md",
+      "required_artifacts": ["CHARACTERS.md", "RESEARCH_REGISTER.md"]
+    }
+  },
+  "gate_required_fields": [
+    "gate_id",
+    "artifacts",
+    "decision",
+    "decided_by",
+    "date",
+    "open_blockers",
+    "next_step"
+  ],
+  "gate_allowed_values": {
+    "decision": ["APPROVE"],
+    "decided_by": ["human"],
+    "open_blockers": ["no"]
+  },
+  "character_state_required_fields": [
+    "scene_id",
+    "character",
+    "status",
+    "knows_before",
+    "believes_before",
+    "wants_now",
+    "fears_or_avoids",
+    "relationship_state",
+    "must_not_know_yet",
+    "knows_after",
+    "believes_after",
+    "relationship_change",
+    "decision_or_commitment"
+  ],
+  "character_state_allowed_values": {
+    "status": ["ready"]
+  },
+  "principle": "The checker validates explicit upstream completeness, dependency closure and human gate records. It does not judge story quality and never creates approvals."
+}
