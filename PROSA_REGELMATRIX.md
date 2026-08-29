@@ -101,7 +101,7 @@ Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
 - **INFO → REVIEW:** erst wenn positives und negatives Material die Prüfung sinnvoll kalibrierbar macht.
 - **REVIEW → FAIL:** nur bei sehr hoher Eindeutigkeit **und** bewusster Projekt-/Profilentscheidung.
 - Ein kleines Hold-out allein macht eine Regel niemals „stark“.
-- False Positives bei REVIEW sind zulässig; REVIEW bedeutet bewusst „ansehen“, nicht „ändern`.
+- False Positives bei REVIEW sind zulässig; REVIEW bedeutet bewusst „ansehen“, nicht „ändern“.
 
 ## Definition of Done für v0.1
 
