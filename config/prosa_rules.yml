@@ -1,0 +1,128 @@
+{
+  "version": "0.1",
+  "format_note": "JSON syntax is used intentionally; JSON is valid YAML 1.2 and keeps the scanner dependency-free.",
+  "scope_layers": {
+    "core": "Scanner mechanics only; no literary preference.",
+    "prose_profile": "Reusable language/style rules.",
+    "series_profile": "Optional series-specific overrides; none active in v0.1.",
+    "book": "Optional book-specific metadata and exceptions; no NORMALFALL names are hard-coded."
+  },
+  "active": {
+    "prose_profile": "de_anti_ki_prosa_v1",
+    "series_profile": null,
+    "book": null
+  },
+  "characters": [],
+  "rules": {
+    "forbidden_sondern": {
+      "scope": "prose_profile",
+      "type": "deterministic",
+      "severity": "FAIL",
+      "pattern": "\\bsondern\\b",
+      "flags": [
+        "IGNORECASE"
+      ],
+      "exceptions": [],
+      "evidence_status": "established_project_rule",
+      "auto_rewrite": false
+    },
+    "softener_density": {
+      "scope": "prose_profile",
+      "type": "statistical",
+      "severity": "INFO",
+      "terms": [
+        "vielleicht",
+        "möglicherweise",
+        "vermutlich",
+        "offenbar",
+        "schien",
+        "wirkte",
+        "könnte",
+        "soweit",
+        "zumindest"
+      ],
+      "window_words": 120,
+      "reporting_floor": 2,
+      "max_reports": 12,
+      "note": "reporting_floor limits report noise; it is not a literary quality threshold.",
+      "evidence_status": "insufficient_for_review_threshold",
+      "auto_rewrite": false
+    },
+    "negation_sequence": {
+      "scope": "prose_profile",
+      "type": "structural",
+      "severity": "REVIEW",
+      "starters": [
+        "nicht",
+        "kein",
+        "keine",
+        "keiner",
+        "keines",
+        "keinen",
+        "keinem",
+        "keinerlei",
+        "weder"
+      ],
+      "min_run": 2,
+      "max_words_per_paragraph": 12,
+      "evidence_status": "provisional_small_sample",
+      "auto_rewrite": false
+    },
+    "staccato_sequence": {
+      "scope": "prose_profile",
+      "type": "structural",
+      "severity": "REVIEW",
+      "min_run": 3,
+      "max_words_per_paragraph": 7,
+      "exclude_dialogue": true,
+      "evidence_status": "provisional_small_sample",
+      "auto_rewrite": false
+    },
+    "dialogue_pingpong": {
+      "scope": "prose_profile",
+      "type": "structural",
+      "severity": "REVIEW",
+      "min_run": 4,
+      "max_words_per_paragraph": 10,
+      "evidence_status": "provisional",
+      "auto_rewrite": false
+    },
+    "filter_terms": {
+      "scope": "prose_profile",
+      "type": "statistical",
+      "severity": "INFO",
+      "terms": [
+        "merkte",
+        "bemerkte",
+        "wusste",
+        "dachte"
+      ],
+      "reporting_floor_per_chapter": 2,
+      "evidence_status": "insufficient_for_review_threshold",
+      "auto_rewrite": false
+    }
+  },
+  "semantic_review": {
+    "scope": "prose_profile",
+    "implemented": false,
+    "trigger": {
+      "mode": "manual_gate",
+      "when": [
+        "prose batch is submitted for human approval",
+        "full manuscript is submitted for final prose approval"
+      ],
+      "never": [
+        "every commit",
+        "automatic rewrite",
+        "CI API call"
+      ]
+    },
+    "candidate_families": [
+      "binary_contrast_without_sondern",
+      "explanation_echo",
+      "method_or_proof_prose",
+      "over_symmetry",
+      "unnecessary_post_hoc_analysis"
+    ]
+  }
+}
