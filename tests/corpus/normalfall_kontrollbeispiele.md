@@ -1,14 +1,17 @@
-# NORMALFALL – negative Kontrollbeispiele aus dem Anti-Tick-Pass
+# NORMALFALL – negative Kontrollbeispiele aus mehreren Prosa-Audits
 
-Zweck dieser Datei: reale Stellen aus `Satte882/Buch` sichern, die im Anti-Tick-/Sprachmuster-Audit als potenzielle Muster sichtbar waren, nach dem Pass aber **nicht entfernt** wurden. Sie dienen später als Gegenmaterial zu den 50 Korrekturbeispielen in `normalfall_beispiele.md`.
+Zweck dieser Datei: reale Stellen aus `Satte882/Buch` sichern, die in historischen Anti-Tick-, Rhythmus-, Antithesen- oder Style-Audits als potenzielle Muster sichtbar waren, nach der kontextuellen Überarbeitung aber **nicht entfernt** wurden. Sie dienen später als Gegenmaterial zu den 50 Korrekturbeispielen in `normalfall_beispiele.md`.
 
 Wichtig:
 - Das sind **keine Regeln** und keine Schwellenwerte.
-- `stehen geblieben` bedeutet hier: Die Stelle war im Audit sichtbar und wurde im Commit `5ffa95b403eaeddc5ab6d34155462d344b3de133` nach der kontextuellen Überarbeitung weiterhin geführt bzw. im Manuskript belassen.
+- `stehen geblieben` bedeutet nur: Die Stelle wurde von einem Audit als Kandidat sichtbar gemacht und blieb nach dem jeweiligen Bearbeitungspfad im Manuskript erhalten.
 - Daraus folgt nicht, dass jede ähnliche Formulierung automatisch gut ist.
-- Quelle des Audits: `ANTI_TICK_DETAIL_TEMP.md`, Commit `5ffa95b403eaeddc5ab6d34155462d344b3de133` (`Polish manuscript language patterns`).
+- Die Kontrollbeispiele stammen bewusst aus **mehreren voneinander getrennten Prüfrunden**, damit der Datensatz nicht fast ausschließlich ein `vielleicht`-Korpus bleibt.
+- Für die ergänzten Beispiele K21–K38 wurde zusätzlich gegen den aktuellen kanonischen Stand `Satte882/Buch/AUSNAHMEZUSTAND_FINAL.md` auf `main` geprüft, dass die zitierte Stelle weiterhin vorhanden ist.
 
-## Kontrollbeispiele
+## A. Anti-Tick-/Sprachmuster-Pass
+
+Quelle: `5ffa95b403eaeddc5ab6d34155462d344b3de133` – `Polish manuscript language patterns` / damaliger `ANTI_TICK_DETAIL_TEMP.md`-Audit.
 
 ### K01 – Prolog
 > Drei Meter. Vielleicht vier.
@@ -174,11 +177,235 @@ Wichtig:
 
 ---
 
+## B. Rhythmus-Audit – schnelle Frage/Antwort- und Bestätigungsfolgen
+
+Audit-Skript eingeführt mit `69043517322475a088ee69819971622e7bf0cfc9`; Audit-Lauf auf `eaddb8d93824b7cf5cb3e4a417384fc9695855a7` (`Run temporary manuscript rhythm audit`). Die folgenden Sequenzen wurden im Rhythmus-Audit als Kandidaten sichtbar, blieben aber im aktuellen finalen Manuskript erhalten.
+
+### K21 – Kapitel 4
+> „Die auch?“
+>
+> „Ja.“
+>
+> „Die mochtest du doch.“
+>
+> „Ja.“
+>
+> „Warum dann weg?“
+
+- Audit-Merkmal: schnelle Dialogfolge mit wiederholter Ein-Wort-Bestätigung
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+### K22 – Kapitel 4
+> „Wer hat einen Schlüssel?“
+>
+> „Ich. Du. Der Makler für angekündigte Termine. Sonst keiner.“
+>
+> „Hausmeister?“
+>
+> „Nein.“
+>
+> „Reinigung?“
+>
+> „Nur wenn jemand aufmacht.“
+
+- Audit-Merkmal: interrogative Kurzfolge / Bestätigungsrhythmus
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+### K23 – Kapitel 7
+> „Wer benutzt die Tür?“
+>
+> „Alle, die hinten raus müssen. Müll, Anlieferung, Raucher. Nordtür nennen wir die intern.“
+>
+> „Schlüssel?“
+>
+> „Von außen Chip. Von innen normal raus.“
+>
+> „Und wenn sie so blockiert ist?“
+>
+> „Dann kommt jeder rein, der zieht.“
+
+- Audit-Merkmal: mehrere kurze Prüffragen in Folge
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+### K24 – Kapitel 7
+> „Wenn einer die absichtlich offen hält, ist das schon mehr als zwölf Akkus.“
+>
+> „Ja.“
+>
+> „Aber nicht viel mehr.“
+>
+> „Richtig.“
+
+- Audit-Merkmal: kurze Dialogtakte / Bestätigungskette
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+### K25 – Kapitel 9
+> „Woher hast du das?“
+>
+> „Noch nicht nur aus dem Portal. Ich habe beim Kurierdienst zurückgerufen.“
+>
+> „Über welche Nummer?“
+>
+> „Öffentliche Zentrale. Nicht die im Buchungseintrag.“
+>
+> „Wer hat dir die Auskunft gegeben?“
+
+- Audit-Merkmal: schnelle Verifikations-/Prüffragen
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+### K26 – Kapitel 10
+> „Das ist ein Ziel. Keine Maßnahme.“
+>
+> „Zugriff auf die Räume des Dienstleisters und die Fahrzeuge, wenn der Koffer dort landet.“
+>
+> „Mit welcher Grundlage?“
+
+- Audit-Merkmal: kurze fachliche Dialogfolge
+- Status aktuell: final vorhanden
+- Audit-Quelle: `eaddb8d93824b7cf5cb3e4a417384fc9695855a7`
+
+---
+
+## C. Kurz-Antithesen-/`Nicht`-Audit
+
+Audit-Lauf auf `03be0afb08c416bd9513ec172cd2e01f31635ea9`. Der Lauf listete kurze, mit `Nicht` arbeitende Konstruktionen als Kandidaten. Die folgenden Stellen blieben im aktuellen finalen Manuskript erhalten.
+
+### K27 – Kapitel 9
+> Nicht ungefähr.
+>
+> Nicht irgendwann am Nachmittag.
+>
+> 14.20 Uhr.
+
+- Audit-Merkmal: kurze parallele Negation / Präzisierung
+- Status aktuell: final vorhanden
+- Audit-Quelle: `03be0afb08c416bd9513ec172cd2e01f31635ea9`
+
+### K28 – Kapitel 14
+> Nicht fünf Stunden.
+>
+> Nicht den Beweis, dass der Sicherheitsmann unverletzt geblieben wäre.
+>
+> Nur vierzig Minuten, die ihnen gehört hätten, wenn sie früher parallel gearbeitet hätten.
+
+- Audit-Merkmal: doppelte Negation mit anschließender Präzisierung
+- Status aktuell: final vorhanden
+- Audit-Quelle: `03be0afb08c416bd9513ec172cd2e01f31635ea9`
+
+### K29 – Kapitel 14
+> Nicht nötig.
+>
+> Nicht jetzt.
+
+- Audit-Merkmal: sehr kurze Negationsfolge
+- Status aktuell: final vorhanden
+- Audit-Quelle: `03be0afb08c416bd9513ec172cd2e01f31635ea9`
+
+### K30 – Kapitel 18
+> Drei Treffer.
+>
+> Nicht zwei relevante Treffer.
+>
+> Nicht *Verbindung bestätigt*.
+>
+> Drei.
+
+- Audit-Merkmal: kurze Negations-/Kontrastfolge
+- Status aktuell: final vorhanden
+- Audit-Quelle: `03be0afb08c416bd9513ec172cd2e01f31635ea9`
+
+### K31 – Kapitel 23
+> Achtzehn Personen.
+>
+> Nicht Verdächtige.
+>
+> Personen, deren dienstliche Rollen, Zugänge oder Kommunikationswege innerhalb der vereinbarten Kriterien lagen.
+
+- Audit-Merkmal: kurze Negation als Korrektur/Präzisierung
+- Status aktuell: final vorhanden
+- Audit-Quelle: `03be0afb08c416bd9513ec172cd2e01f31635ea9`
+
+---
+
+## D. Style-/Ambiguity-Audit – Filter, Deutungs- und Autorenformeln
+
+Audit-Skript eingeführt mit `b350d1145628095bd3439f77d2b74825ef768cf4`; Audit-Lauf auf `de55a16cff8ac07162131da4613353b0478b6712`. Der Audit zählte und kontextualisierte u. a. `Daniel wusste`, `Daniel merkte`, `Das war`, `Genau das` und `Der Satz`. Die folgenden Kandidaten wurden später nicht entfernt.
+
+### K32 – Kapitel 4
+> Daniel wusste es tatsächlich. Beim letzten Mal hatte er selbst den Streifen festgedrückt, während Jana mit dem Makler telefoniert hatte.
+
+- Audit-Merkmal: `Daniel wusste`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K33 – Kapitel 7
+> Das war der Satz, der sofort größer klang als der gelbe Streifen selbst.
+
+- Audit-Merkmal: `Das war` / `Der Satz`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K34 – Kapitel 7
+> Das war mehr als vorher.
+>
+> Aber noch keine Geschichte.
+
+- Audit-Merkmal: `Das war`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K35 – Kapitel 8
+> Er versuchte bereits, die Zahl möglicher Beobachter kleiner zu rechnen.
+>
+> Genau das war zu früh.
+
+- Audit-Merkmal: `Genau das`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K36 – Kapitel 10
+> Das war kein Sonderweg.
+>
+> Nur bessere Organisation.
+
+- Audit-Merkmal: `Das war` / sehr kurze Folgesätze
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K37 – Kapitel 18
+> „Sie interessiert sich dafür, wie ich entscheide“, sagte Daniel.
+>
+> Der Satz klang laut schlechter als auf dem Bildschirm.
+
+- Audit-Merkmal: `Der Satz`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+### K38 – Kapitel 18
+> Beide Ansichten waren schlechter für eine schnelle Geschichte.
+>
+> Das war Absicht.
+
+- Audit-Merkmal: `Das war`
+- Status aktuell: final vorhanden
+- Audit-Quelle: `de55a16cff8ac07162131da4613353b0478b6712`
+
+---
+
 ## Empirischer Zweck
 
-Diese 20 Stellen bilden zusammen mit den 50 Korrekturbeispielen ein erstes positives/negatives Rohmaterialpaar:
+Der Kontrollkorpus umfasst jetzt **38 reale Kontrollbeispiele aus vier historischen Prüfrichtungen**:
 
-- `normalfall_beispiele.md`: Stellen, die tatsächlich geändert wurden
-- `normalfall_kontrollbeispiele.md`: ähnliche/auffällige Stellen, die im kontextuellen Pass stehen blieben
+- 20 aus dem Anti-Tick-/Sprachmuster-Pass,
+- 6 aus dem Rhythmus-Audit,
+- 5 aus dem Kurz-Antithesen-/`Nicht`-Audit,
+- 7 aus dem Style-/Ambiguity-Audit.
+
+Damit bleibt der ursprüngliche `vielleicht`-Schwerpunkt als historisches Rohmaterial erhalten, ist aber nicht mehr die einzige belastbare Kontrollbasis. Zusammen mit `normalfall_beispiele.md` liegt jetzt Kontrastmaterial für Weichmacher, kurze Negationsformen, Dialogrhythmus sowie mehrere Filter-/Autorenformeln vor.
 
 Keine weitere Generalisierung erfolgt in dieser Datei.
