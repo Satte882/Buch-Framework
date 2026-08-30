@@ -5,7 +5,7 @@ fixture_status: frozen_regression_fixture
 date: 2026-08-30
 acceptance_basis: `M1_ACCEPTANCE.md` blob `c366c3f3f30b76e6f2358143d7ab72d254b5fe36`
 issue: `#8 – M1 E2E-Lauf nach v0.2-Arbeitsweise durchführen`
-issue_status: closing_as_completed
+issue_status: completed
 
 ## Ergebnis
 
