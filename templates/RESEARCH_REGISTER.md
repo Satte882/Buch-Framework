@@ -2,16 +2,36 @@
 
 register_status: ready
 
-Dieses Register enthält nur Recherchefragen, die für Plot, Figurenhandlung, Plausibilität oder konkrete Szenenentscheidungen relevant sind.
+Dieses Register enthält nur Recherchefragen, die für Plot, Figurenhandlung, Plausibilität oder konkrete Szenenentscheidungen relevant sind. Recherche ist ein **Querschnittsartefakt** und besitzt standardmäßig keinen eigenen Human Gate.
 
-| ID | Frage | Betroffene Szene(n) | Risiko bei falscher Annahme | Status | Beleg / Quelle | Entscheidung |
-|---|---|---|---|---|---|---|
-| R-001 | <Frage> | <IDs> | low / medium / high | open / resolved / not_applicable | <Quelle> | <was gilt für das Buch> |
+| ID | Frage | Betroffene Ebene / Artefakte | Risiko bei falscher Annahme | Status | Beleg / Quelle | Entscheidung | blocking_now |
+|---|---|---|---|---|---|---|---|
+| R-001 | <Frage> | <Baustein/Event/Beat/Szene> | low / medium / high | open / resolved / not_applicable | <Quelle> | <was gilt für das Buch> | yes / no |
 
-## Gate-Regel
+## Blockierregel v0.x
 
-`register_status: ready` bedeutet nur: Das Register ist als Arbeitsartefakt angelegt und die bekannten plotrelevanten Recherchefragen sind erfasst. Es bedeutet **nicht**, dass alle Recherche abgeschlossen ist.
+Eine offene Recherchefrage blockiert die **aktuelle Entwicklungsebene** nur dann, wenn ihre Antwort eine jetzt zu treffende
 
-Ein szenenreferenzierter Recherchepunkt mit Status `open` blockiert Scene Readiness. Ein `resolved`-Punkt benötigt Beleg/Quelle und eine explizite Buchentscheidung.
+- Plotentscheidung,
+- Figurenentscheidung,
+- Szenenentscheidung,
+- Informationsentscheidung oder
+- Konsequenzentscheidung
 
-Recherche darf nach Scene Readiness offen bleiben, wenn sie andere Szenen betrifft oder nur sprachliche Farbe beziehungsweise austauschbare Oberflächendetails liefert und keine relevante Storyentscheidung mehr verändert.
+verändern kann.
+
+Austauschbare Oberflächendetails blockieren nicht.
+
+`blocking_now: yes` bedeutet deshalb: Die abhängige Entscheidung darf nicht als fertig bzw. freigabereif behandelt werden, solange der Recherchepunkt `open` ist.
+
+`blocking_now: no` bei einem offenen Punkt muss bedeuten, dass die aktuelle Entscheidung unabhängig von der späteren Detailantwort stabil bleibt.
+
+Für v0.x wird bewusst kein zusätzlicher Score und keine Bewertungsmatrix eingeführt.
+
+## Gate-Bezug
+
+- G1 darf keine offene Recherchefrage übergehen, die eine Story-Architekturentscheidung verändern kann.
+- G2 darf keine offene Recherchefrage übergehen, die Beat-, Szenen-, Character-State-, Informations- oder Konsequenzentscheidungen verändern kann.
+- Spätere sprachliche oder austauschbare Detailrecherche darf nach G2 offen bleiben, wenn sie keine Storywahrheit mehr verändert.
+
+`register_status: ready` bedeutet nur: Die bekannten relevanten Recherchefragen sind erfasst und ihr aktueller Blockierstatus ist bewusst gesetzt. Es bedeutet nicht, dass sämtliche Recherche abgeschlossen ist.
