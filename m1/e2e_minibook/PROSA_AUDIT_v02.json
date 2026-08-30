@@ -1,0 +1,80 @@
+{
+  "manuscript": "m1/e2e_minibook/MANUSCRIPT_v02.md",
+  "manuscript_ref": "ee6117b52ea0cf80c2c8d312f46c0844bfc0498a",
+  "scanner": "scripts/prosa_audit.py",
+  "scanner_ref": "b0ac99cad7d208e363a902b5a632de59661add3f",
+  "config": "config/prosa_rules.yml",
+  "config_ref": "001296c418c7827457cbd15249272840a691bfed",
+  "date": "2026-08-30",
+  "counts": {
+    "FAIL": 0,
+    "REVIEW": 0,
+    "INFO": 4
+  },
+  "findings": [
+    {
+      "rule_id": "dialogue_pingpong",
+      "severity": "INFO",
+      "chapter": "S1",
+      "start_line": 31,
+      "end_line": 37,
+      "message": "4 consecutive short dialogue paragraphs",
+      "excerpt": "„Du siehst es?“, fragte er. / „Ich sehe eine Meldung.“ / „Vom gleichen Punkt?“ / „Ja.“",
+      "scope": "prose_profile",
+      "evidence_status": "insufficient_for_review_threshold",
+      "disposition": "accepted_info",
+      "reason": "Kurzer beruflicher Abgleich am Beginn des Konflikts; funktional und bereits Bestandteil des menschlich freigegebenen G3-Stil-Batches. INFO ist laut Regelmatrix kein Qualitätsgrenzwert."
+    },
+    {
+      "rule_id": "dialogue_pingpong",
+      "severity": "INFO",
+      "chapter": "S1",
+      "start_line": 57,
+      "end_line": 63,
+      "message": "4 consecutive short dialogue paragraphs",
+      "excerpt": "„Wer sollte oben sein?“ / „Niemand.“ / „Sicher?“ / „Laut Plan ja. Die letzte Schicht ist raus.“",
+      "scope": "prose_profile",
+      "evidence_status": "insufficient_for_review_threshold",
+      "disposition": "accepted_info",
+      "reason": "Gezielter Belegungsabgleich unter Zeitdruck; keine automatische Änderung, da der Detektor nach Vollmanuskript-Rauschtest ausdrücklich nur INFO liefert."
+    },
+    {
+      "rule_id": "staccato_sequence",
+      "severity": "INFO",
+      "chapter": "S2",
+      "start_line": 129,
+      "end_line": 133,
+      "message": "3 consecutive very short narrative paragraphs",
+      "excerpt": "Der vertraute Gedanke kam fast von selbst. / Wieder nichts. / Mara ging weiter.",
+      "scope": "prose_profile",
+      "evidence_status": "insufficient_for_review_threshold",
+      "disposition": "accepted_info",
+      "reason": "Bewusste kurze Entlastungsfolge vor dem ersten Gegenbeleg; der Rhythmus unterstützt den Kipppunkt und war Teil des G3-Batches."
+    },
+    {
+      "rule_id": "staccato_sequence",
+      "severity": "INFO",
+      "chapter": "S2",
+      "start_line": 137,
+      "end_line": 141,
+      "message": "3 consecutive very short narrative paragraphs",
+      "excerpt": "Sie blieb stehen. / Der Bereich sollte leer sein. / Mara nahm das Funkgerät.",
+      "scope": "prose_profile",
+      "evidence_status": "insufficient_for_review_threshold",
+      "disposition": "accepted_info",
+      "reason": "Kurze Handlungsfolge am ersten belastbaren Widerspruch; funktional, nicht als mechanischer Fehler zu behandeln."
+    }
+  ],
+  "semantic_self_review": {
+    "independent_review": false,
+    "result": "no_blocking_issue_detected",
+    "candidate_families_checked": [
+      "binary_contrast_without_sondern",
+      "explanation_echo",
+      "method_or_proof_prose",
+      "over_symmetry",
+      "unnecessary_post_hoc_analysis"
+    ],
+    "notes": "Die erzeugende KI hat den Gesamttext vor G4 semantisch gegengelesen. Zwei weiche/zu symmetrische Stellen in S3 wurden rein sprachlich revidiert. Verbleibende Kontraste und Schlussreflexionen tragen Szene bzw. Thema und werden nicht als unabhängige Qualitätsfreigabe ausgegeben."
+  }
+}
