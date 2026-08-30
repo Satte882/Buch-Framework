@@ -39,9 +39,9 @@ story_decisions_open: yes
 - finale Entscheidung: <...>
 - Nachhall: <...>
 
-## Plotarchitektur
+## Makroarchitektur
 
-<Bausteine / Akte / Sequenzen; Format ist genrespezifisch und nicht im Core erzwungen.>
+<Übergeordnete Form/Akte/Entwicklung; die konkrete horizontale Zerlegung erfolgt anschließend in `STORY_BLOCKS.md` und `EVENTS.md`.>
 
 ## Reversal / Umdeutung
 
@@ -68,8 +68,12 @@ story_decisions_open: yes
 |---|---|---|---|
 | R-001 | <...> | <...> | open |
 
-## G1 – offene irreversible Entscheidungen
+## Offene Storyentscheidungen
 
 - <Punkt oder `none`>
 
-**Gate-Regel:** Vor `G1 = APPROVE` muss `story_decisions_open: no` gelten. Solange ein plotrelevanter Punkt offen ist, darf die detaillierte Szenenplanung nicht als freigegeben gelten.
+## Arbeitsregel
+
+`STORY_PACKAGE.md` ist ein Arbeitsartefakt der **Story-Architektur** und besitzt standardmäßig keinen isolierten Human Gate.
+
+Vor **G1 = Story-Architektur APPROVE** müssen zusätzlich die dramaturgischen Bausteine (`STORY_BLOCKS.md`) und Ereignisse/Sequenzen (`EVENTS.md`) über das gesamte Buch ausreichend geschlossen sein. Figurenkern und relevante Rechercheabhängigkeiten werden im selben G1-Paket mitgeprüft.
