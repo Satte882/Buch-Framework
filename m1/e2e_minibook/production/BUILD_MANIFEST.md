@@ -1,6 +1,6 @@
 # FEHLALARM v0.2 – Build Manifest
 
-status: G5_CANDIDATE
+status: G5_APPROVED
 date: 2026-08-30
 
 ## Source
@@ -27,6 +27,8 @@ python scripts/build_html.py \
 - `m1/e2e_minibook/production/FEHLALARM_v02.html`
 - output blob: `1add4d45fea3e552521041ae5d6120fba717d214`
 - type: standalone HTML reading/print artifact
+- G5: **APPROVE**
+- G5 record: `m1/e2e_minibook/gates/G5.md` — blob `96e2033e60575794645485924fe6045147a5a458`
 
 Production features:
 
@@ -43,7 +45,7 @@ Production features:
 Regression test:
 
 - `tests/test_build_html.py`
-- final test blob: `7d0bf4d7d592b4cad42fec29953c6fef93b205e8`
+- test blob: `7d0bf4d7d592b4cad42fec29953c6fef93b205e8`
 
 The test rebuilds the HTML from `MANUSCRIPT_v02.md` and requires **byte-for-byte equality** with the committed production artifact.
 
@@ -65,8 +67,6 @@ The successful run includes:
 - prose audit tests,
 - full NORMALFALL noise audit workflow.
 
-## G5 Scope
+## Validity
 
-G5 is asked to approve exactly output blob `1add4d45fea3e552521041ae5d6120fba717d214` as the final M1 production artifact.
-
-A later content change to `MANUSCRIPT_v02.md` requires backtracking through G4 and a rebuild. A later production-only change (CSS/markup/builder) creates a new output blob and requires a new G5 decision.
+This manifest approves exactly output blob `1add4d45fea3e552521041ae5d6120fba717d214` against the fixed G4 source blob. A later content change requires G4 backtracking and rebuild. A production-only change creates a new output blob and requires a new G5 decision.
