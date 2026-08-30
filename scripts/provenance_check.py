@@ -26,10 +26,12 @@ from pathlib import Path
 
 FIELD_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*?)\s*$")
 REF_LINE_RE = re.compile(
-    r"`([^`]+)`\s+—\s+(?:blob\s+)?`([0-9a-fA-F]{40})`"
+    r"^\s*-\s+`([^`]+)`\s+—\s+(?:blob\s+)?`([0-9a-fA-F]{40})`\s*$",
+    re.MULTILINE,
 )
 SLICE_REF_LINE_RE = re.compile(
-    r"`([^`]+)`\s+—\s+slice\s+`([^`]+)`\s+—\s+(?:blob\s+)?`([0-9a-fA-F]{40})`"
+    r"^\s*-\s+`([^`]+)`\s+—\s+slice\s+`([^`]+)`\s+—\s+(?:blob\s+)?`([0-9a-fA-F]{40})`\s*$",
+    re.MULTILINE,
 )
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 VALID_STATUSES = {"draft", "accepted", "stale", "invalidated"}
