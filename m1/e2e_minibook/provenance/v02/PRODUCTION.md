@@ -6,8 +6,8 @@ generated_via: deterministic_builder
 action: generated
 date: 2026-08-30
 purpose: Den G4-freigegebenen Mini-Manuskriptstand als eigenständiges HTML-Lese- und Printartefakt ableiten.
-gate_basis: G4 APPROVE
-status: draft
+gate_basis: G4 APPROVE + G5 APPROVE
+status: accepted
 
 ## Upstream
 
@@ -42,8 +42,22 @@ Das Artefakt ist keine umbenannte Markdown-Kopie:
 
 Der erste Lauf dieses neuen Tests hat einen echten Driftfehler gefunden: Das HTML war aus einem minimal älteren S3-Zwischenstand gebaut. Das Produktionsartefakt wurde daraufhin ausschließlich aus dem bereits G4-freigegebenen Manuskript neu gebaut; der G4-Manuskripttext selbst blieb unverändert.
 
-Die endgültige CI-Freigabe wird im G5-Review-Paket auf den erfolgreichen Rebuild-Test referenziert.
+Finaler Nachweis:
+
+- `Framework Validation` Run #32 / ID `33306864034`
+- Ergebnis: **success**
+- byte-genauer Produktions-Rebuild: PASS
+- Provenienz-/Invalidierungstest: PASS
+
+## Human G5
+
+- `m1/e2e_minibook/gates/G5.md` — blob `96e2033e60575794645485924fe6045147a5a458`
+- Entscheidung: **APPROVE**
+- entschieden durch: human
+- Datum: 2026-08-30
+
+Damit ist genau Output-Blob `1add4d45fea3e552521041ae5d6120fba717d214` als finaler M1-Produktionsstand akzeptiert.
 
 ## Gültigkeit
 
-Bis zum menschlichen `G5-APPROVE` bleibt das Produktionsartefakt `draft`. Eine Änderung des G4-Manuskript-Blobs invalidiert diesen Output; reine Build-/CSS-Änderungen erzeugen einen neuen Produktionsstand und müssen erneut über G5 geprüft werden.
+Eine Änderung des G4-Manuskript-Blobs invalidiert diesen Output. Eine reine Build-/CSS-Änderung erzeugt einen neuen Produktionsstand und benötigt eine neue G5-Entscheidung. Dieser Record darf nicht automatisch auf einen neuen Output übertragen werden.
