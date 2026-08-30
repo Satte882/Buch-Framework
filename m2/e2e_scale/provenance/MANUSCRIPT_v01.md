@@ -1,14 +1,14 @@
 # PROVENANCE – M2 MANUSCRIPT v0.1
 
-status: draft
+status: accepted
 artifact: MANUSCRIPT_v01.md
 artifact_ref: 55753bb0ce177a80886343a8ac4e23a71de05c4a
 generated_via: deterministic_concatenation_of_committed_drafts
 action: rebuilt_after_full_manuscript_review
 date: 2026-08-30
-purpose: Vollständiger 10-Szenen-Manuskriptstand für finalen Audit, Gesamt-Self-Review und Human Gate G4.
-gate_basis: G3 APPROVE
-review_status: awaiting_human_G4
+purpose: Vollständiger 10-Szenen-Manuskriptstand; durch Human Gate G4 für die Produktion freigegeben.
+gate_basis: G3 APPROVE; G4 APPROVE
+review_status: human_G4_approved
 
 ## Upstream refs
 
@@ -28,4 +28,4 @@ review_status: awaiting_human_G4
 
 ## Gültigkeit
 
-Das Manuskript ist noch nicht G4-freigegeben. Jede Änderung eines referenzierten Draft-Blobs muss die Manuskript-Provenienz sichtbar blockieren oder den Manuskriptstand explizit `stale` machen. Human Gate G4 darf nur den konkret referenzierten Manuskript-Blob freigeben.
+Human Gate G4 hat exakt diesen Manuskript-Blob als kanonischen vollständigen Prosa-Stand für die Produktion freigegeben. Jede spätere Inhaltsänderung eines referenzierten Drafts oder des Manuskripts erzeugt einen neuen Manuskriptstand und erfordert Backtracking zu G4. Reine Produktions-/Markup-Änderungen dürfen den Manuskripttext nicht verändern und werden in G5 entschieden.

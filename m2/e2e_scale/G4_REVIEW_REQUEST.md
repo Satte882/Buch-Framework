@@ -1,10 +1,12 @@
 # G4 Review Request – SPERRFRIST M2
 
-status: AWAITING_HUMAN_G4_DECISION
+status: APPROVED
 gate_name: Manuskript
 prior_gate: `gates/G3.md`
 prior_gate_ref: `17330cb19c3b6b25d47f06868f690bc1828445c3`
 m2_issue: `#10 – M2 – Skalierungsnachweis mit komplexem 10-Szenen-Testfall`
+human_decision: `G4-APPROVE`
+decision_date: 2026-08-30
 
 ## Zweck
 
@@ -15,14 +17,14 @@ Ein `G4-APPROVE` bestätigt keine neue Storywahrheit. Es friert genau den unten 
 ## G4-Kandidat
 
 - `MANUSCRIPT_v01.md` — blob `55753bb0ce177a80886343a8ac4e23a71de05c4a`
-- Manuskript-Provenienz `provenance/MANUSCRIPT_v01.md` — blob `25182aaf660093122bdba64d91e17d44f0a04d7d`
+- Manuskript-Provenienz vor G4 `provenance/MANUSCRIPT_v01.md` — blob `25182aaf660093122bdba64d91e17d44f0a04d7d`
 - Umfang: 10 Szenen, ca. 6.6k Wörter
 
 Der Manuskriptstand ist deterministisch die Verkettung der zehn aktuell referenzierten Drafts S1–S10.
 
 ## Technischer Gesamtcheck
 
-Finale Prüfgrundlage: CI Run #42 — **PASS**.
+Finale Prüfgrundlage vor Human Decision: CI Run #45 — **PASS**.
 
 - Tests: **60/60 PASS**
 - M2 Manuskript `FAIL`: **0**
@@ -52,21 +54,8 @@ Kein Befund erforderte eine neue G2-Storyentscheidung.
 
 Wichtig: Dieser Review war **same-context Self-Review**. Er ist kein Nachweis unabhängiger semantischer QA. Diese M2-Frage bleibt separat offen.
 
-## G4-Prüffragen
+## Human Decision
 
-1. Funktioniert SPERRFRIST über alle zehn Szenen als zusammenhängende Geschichte statt als Folge sauberer Einzeltests?
-2. Bleibt die Nora-Perspektive über den vollständigen Text konsistent und ausreichend nah?
-3. Entwickeln sich technische Evidenz und persönliche Verantwortungsfrage verständlich, ohne methodische Erklärprosa?
-4. Tragen Jonas' Fehler/Rehabilitation, Quelle As Konflikt und Davids Timing-Gegenposition über die Szenengrenzen hinweg?
-5. Wirkt der Mittelteil S3–S7 wie zunehmender Druck oder wie repetitive Dokumentprüfung?
-6. Funktioniert S8 als echter Reversal und S9/S10 als Konsequenz statt als bloßer Nachlauf?
-7. Gibt es sichtbare Stil-/KI-Prosa-Muster, die vor Produktion noch zwingend revidiert werden müssen?
-8. Ist der vollständige Manuskriptstand stark genug, um ihn für G5 einzufrieren?
+Der Mensch hat im Chat am 2026-08-30 ausdrücklich **`G4-APPROVE`** erteilt. Damit ist ausschließlich `MANUSCRIPT_v01.md` blob `55753bb0ce177a80886343a8ac4e23a71de05c4a` für die Produktion freigegeben.
 
-## Nächste menschliche Entscheidung
-
-- `G4-APPROVE` — genau Manuskript-Blob `55753bb0ce177a80886343a8ac4e23a71de05c4a` wird als vollständiger Manuskriptstand freigegeben; danach Produktion/G5.
-- `G4-REWORK` — konkrete Manuskriptbefunde bearbeiten; G4 bleibt offen.
-- `G4-STOP` — M2 an dieser Stelle beenden.
-
-**Wichtig:** Nur der Mensch kann G4 freigeben.
+Keine stillschweigende Inhaltsänderung ist nach G4 zulässig. Inhaltsänderungen erfordern erneute G4-Prüfung; reine Produktions-/Markup-Ableitungen werden in G5 geprüft.
