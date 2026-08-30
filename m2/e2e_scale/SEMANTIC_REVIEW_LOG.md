@@ -1,50 +1,61 @@
 # M2 – Semantic Review Log
 
-status: active
+status: complete
 purpose: Semantische Reviews im M2-Lauf sichtbar dokumentieren, ohne sie als unabhängige oder bereits validierte QA-Fähigkeit auszugeben.
 
 ## SR-001 – Story-Reversal wurde fälschlich als Framework-Invalidierung interpretiert
 
 date: 2026-08-30
-review_purpose: G1-Gesamtcheck vor Vorlage an den Human Gate; prüfen, ob die geplante M2-Invalidierung tatsächlich ein Provenienz-/Backtracking-Ereignis und nicht nur Teil der Storyhandlung ist.
 review_context: same_chat_same_model_context
 independent_review: no
-artifacts_reviewed:
-- `STORY_PACKAGE.md`
-- `STORY_BLOCKS.md`
-- `EVENTS.md`
-- Issue #10 M2-Anforderung zur realen Upstream-Änderung nach vorhandenen Downstream-Artefakten
-
-### Befund
-
-Die erste G1-Fassung behandelte B11/E027 sinngemäß als geplanten Invalidierungsanlass: Ein später Beleg innerhalb der Story widerlegt eine frühe Verantwortungsannahme.
-
-Das ist methodisch falsch. Da B11/E027 bereits auf G1-Ebene kanonisch zur Geschichte gehören, können spätere Beats und Szenen den früheren Figuren-Glauben an K korrekt abbilden. Diese Downstream-Artefakte werden durch den späteren In-Story-Reveal nicht stale; sie sind gerade dann korrekt, wenn sie den jeweiligen Wissensstand der Figuren zeigen.
-
-Damit hätte M2 eine Story-Wendung fälschlich als Framework-Backtracking gezählt.
-
 severity: high
-real_framework_risk: yes
-
-### Korrektur
-
-Vor G1 wurden drei noch nicht human-freigegebene Artefakte korrigiert:
-
-- `STORY_PACKAGE.md`: klare Abgrenzung Story-Reversal vs. Framework-Backtracking.
-- `STORY_BLOCKS.md`: B11 bleibt Story-Reversal; kein Anspruch auf Artefaktinvalidierung.
-- `EVENTS.md`: E027 ändert den Figuren-/Story-Wissensstand, nicht den kanonischen Upstream-Stand des Frameworks.
-
-Der echte M2-Invalidierungstest wird separat erst **nach Existenz realer Downstream-Artefakte** durchgeführt: Eine relevante kanonische Upstream-Annahme wird kontrolliert geändert, betroffene Git-Abhängigkeiten müssen sichtbar stale/invalidated werden und das Rework wird gemessen.
-
 correction_triggered: yes
-human_disposition: pending_G1
-notes: Die Korrektur erfolgte vor dem G1-Human-Gate. Der Mensch entscheidet mit `G1-APPROVE/REWORK/STOP` über das korrigierte Gesamtpaket; der Self-Review selbst ersetzt diese Entscheidung nicht.
+human_disposition: accepted_with_G1
 
-## Zählung aktuell
+Vor G1 wurde ein geplanter In-Story-Reveal fälschlich als Framework-Backtracking behandelt. `STORY_PACKAGE.md`, `STORY_BLOCKS.md` und `EVENTS.md` wurden vor Human Gate G1 korrigiert. Der reale Invalidierungstest wurde anschließend separat nach vorhandenen Downstream-Artefakten durchgeführt.
 
-semantic_review_findings: 1
-real_corrections_triggered: 1
+## G3 – repräsentativer Prosa-Self-Review
+
+Vollständige Dokumentation: `SEMANTIC_G3_SELF_REVIEW.md`.
+
+review_context: same_chat_same_model_context
+independent_review: no
+human_disposition: accepted_with_G3
+
+Reale korrigierte Befundgruppen:
+
+1. POV-Grenze in S1 überschritten — FIXED.
+2. interne Framework-Labels in S5/S8 in Romanprosa geleakt — FIXED plus Regressionstest.
+3. überkonstruierte Rhythmusstellen — SELECTIVELY FIXED; Staccato-Treffer im Sample von 2 auf 0 reduziert.
+
+Der zusätzliche G2-Storydrift-Check fand keine neue Storyentscheidung und zählt nicht als Fehlerbefund.
+
+## G4 – Vollmanuskript-Self-Review
+
+Vollständige Dokumentation: `SEMANTIC_G4_SELF_REVIEW.md`.
+
+review_context: same_chat_same_model_context
+independent_review: no
+human_disposition: accepted_with_G4
+
+Reale korrigierte Befundgruppen:
+
+1. S4 unnötige Negationsfolge — FIXED.
+2. S6 zu frühe Publizierbarkeit gegenüber G2-Zustand — FIXED.
+3. S9 künstliche Rhythmusverdichtung — FIXED.
+4. S10 Sperrfrist sprachlich zu nah an 18:00 plus Rhythmus — FIXED; Veröffentlichung explizit 18:01.
+
+## Finale M2-Zählung
+
+semantic_review_findings: 8
+real_corrections_triggered: 8
 independent_semantic_reviews: 0
 validated_semantic_QA_capability: no
 
-**Regel:** Weitere semantische Reviews im M2-Lauf werden analog dokumentiert: Zweck, Artefakte, Kontext-Unabhängigkeit, konkreter Befund, Human-Disposition und tatsächliche Korrekturwirkung.
+Zählweise: 1 realer Methodenfehler vor G1 + 3 korrigierte G3-Befundgruppen + 4 korrigierte G4-Befundgruppen. Reine Checks ohne gefundenen Fehler werden nicht als Befund gezählt.
+
+## Schlussfolgerung
+
+M2 zeigt: strukturierte same-context Reviews können konkrete methodische, perspektivische, Stil- und Kontinuitätsfehler finden und echte Korrekturen auslösen. M2 zeigt ausdrücklich **nicht**, dass dieselbe Methode unabhängig, reproduzierbar oder mit bekannter Trefferquote funktioniert.
+
+Daher ist eine bewusst unabhängige semantische Review-Methode ein evidenzbasierter nächster Prüfpunkt; ein automatischer Quality Score oder LLM-as-a-Judge ist durch M2 nicht gerechtfertigt.

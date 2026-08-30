@@ -1,138 +1,122 @@
 # M2 Observations – SPERRFRIST
 
-status: IN_PROGRESS
+status: COMPLETE
 m2_issue: `#10`
 date: 2026-08-30
-scope: Beobachtungen bis einschließlich Human Gate G2, deterministischem READY_FOR_PROSE-Nachweis und kontrolliertem Invalidierungstest
+scope: vollständiger M2-Lauf G0–G5 inklusive G2-Batching, kontrolliertem Invalidierungstest, repräsentativem G3-Prosa-Batch, Vollmanuskript und Produktion
 
-## Messbarer Umfang bisher
+## Messbarer Gesamtumfang
 
 - Story Blocks: 12
 - Events: 30
 - Beats: 42
 - Szenen: 10
 - Character States: 31
+- plotrelevante Figuren/Rollen: 6
 - G2 Batch 1: 5 Szenen / 21 Beats / 13 Character States
 - G2 Batch 2: 5 Szenen / 21 Beats / 18 Character States
-- Human Gates abgeschlossen: G0, G1, G2
+- Human Gates abgeschlossen: G0–G5 = 6/6
 - interne G2-Batches menschlich akzeptiert: 2/2
 - Cross-Batch-Probleme im Gesamtcheck: 0
 - Human-Rework in den beiden G2-Batches: 0
-- deterministischer Pipeline-Status nach G2: `READY_FOR_PROSE`
 - kontrollierter Invalidierungstest: PASS
+- G3 repräsentativer Prosa-Batch: 3 Szenen
+- vollständiges Manuskript: 10 Szenen
+- finaler M2-Manuskript-Audit: FAIL 0 / REVIEW 0 / INFO 36
+- dokumentierte semantische Befundgruppen: 8
+- davon reale Korrekturen: 8
+- unabhängige semantische Reviews: 0
+- kanonischer Produktionsbuild: Run #48 PASS
+- finaler Repo-/Rebuild-Check: Run #49 PASS
 
-## O-01 – fünf Szenen sind als Review-Batch grundsätzlich handhabbar
+## O-01 – fünf Szenen sind für diesen Fall als G2-Review-Batch praktikabel
 
-Beide 5-Szenen-Batches konnten als kompakte Review-Pakete ohne Rückfrage und ohne Human-Rework akzeptiert werden.
+Beide 5-Szenen-Batches konnten ohne Rückfrage und ohne Human-Rework akzeptiert werden. Ein belastbarer Zeitwert in Minuten wurde nicht erhoben und wird nicht nachträglich geschätzt.
 
-Das ist **kein allgemeiner Standard `5 Szenen`**. Für diesen 10-Szenen-Fall war die Größe praktikabel. Ein belastbarer Zeitwert in Minuten wurde nicht erhoben und wird nicht erfunden.
+Schlussfolgerung: Fünf Szenen sind für einen Stoff dieser Dichte ein brauchbarer Startwert, aber kein Framework-Standard. Die Batch-Grenze sollte zusätzlich an einem funktionalen Zustandswechsel liegen.
 
 ## O-02 – Volltext aller Character States ist bereits Kontextmüll
 
-31 Character-State-Dateien direkt vorzulegen wäre unergonomisch. Tatsächlich nützlich waren ad hoc, nicht als neues Tooling:
+31 Character-State-Dateien direkt vorzulegen wäre unergonomisch. Praktisch nützlich waren ad-hoc, aus kanonischen Daten abgeleitete Sichten:
 
-1. Scene-Batch-Sicht: Funktion, Entscheidung, Leserwissen, Beziehungsverschiebung je Szene.
-2. Information/Reveal-Sicht: getrennte T-/K-Entwicklung.
-3. Character-/Relationship-Sicht: Nora↔David, Nora↔Jonas, Nora↔Quelle A und Nebenbeziehungen.
+- Scene-Batch-Sicht,
+- Information/Reveal-Sicht,
+- Character-/Relationship-Sicht,
+- expliziter Batch-Grenzzustand.
 
-Eine separate Research Dependency View war bisher nicht nötig; R-01/R-02 ließen sich innerhalb der Szenen-/Batch-Prüfung ausreichend kontrollieren.
+Eine separate Research Dependency View war im M2-Fall nicht wiederholt erforderlich.
 
-## O-03 – die Batch-Grenze braucht einen expliziten Übergabezustand
+Schlussfolgerung: Ein festes, nicht-kanonisches Review-Template für diese verdichteten Sichten ist durch M2 gerechtfertigt. Ein eigener Generator, neue Artefakttypen oder neue Gates sind nicht belegt.
 
-Für S5→S6 war ein kompakter Übergabezustand wesentlich nützlicher als erneutes Lesen aller 13 Batch-1-State-Dateien:
+## O-03 – Gesamtlogik blieb über zwei G2-Batches erhalten
 
-- T unabhängig gestützt, letzte RC-Brücke fehlt,
-- K deutlich geschwächt,
-- Quelle A geschützt, aber verunsichert,
-- Quelle B geschützt,
-- Jonas fachlich im Fall, externe Autonomie eingeschränkt,
-- Nora↔David Timingkonflikt offen,
-- kein Publikationsbeschluss.
+Der Gesamtcheck S1–S10 fand 0 neue Cross-Batch-Widersprüche. Geprüft wurden insbesondere Chronologie, technische Evidenzkette, Verantwortungszuschreibung, Nora↔Jonas, Nora↔David, Quellenschutz und Recherchegrenzen.
 
-## O-04 – Gesamtlogik blieb über zwei Batches erhalten
+Der Review erfolgte im selben Arbeitskontext und ist daher kein Beleg unabhängiger semantischer QA.
 
-Der Gesamt-Self-Review S1–S10 fand nach den beiden akzeptierten Batches **0 neue Cross-Batch-Widersprüche**.
+## O-04 – deterministische Checks skalierten und fanden reale Integrationsprobleme
 
-Geprüft wurden Chronologie, T, K, Nora↔Jonas, Nora↔David, Nora↔Quelle A, Quelle-B-Schutz und Recherchegrenzen. Der Review erfolgte im selben Chat-/Modellkontext und ist daher kein Nachweis unabhängiger semantischer QA.
+Im Lauf wurden reale nicht-literarische Fehler sichtbar und korrigiert:
 
-## O-05 – semantischer Self-Review fand einen echten Methodenfehler
+- G0/G1-Gate-Metadaten zunächst nicht vollständig vertragskonform,
+- BT009-Placeholder-False-Positive auf legitimer Unsicherheitsbeschreibung,
+- 10/10 Szenen-Provenienzen nach G2 deterministisch geprüft,
+- G4-Manuskript als exakte Verkettung der zehn Drafts geprüft,
+- G5-Quellblob und Produktionsoutput bytegenau geprüft.
 
-Vor G1 war der geplante Story-Reversal zunächst fälschlich als Framework-Invalidierung interpretiert worden. Der Fehler wurde vor G1 korrigiert und in `SEMANTIC_REVIEW_LOG.md` dokumentiert.
+Keine neue fachliche Gate- oder Pipeline-Stufe war dafür nötig.
 
-Das ist ein realer semantischer Fund, aber **kein** Beleg für eine validierte unabhängige Review-Methode, weil Erzeugung und Review aus demselben Kontext kamen.
+## O-05 – kontrolliertes Backtracking funktioniert, aber die Provenienz ist zu grob
 
-## O-06 – deterministische Prüfungen fanden reale Metadatenprobleme
+Die separate, nicht gemergte Teständerung an Jonas' Governance-Baseline erzeugte erwartungsgemäß:
 
-Zwei unterschiedliche mechanische Probleme wurden sichtbar:
+- accepted + Drift → 10/10 BLOCK,
+- explizit stale + derselbe Drift → 10/10 STALE_OK.
 
-1. G0/G1-Gate-Records enthielten zunächst `artifacts:` nicht vertragskonform. Die Metadaten wurden korrigiert; Story blieb unverändert.
-2. Nach G2 blockierte CI Run #33 den M2-Stand wegen BT009: Das Wort `unklar` in einer legitimen Informationsbeschreibung wurde als Placeholder erkannt.
+Damit ist stille Weiterverwendung verhindert.
 
-BT009 wurde semantisch identisch formuliert als: `Bezug zum relevanten Release ist noch nicht belegt.`
+Gleichzeitig wurden technisch 10/10 Szenen stale, obwohl die Änderung fachlich primär einen Teil des Jonas-Bogens betraf. Ursache: alle Szenen referenzieren den gesamten `CHARACTERS.md`-Blob.
 
-Danach bestätigte Framework Validation Run **#34** den vollständigen M2-Stand mit `READY_FOR_PROSE`.
+Schlussfolgerung: Die file-level Provenienz ist sicher, aber für größere Bücher zu grobgranular. Vor einem 40+-Szenen-Lauf sollte dieses reale Skalierungsrisiko gezielt gehärtet werden.
 
-Der zweite Fund zeigt zugleich eine Grenze des Placeholder-Scanners: fachlich legitime Unsicherheit kann bei bestimmten Triggerwörtern False Positives erzeugen.
+## O-06 – same-context semantische Reviews erzeugten realen Wert, aber keine validierte QA
 
-## O-07 – G2-Provenienz funktioniert unter 10-Szenen-Last
+Dokumentiert wurden 8 konkrete Befundgruppen mit 8 realen Korrekturen:
 
-Nach G2 wurden zehn `accepted` Szenen-Provenienzmanifeste angelegt. Auf unverändertem `main` bestätigte Framework Validation Run **#35**:
+- 1 Methodenfehler vor G1,
+- 3 Befundgruppen im G3-Sample,
+- 4 Befundgruppen im G4-Vollmanuskript.
 
-- 10/10 Provenienzmanifeste `OK`.
+Dazu gehörten unter anderem POV-Überschreitung, interne Label-Leaks, Rhythmusprobleme, eine zu frühe Publizierbarkeit in S6 und die explizite Sperrfristkorrektur auf 18:01 in S10.
 
-Damit ist die bestehende M1-Provenienzmechanik erstmals auf zehn aktive Szenen angewandt.
+Schlussfolgerung: Eine strukturierte semantische Review-Schicht ist sinnvoll zu prüfen. Nicht belegt sind unabhängige Trefferquote, Reproduzierbarkeit oder ein Quality Score.
 
-## O-08 – kontrollierte Upstream-Änderung invalidiert zuverlässig
+## O-07 – G3 als repräsentativer Stil-Gate funktioniert
 
-Auf der separaten, nie gemergten Test-Branch `m2-invalidation-test` wurde Jonas’ kanonische Governance-Baseline relevant verändert: externe Kontakte wären von Beginn an freigabepflichtig. Dadurch wäre die bestehende S5-Fehlerlogik fachlich nicht mehr unverändert tragfähig.
+Vor Vollskalierung wurden S1, S5 und S8 als repräsentative Stil-Stichprobe geschrieben und geprüft. Nach Human `G3-APPROVE` wurde der Stil auf die restlichen Szenen skaliert.
 
-Ergebnis:
+Der Vollmanuskript-Review fand anschließend vier gezielte Rework-Punkte, aber keinen Bedarf, G2 neu zu öffnen oder den G3-Stil grundsätzlich zurückzunehmen.
 
-- Phase 1: 10/10 `accepted`-Manifeste → `BLOCK`; PR-CI Run **#36** PASS, weil BLOCK erwartet wurde.
-- Phase 2: dieselben 10 Manifeste explizit `stale` → 10/10 `STALE_OK`; PR-CI Run **#38** PASS.
-- Mismatch blieb in beiden Phasen sichtbar.
-- Draft-PR #15 wurde geschlossen und nicht gemergt.
+## O-08 – Vollmanuskript und Produktion bleiben kontrollierbar
 
-Vollständige Dokumentation: `M2_INVALIDATION_TEST.md`.
+Der finale Manuskriptstand hat `FAIL=0 / REVIEW=0 / INFO=36`; alle zehn Draft-Provenienzen und die Manuskript-Provenienz waren vor G4 aktuell. Human G4 akzeptierte exakt den Manuskript-Blob `55753bb0ce177a80886343a8ac4e23a71de05c4a`.
 
-## O-09 – file-level Provenienz erzeugt einen zu großen technischen Blast Radius
+G5 baute aus genau diesem Blob ein minimales HTML-Produktionsartefakt. Run #48 und Run #49 erzeugten denselben HTML-SHA-256 `233d4285f020a070ee6128dac8a15b2d4c87cdf0136524b14821daa228ea2acb`.
 
-Die Teständerung betraf semantisch primär Jonas’ Governance-/Vertrauensbogen. Der bestehende Provenienzchecker inferiert bewusst keine semantische Relevanz.
+## O-09 – kein ungeplanter fachlicher Framework-Ausbau war nötig
 
-Da alle Szenenmanifeste den gesamten `CHARACTERS.md`-Blob referenzieren, führte die Änderung technisch zu:
+M2 benötigte keine zusätzlichen Human Gates, keine neue Story-Pipeline, keinen semantischen Score, keinen Agentenstack und keine DOCX/PDF/KDP-Pipeline.
 
-**10/10 Szenen stale.**
+Hinzu kamen ausschließlich Test-/Review-Artefakte und Integration/CI-Prüfungen auf Basis bestehender Mechaniken. Die ad-hoc Review-Sichten blieben bewusst nicht-kanonisch.
 
-Das ist konservativ sicher, aber bei größeren Büchern potenziell teuer. Der tatsächliche fachliche Rework-Radius wäre voraussichtlich kleiner als der technische Invalidierungsradius.
+## Finale Skalierungsaussage
 
-Konsequenz für M2: Dies ist ein **real beobachtetes Skalierungsproblem**, aber noch kein Auftrag, sofort neue Granularität oder Impact-Analyse zu implementieren. Die Entscheidung dazu gehört in den M2-Abschlussbericht.
+M2 zeigt belastbar, dass die v0.2-Pipeline von 3 auf 10 Szenen und von 7 auf 31 Character States skaliert, ohne fachliche Pipeline-Erweiterung zu erzwingen.
 
-## O-10 – bisher kein ungeplanter Framework-Funktionsausbau nötig
+Nicht bewiesen ist weiterhin ein 40+-Szenen-/70.000+-Wörter-Romanlauf. Die real sichtbaren Risiken dafür liegen nicht primär in der Makro→Mikro-Pipeline, sondern in:
 
-Bis einschließlich Invalidierungstest wurden keine neuen Checker, semantischen Scores, Agenten, Human Gates oder Produktionspfade gebaut.
+1. zu grober Provenienzgranularität,
+2. Review-Kontextverdichtung,
+3. fehlendem Nachweis unabhängiger semantischer QA.
 
-Hinzu kamen lediglich:
-
-- M2-Testartefakte,
-- ad-hoc Review-Zusammenfassungen,
-- zwei kleine Integrationstests, die die **bestehenden** Pipeline-/Provenienzchecker gegen den realen M2-Bestand ausführen.
-
-Neue Framework-Funktionen ungeplant erforderlich: **keine**.
-
-## Noch offen für M2
-
-- G3 Prosa-Stil mit realem repräsentativem Prosa-Batch.
-- vollständige Prosa / G4 Manuskript.
-- G5 Produktion.
-- Review-Aufwand bis G4/G5 weiter dokumentieren.
-- finale Bewertung der Review-Sichten.
-- M2-Abschlussbericht mit sieben Prüffragen und Entscheidung: echter Buchlauf vs. M3 vs. gezielter QA-/Review-Ausbau.
-
-## Zwischenfazit nach G2 + Invalidierung
-
-Die Pipeline skaliert von 3 auf 10 Szenen mechanisch und fachlich besser als vor M2 belegt. Der erste klare Engpass ist nicht die reine Szenenzahl, sondern **Review- und Abhängigkeitsgranularität**:
-
-- Human Review braucht verdichtete Sichten statt Volltext aller Zustände.
-- Provenienz schützt zuverlässig vor stillem Drift, ist auf Datei-Blob-Ebene aber zu grob und kann unnötig viele Downstreams invalidieren.
-
-Beides ist jetzt beobachtet statt nur vermutet. Ob daraus festes Tooling entsteht, wird erst nach dem vollständigen M2-Lauf entschieden.
+Diese drei Punkte sind jetzt beobachtete Risiken und keine bloßen Vermutungen.
