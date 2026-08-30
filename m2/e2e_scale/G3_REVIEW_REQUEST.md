@@ -57,7 +57,7 @@ Die Freigabe bestätigt ausdrücklich **nicht** das vollständige Manuskript. De
 
 ## Umsetzung nach G3
 
-Der freigegebene Stilpfad wurde anschließend auf die sieben fehlenden Szenen skaliert. Commit: `b2fabacf78c46e073c69a3ea7845f0a24cfc589a`.
+Der freigegebene Stilpfad wurde auf die sieben fehlenden Szenen skaliert. Der kanonische 7-Szenen-Draft-Commit ist `eab66e620121202d8113aa4e6b8a1c912bf2d461`.
 
 Neue Draft-Blobs:
 
