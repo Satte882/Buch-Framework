@@ -19,8 +19,14 @@ open_character_decisions: yes
 - Welche Motivation muss unabhängig vom Plot bestehen?
 - Welche offene Figurenentscheidung würde beim Schreiben sonst improvisiert?
 
-## G2 – offene Figurenentscheidungen
+## Offene Figurenentscheidungen
 
 - <Punkt oder `none`>
 
-**Gate-Regel:** Vor `G2 = APPROVE` muss `open_character_decisions: no` gelten. Diese Datei ist bewusst nur die globale Baseline. Szenenspezifisches Wissen, Glauben, Ziel und Beziehungszustand gehören in `CHARACTER_STATE`.
+## Arbeitsregel
+
+`CHARACTERS.md` ist ein **Querschnittsartefakt**, keine isolierte lineare Stufe mit eigenem Standard-Gate.
+
+- Figurenkern und zentrale Beziehungen werden im **G1 Story-Architektur-Paket** mitgeprüft.
+- Szenenspezifisches Wissen, Glauben, Ziel und Beziehungszustand gehören in `CHARACTER_STATE` und werden bis **G2 Prose Ready** konkretisiert.
+- Eine offene Figurenentscheidung blockiert erst dann, wenn sie eine aktuell zu treffende Story-, Beat- oder Szenenentscheidung verändern kann.
