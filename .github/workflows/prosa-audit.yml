@@ -49,6 +49,46 @@ jobs:
       - name: Run framework tests
         run: python -m unittest discover -s tests -p "test_*.py" -v
 
+      - name: Verify G4-approved SPERRFRIST source blob
+        run: |
+          actual="$(git hash-object m2/e2e_scale/MANUSCRIPT_v01.md)"
+          expected="55753bb0ce177a80886343a8ac4e23a71de05c4a"
+          echo "SPERRFRIST manuscript blob: $actual"
+          test "$actual" = "$expected"
+
+      - name: Build M2 SPERRFRIST production HTML
+        run: |
+          python scripts/build_html.py \
+            m2/e2e_scale/MANUSCRIPT_v01.md \
+            m2/e2e_scale/production/SPERRFRIST_v01.html
+
+      - name: Verify M2 production byte-for-byte
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from scripts.build_html import build_document
+
+          source = Path("m2/e2e_scale/MANUSCRIPT_v01.md").read_text(encoding="utf-8")
+          actual = Path("m2/e2e_scale/production/SPERRFRIST_v01.html").read_text(encoding="utf-8")
+          expected = build_document(source)
+          if actual != expected:
+              raise SystemExit("SPERRFRIST production drift: output differs from deterministic builder result")
+          print("M2 SPERRFRIST production: byte-for-byte deterministic build PASS")
+          PY
+
+      - name: Hash M2 SPERRFRIST production
+        run: |
+          sha256sum m2/e2e_scale/production/SPERRFRIST_v01.html | tee m2/e2e_scale/production/SPERRFRIST_v01.sha256
+
+      - name: Upload M2 SPERRFRIST production
+        uses: actions/upload-artifact@v4
+        with:
+          name: m2-sperrfrist-production
+          path: |
+            m2/e2e_scale/production/SPERRFRIST_v01.html
+            m2/e2e_scale/production/SPERRFRIST_v01.sha256
+          if-no-files-found: error
+
       - name: Audit full NORMALFALL manuscript
         run: |
           python scripts/prosa_audit.py \
