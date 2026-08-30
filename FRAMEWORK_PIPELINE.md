@@ -97,11 +97,27 @@ G3 prüft danach zunächst einen repräsentativen Prosa-Batch. Erst nach erfolgr
 
 Wenn eine tiefere Ebene eine bessere oder notwendige Storyänderung sichtbar macht, wird nicht downstream improvisiert. Die Änderung wandert zuerst zur kanonischen Upstream-Ebene, betroffene Ableitungen werden `stale`/`invalidated`, anschließend werden nur die betroffenen Freigabephasen erneut durchlaufen.
 
-## Historischer v0.1-Checker
+## Deterministischer v0.2-Checker
 
-`scripts/pipeline_check.py` und `config/pipeline_contract.yml` bilden derzeit noch den früheren v0.1-Pfad mit separatem Figuren-/Recherche-Gate und altem G0–G3-Mapping ab.
+`scripts/pipeline_check.py` und `config/pipeline_contract.yml` bilden den v0.2-Upstream-Pfad bis G2 mechanisch ab:
 
-Dieser technische Stand bleibt bis zur Migration ein **Legacy-Checker** und ist für die neue Gate-Semantik nicht autoritativ. Die Migration muss die neue Arbeitsweise abbilden, ohne zusätzliche Infrastruktur einzuführen.
+`BOOK_IDEA → STORY_PACKAGE/STORY_BLOCKS → EVENTS → BEATS → SCENE_PLAN/CHARACTER_STATE`
+
+Der Checker arbeitet phasenweise: Erst nach einem mechanisch gültigen vorhandenen Human-Record der früheren Phase werden die Artefakte der nächsten Phase verpflichtend. Dadurch erzeugt ein G1-Check noch keine künstlichen G2-Fehler.
+
+Der Checker prüft:
+
+- Pflichtfelder und Versionsbezüge,
+- Baustein→Event- und Event→Beat-Abdeckung,
+- Beat→Szenen-Zuordnung und `beat_refs`,
+- referenzierte Character States,
+- Research-Referenzen,
+- offene Recherche nur dann als Blocker, wenn `blocking_now: yes`,
+- vorhandene menschliche Gate-Records G0, G1 und G2 sowie deren Artefaktumfang.
+
+Er erzeugt keine Human-Entscheidung und bewertet keine Storyqualität. Historische Szenendateien außerhalb der aus `BEATS.md` abgeleiteten aktiven Szenenmenge werden nicht als v0.2-Abdeckung gewertet.
+
+Ein vollständiger mechanisch konsistenter G0→G2-Lauf endet mit `READY_FOR_PROSE`. Das bedeutet ausschließlich, dass die deterministischen Verträge erfüllt sind und ein menschliches G2-`APPROVE` als Record vorhanden ist.
 
 ## Leitregel
 

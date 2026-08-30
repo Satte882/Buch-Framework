@@ -76,11 +76,30 @@ Systematische Prosa beginnt erst nach G2. Die zentrale Prose-Readiness-Frage lau
 
 ## Bestehende technische Bausteine
 
-### Scene Readiness / Pipeline-Checker v0.1
+### Scene Readiness / Pipeline-Checker v0.2
 
-`scripts/pipeline_check.py`, `config/pipeline_contract.yml` und die zugehörigen Tests bilden noch das ältere Gate-Mapping mit separatem Figuren-/Recherche-Gate ab. Sie bleiben bis zur Migration als **Legacy-v0.1-Checker** erhalten und sind für die neue fachliche Gate-Semantik nicht autoritativ.
+Vorhanden sind:
 
-Die Migration soll die v0.2-Arbeitsweise abbilden, ohne zusätzliche Runtime-, Provider- oder Agenten-Infrastruktur einzuführen.
+- `config/pipeline_contract.yml`,
+- `scripts/pipeline_check.py`,
+- `tests/test_pipeline_check.py`,
+- `config/scene_readiness.yml`,
+- `scripts/scene_readiness.py`,
+- `tests/test_scene_readiness.py`.
+
+Der Pipeline-Checker bildet die v0.2-Arbeitsweise deterministisch bis **G2 – Prose Ready** ab. Er arbeitet phasenweise: Solange ein früherer Human Gate fehlt oder blockiert, fordert er noch keine Artefakte der späteren Phase an. Er prüft insbesondere:
+
+- `BOOK_IDEA` + vorhandenen G0-Human-Record,
+- Story Package + vollständige Baustein→Event-Abdeckung + vorhandenen gebündelten G1-Human-Record,
+- vollständige Event→Beat→Szenen-Abdeckung,
+- `beat_refs` der aktiven Szenenkarten,
+- referenzierte Character States,
+- Research-Referenzen und `blocking_now`,
+- vorhandenen gebündelten G2-Human-Record mit den tatsächlich aktiven Szenen-/State-Artefakten.
+
+Nur Szenen, die aus `BEATS.md` als geplante Szenen referenziert werden, zählen zum aktiven v0.2-Pfad. Historische Szenendateien werden dadurch nicht versehentlich als neuer M1-Nachweis behandelt.
+
+Eine offene Recherchefrage blockiert den Checker nur bei `status: open` **und** `blocking_now: yes`. Der Checker setzt niemals einen Human Gate und bewertet keine semantische Storyqualität. Ein erfolgreicher vollständiger Lauf endet mechanisch mit `READY_FOR_PROSE`, nicht mit `APPROVE`.
 
 ### Prosa-Audit v0.1
 

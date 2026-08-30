@@ -1,7 +1,16 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "format_note": "JSON syntax is used intentionally; JSON is valid YAML 1.2 and keeps the checker dependency-free.",
-  "placeholder_tokens": ["<", "TODO", "TBD", "OFFEN", "UNKLAR", "später festlegen", "noch festlegen", "?"],
+  "placeholder_tokens": [
+    "<",
+    "TODO",
+    "TBD",
+    "OFFEN",
+    "UNKLAR",
+    "später festlegen",
+    "noch festlegen",
+    "?"
+  ],
   "artifacts": {
     "book_idea": {
       "path": "BOOK_IDEA.md",
@@ -16,7 +25,9 @@
         "irreversible_decisions_open"
       ],
       "allowed_values": {
-        "irreversible_decisions_open": ["no"]
+        "irreversible_decisions_open": [
+          "no"
+        ]
       }
     },
     "story_package": {
@@ -36,7 +47,35 @@
         "story_decisions_open"
       ],
       "allowed_values": {
-        "story_decisions_open": ["no"]
+        "story_decisions_open": [
+          "no"
+        ]
+      }
+    },
+    "story_blocks": {
+      "path": "STORY_BLOCKS.md",
+      "required_fields": [
+        "version",
+        "story_package_version",
+        "blocks_status"
+      ],
+      "allowed_values": {
+        "blocks_status": [
+          "ready"
+        ]
+      }
+    },
+    "events": {
+      "path": "EVENTS.md",
+      "required_fields": [
+        "version",
+        "story_blocks_version",
+        "events_status"
+      ],
+      "allowed_values": {
+        "events_status": [
+          "ready"
+        ]
       }
     },
     "characters": {
@@ -49,29 +88,60 @@
         "open_character_decisions"
       ],
       "allowed_values": {
-        "open_character_decisions": ["no"]
+        "open_character_decisions": [
+          "yes",
+          "no"
+        ]
       }
     },
     "research_register": {
       "path": "RESEARCH_REGISTER.md",
-      "required_fields": ["register_status"],
+      "required_fields": [
+        "register_status"
+      ],
       "allowed_values": {
-        "register_status": ["ready"]
+        "register_status": [
+          "ready"
+        ]
+      }
+    },
+    "beats": {
+      "path": "BEATS.md",
+      "required_fields": [
+        "version",
+        "events_version",
+        "beats_status"
+      ],
+      "allowed_values": {
+        "beats_status": [
+          "ready"
+        ]
       }
     }
   },
   "gates": {
     "G0": {
       "path": "gates/G0.md",
-      "required_artifacts": ["BOOK_IDEA.md"]
+      "required_artifacts": [
+        "BOOK_IDEA.md"
+      ]
     },
     "G1": {
       "path": "gates/G1.md",
-      "required_artifacts": ["STORY_PACKAGE.md"]
+      "required_artifacts": [
+        "STORY_PACKAGE.md",
+        "STORY_BLOCKS.md",
+        "EVENTS.md",
+        "CHARACTERS.md",
+        "RESEARCH_REGISTER.md"
+      ]
     },
     "G2": {
       "path": "gates/G2.md",
-      "required_artifacts": ["CHARACTERS.md", "RESEARCH_REGISTER.md"]
+      "required_artifacts": [
+        "BEATS.md",
+        "RESEARCH_REGISTER.md"
+      ]
     }
   },
   "gate_required_fields": [
@@ -84,9 +154,15 @@
     "next_step"
   ],
   "gate_allowed_values": {
-    "decision": ["APPROVE"],
-    "decided_by": ["human"],
-    "open_blockers": ["no"]
+    "decision": [
+      "APPROVE"
+    ],
+    "decided_by": [
+      "human"
+    ],
+    "open_blockers": [
+      "no"
+    ]
   },
   "character_state_required_fields": [
     "scene_id",
@@ -104,7 +180,9 @@
     "decision_or_commitment"
   ],
   "character_state_allowed_values": {
-    "status": ["ready"]
+    "status": [
+      "ready"
+    ]
   },
-  "principle": "The checker validates explicit upstream completeness, dependency closure and human gate records. It does not judge story quality and never creates approvals."
+  "principle": "The checker validates v0.2 macro-to-micro completeness, reference coverage, blocking research dependencies and existing human gate records through G2. It never judges story quality and never creates approvals."
 }

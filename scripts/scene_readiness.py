@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Scene Readiness completeness checker for Buch-Framework v0.1.
+"""Scene Readiness completeness checker for Buch-Framework v0.2.
 
 The checker deliberately does NOT decide literary quality. It verifies that a
-scene plan has explicit inputs, closed plot/research/character dependencies and
-human-reviewed experiential planning before it reaches the G3 human gate.
+scene plan has explicit inputs and closed plot/research/character dependencies
+so it can enter the bundled G2 Prose Ready review. Human approval remains
+external to the checker.
 """
 
 from __future__ import annotations
@@ -29,7 +30,7 @@ class ReadinessResult:
 def load_config(path: str | Path) -> dict[str, Any]:
     with Path(path).open("r", encoding="utf-8") as handle:
         data = json.load(handle)
-    if str(data.get("version")) != "0.1":
+    if str(data.get("version")) != "0.2":
         raise ValueError(f"Unsupported scene-readiness config version: {data.get('version')!r}")
     if not data.get("required_fields"):
         raise ValueError("scene-readiness config requires required_fields")
@@ -66,8 +67,6 @@ def _na_with_reason(value: str, prefixes: list[str]) -> bool:
 def _contains_placeholder_marker(folded: str, token: str) -> bool:
     marker = token.casefold()
     if marker == "offen":
-        # "offen" is common legitimate prose ("Die Spur bleibt offen"). Treat
-        # it as a placeholder only when it is used as an explicit marker.
         return (
             folded == "offen"
             or folded.startswith("offen:")
@@ -115,7 +114,6 @@ def evaluate(text: str, config: dict[str, Any]) -> ReadinessResult:
             if not _na_with_reason(value, na_prefixes):
                 issues.append(f"not-applicable value requires reason: {key}")
                 continue
-            # Explicit N/A with a reason is a resolved value, not a placeholder.
             continue
 
         if _looks_placeholder(value, placeholders):
@@ -129,18 +127,15 @@ def evaluate(text: str, config: dict[str, Any]) -> ReadinessResult:
         if value not in allowed_folded:
             issues.append(f"{key} must be one of {sorted(allowed)}; got {fields[key]!r}")
 
-    # Explicit invariants. They are duplicated here intentionally so malformed
-    # configs cannot silently weaken the core gate semantics.
+    # Core prose-readiness invariants remain explicit so malformed configs
+    # cannot silently weaken deterministic dependency checks.
     if fields.get("story_decisions_open", "").casefold() != "no":
         issues.append("open story decisions block prose")
     if fields.get("character_state_status", "").casefold() != "ready":
         issues.append("character state is not ready")
     if fields.get("research_status", "").casefold() not in {"ready", "not_applicable"}:
         issues.append("research blockers are not closed")
-    if fields.get("experience_status", "").casefold() != "human_reviewed_ready":
-        issues.append("experiential plan has not been human-reviewed as ready")
 
-    # Deduplicate while preserving order.
     unique_issues = list(dict.fromkeys(issues))
     status = "BLOCK" if unique_issues else "READY_FOR_HUMAN_GATE"
     return ReadinessResult(
@@ -166,7 +161,7 @@ def format_text(result: ReadinessResult) -> str:
             [
                 "",
                 "Mechanical completeness is satisfied.",
-                "This is NOT an approval. G3 still requires a human APPROVE/REWORK/STOP decision.",
+                "This is NOT an approval. The scene may enter the bundled G2 Prose Ready review.",
             ]
         )
     return "\n".join(lines)
@@ -177,7 +172,9 @@ def format_json(result: ReadinessResult) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Check whether a scene plan is mechanically ready for the human G3 gate.")
+    parser = argparse.ArgumentParser(
+        description="Check whether a scene plan is mechanically ready for bundled G2 review."
+    )
     parser.add_argument("scene_plan", help="Scene plan Markdown file")
     parser.add_argument("--config", default="config/scene_readiness.yml")
     parser.add_argument("--format", choices=("text", "json"), default="text")
