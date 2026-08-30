@@ -6,6 +6,8 @@ on:
   push:
     branches: [main]
     paths:
+      - "m1/**"
+      - "m2/**"
       - "scripts/**"
       - "config/**"
       - "templates/**"
@@ -16,6 +18,8 @@ on:
       - ".github/workflows/prosa-audit.yml"
   pull_request:
     paths:
+      - "m1/**"
+      - "m2/**"
       - "scripts/**"
       - "config/**"
       - "templates/**"
