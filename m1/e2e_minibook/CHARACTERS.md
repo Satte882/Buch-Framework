@@ -1,6 +1,6 @@
 # CHARACTERS
 
-version: v0.1
+version: v0.2
 story_package_version: v0.1
 roster_summary: Mara Voss trägt Perspektive und Entscheidung; Nils Berger verkörpert den legitimen betrieblichen Gegenanreiz; Lea Hartmann macht die reale menschliche Konsequenz der Entscheidung sichtbar, ohne einen Nebenplot zu eröffnen.
 relationship_baseline_summary: Mara und Nils arbeiten sachlich und grundsätzlich vertrauensvoll zusammen, vertreten in dieser Lage aber unterschiedliche Risikogewichtungen; Lea ist Mara nicht persönlich nah und wird deshalb nicht als emotionale Abkürzung für die Entscheidung benutzt.
@@ -16,13 +16,13 @@ open_character_decisions: no
 
 ## Globale Konsistenzfragen
 
-- Mara darf vor S2 nicht wissen, dass Lea noch im Bereich ist.
+- Mara darf vor der Vor-Ort-Prüfung nicht wissen, dass Lea noch im Bereich ist.
 - Nils darf nicht heimlich mehr wissen als Mara; sein Druck muss aus Versuchsschutz und derselben unvollständigen Lage entstehen.
 - Lea darf nicht als absichtlich verschwiegene Person oder Plotfalle konstruiert werden; ihre Restanwesenheit entsteht aus einem banalen betrieblichen Nachlauf.
 - Maras finale Eskalation muss aus der veränderten Beleglage entstehen, nicht aus persönlicher Nähe zu Lea.
 
-## G2 – offene Figurenentscheidungen
+## G1 – offene Figurenkernentscheidungen
 
 - none
 
-**Gate-Regel:** Vor `G2 = APPROVE` muss `open_character_decisions: no` gelten.
+**Arbeitsregel v0.2:** Der Figurenkern und die zentralen Beziehungen werden im gebündelten G1-Story-Architektur-Paket geprüft. Szenenspezifische Wissens-, Glaubens-, Ziel- und Beziehungszustände werden erst auf der nachgelagerten Character-State-Ebene bis G2 konkretisiert.
