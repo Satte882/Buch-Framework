@@ -6,20 +6,22 @@ status: ready
 
 ## Vor der Szene
 
-knows_before: Der Warnpunkt hat eine Fehlalarm-Vorgeschichte; die Flurkamera ist ausgefallen; der offizielle Belegungsstand zeigt den Bereich als leer; eine schwache zusätzliche Statusabweichung ist aufgetreten; Mara hat sich für lokale Verifikation entschieden.
-believes_before: Ein Fehlalarm ist weiterhin möglich, aber die technische Lage ist nicht sauber genug, um den Hinweis aus der Ferne abzutun.
+knows_before: Der Warnpunkt hat eine Fehlalarm-Vorgeschichte; die Flurkamera liefert kein verwertbares Bild; der offizielle Belegungsstand zeigt den Bereich als leer; Nils hat den sicheren Versuchsschaden einer Volleskalation benannt; Mara hat sich selbst für lokale Verifikation entschieden.
+believes_before: Ein Fehlalarm ist weiterhin plausibel, aber die Fernlage reicht nicht für belastbare Entwarnung.
 wants_now: Vor Ort schnell feststellen, ob die interne Warnung harmlos ist oder die volle Alarm-/Evakuierungskette nötig wird.
-fears_or_avoids: Zu spät zu eskalieren oder auf Basis eines mehrdeutigen Indizes unnötig den Nachtversuch zu zerstören.
-relationship_state: Nils vertraut auf Maras Prüfung, drängt aber wegen des Versuchs auf möglichst kurze Verifikation; Mara akzeptiert seinen Input, lässt die Sicherheitsentscheidung aber nicht delegieren.
-must_not_know_yet: Dass Lea Hartmann tatsächlich noch im Bereich ist; die genaue technische Ursache; ob der Vorfall bereits akut gefährlich ist.
+fears_or_avoids: Zu spät zu eskalieren oder aufgrund noch mehrdeutiger Evidenz unnötig den Nachtversuch zu zerstören.
+relationship_state: Nils respektiert Maras Prüfung und argumentiert aus Versuchsschutz; Mara akzeptiert seinen Input, lässt die Sicherheitsentscheidung aber nicht delegieren.
+must_not_know_yet: Dass Lea Hartmann tatsächlich noch im Bereich ist; die genaue technische Ursache; ob der aktuelle Warnhinweis real ist.
 
 ## Nach der Szene
 
-knows_after: Der Bereich ist nicht so leer wie der Belegungsstand behauptet; eine frische persönliche/arbeitsbezogene Anwesenheitsspur ist vorhanden; aus Richtung eines Technik-/Laborbereichs kommen konkrete Rauch-/Hitzehinweise.
-believes_after: Die Kombination der Indizien passt nicht mehr belastbar zum bekannten Fehlalarm-Muster; eine reale Gefahrenlage ist jetzt plausibel genug für Volleskalation.
-relationship_change: Mara widerspricht Nils erstmals ausdrücklich in der Risikogewichtung; die professionelle Beziehung bleibt bestehen.
-decision_or_commitment: Mara aktiviert die volle interne Alarm-/Evakuierungskette, obwohl dadurch der Nachtversuch voraussichtlich verloren geht.
+knows_after: Eine frische Anwesenheitsspur widerspricht dem offiziellen Leerstand; zusätzlich liegt ein konkreter Rauch-/Hitzehinweis vor; Nils hält aufgrund der früheren Datenlage noch wenige Sekunden weiterer Verifikation für vertretbar.
+believes_after: Die Kombination aus Warnsignal, unzuverlässiger Leerbelegung und physischem Gefahrenhinweis passt nicht mehr belastbar zum bekannten Fehlalarm-Muster; weitere Verzögerung bietet keinen ausreichenden Erkenntnisgewinn gegenüber dem Risiko.
+relationship_change: Mara widerspricht Nils ausdrücklich in der aktuellen Risikogewichtung; die professionelle Beziehung bleibt bestehen.
+decision_or_commitment: Mara beendet die lokale Prüfroutine und aktiviert die volle interne Alarm-/Evakuierungskette, obwohl dadurch der Nachtversuch verloren geht.
 
 ## Konsistenzhinweis
 
-Der Kipppunkt entsteht aus der Kombination mehrerer konkreter Hinweise. Kein einzelnes dramatisches Wunder-Indiz und kein verborgenes Täterwissen darf die Entscheidung ersetzen.
+Der Kipppunkt entsteht aus kumulierender Evidenz. Kein einzelnes Wunder-Indiz, kein verborgenes Täterwissen und keine persönliche Feindschaft mit Nils darf die Entscheidung ersetzen.
+
+**Zweck:** Dieser State trägt S2 in den gebündelten G2-Review; er ersetzt keine vollständige Figurenbiografie.
