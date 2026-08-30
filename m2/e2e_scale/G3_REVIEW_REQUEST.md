@@ -54,3 +54,19 @@ Gefunden und korrigiert wurden eine POV-Grenzverletzung, Framework-Labels in Rom
 Der menschliche Gate ist bestanden. Der Stilpfad aus S1/S5/S8 darf auf S2–S4, S6–S7 und S9–S10 skaliert werden.
 
 Die Freigabe bestätigt ausdrücklich **nicht** das vollständige Manuskript. Der nächste geschützte Human Gate ist **G4 – Manuskript**.
+
+## Umsetzung nach G3
+
+Der freigegebene Stilpfad wurde anschließend auf die sieben fehlenden Szenen skaliert. Commit: `b2fabacf78c46e073c69a3ea7845f0a24cfc589a`.
+
+Neue Draft-Blobs:
+
+- S2 `8acdac03ad5611904c2a231e66dbd8f3df40e39a`
+- S3 `946692dbbbea61dbb0c18dc3af8a955666ada5f4`
+- S4 `d0764866d7cde14da2183da6db313f3e4f267fc7`
+- S6 `79a57d1dda5ac91d87d7f4ff5b7d84e8e94ae9d7`
+- S7 `9dd5b8e039eb969723233bb7063f3531a6bf69c7`
+- S9 `75bf8be7c59cb20b77aaebd7eaa3e71eac7c1ffd`
+- S10 `ff93884ced623592959324869c9fadfa288d6f81`
+
+Diese sieben Drafts sind **noch nicht G4-freigegeben**. Als Nächstes folgen Provenienz, Gesamtmanuskript, Audit und Human Gate G4.
