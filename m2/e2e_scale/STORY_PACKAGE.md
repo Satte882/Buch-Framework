@@ -67,7 +67,7 @@ Die Makroarchitektur wird in `STORY_BLOCKS.md` auf zwölf Bausteine konkretisier
 - rechtliche/editoriale Eingrenzung,
 - neue technische Evidenz,
 - Vertrauenskonflikt mit Quelle A,
-- später Gegenbeleg mit Upstream-Korrektur,
+- später Gegenbeleg innerhalb der Handlung,
 - engere Veröffentlichung + realer Preis.
 
 Diese Makrofunktionen sind **noch keine Szenenkarten**. Genau zehn Szenen werden erst nach G1 über Beats und G2-Planung abgeleitet.
@@ -127,8 +127,13 @@ Storyentscheidung: Das fiktive Unternehmen liefert eine **vendorseitige redundan
 - mindestens 4 plotrelevante Figuren: sechs Funktionsrollen vorgesehen,
 - mindestens 2 Figuren-/Beziehungsentwicklungen: Nora↔David sowie Nora↔Jonas / Nora↔Quelle A,
 - mindestens 2 Reveal-Stränge: T und K,
-- mindestens 2 Rechercheabhängigkeiten: R-01 und R-02,
-- reale spätere Upstream-Korrektur: finaler Beleg korrigiert die K-Verantwortungsannahme nach bereits vorhandenen Downstream-Artefakten; der konkrete Zeitpunkt wird im M2-Lauf dokumentiert und darf nicht vorab als künstliche Dateimanipulation simuliert werden.
+- mindestens 2 Rechercheabhängigkeiten: R-01 und R-02.
+
+### Abgrenzung Story-Reversal vs. Framework-Backtracking
+
+Der späte Beleg innerhalb der Handlung (B11/E025–E027) ist **kein** Framework-Invalidierungstest. Er ist von G1 an Teil der kanonischen Storyarchitektur und wird von späteren Beats/Szenen als geplanter Informationswechsel abgebildet.
+
+Der in Issue #10 geforderte echte Backtracking-/Invalidierungsnachweis wird **separat auf Prozessebene** durchgeführt: Erst nachdem reale Downstream-Artefakte existieren, wird eine relevante kanonische Upstream-Annahme kontrolliert geändert. Dann muss sichtbar werden, welche abhängigen Artefakte stale/invalidated werden und wie viel Rework entsteht. Diese Testinjektion wird als solche dokumentiert und nicht als spontan entdeckter Storyfehler ausgegeben.
 
 ## G1 – offene irreversible Entscheidungen
 
