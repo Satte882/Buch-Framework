@@ -1,59 +1,60 @@
 # H3 Validation Status – unabhängiger semantischer Review
 
-status: NOT_YET_VALIDATED
+status: PASS_FOR_PILOT
 issue: #16
 date: 2026-08-30
 protocol: `SEMANTIC_REVIEW_PROTOCOL.md`
 fresh_context_task: `hardening/h3/FRESH_CONTEXT_TASK.md`
+fresh_context_result: `hardening/h3/FRESH_CONTEXT_RESULT.md`
 holdout_target_blob: `d4a4225d76b3f8699660683cda26252ed4a2809c`
 
-## Warum noch kein PASS
+## Nachweis
 
-Der aktuelle Arbeitschat hat:
+Der vorbereitete H3-Blind-Test wurde in einem neuen Chat ausgeführt. Der Reviewer meldete:
 
-- SPERRFRIST erzeugt,
-- M2 begleitet,
-- frühere semantische Befunde gesehen,
-- den späteren korrigierten Manuskriptstand gesehen.
+- `review_status: CLEAN_FRESH_CONTEXT`
+- exakt den vorgesehenen historischen Ziel-Blob
+- 3 strukturierte Findings
+- keine Nutzung späterer Manuskriptstände, früherer Reviews, Completion-Dateien oder Git-Diffs.
 
-Ein Review desselben Modells **in diesem Kontext** wäre deshalb nicht unabhängig und darf H3 nicht validieren.
+Die anschließende Disposition gegen den bestehenden M2-Stand ist in `FRESH_CONTEXT_RESULT.md` dokumentiert.
 
-Diese Grenze wird nicht durch einen simulierten „neuen Reviewer“ innerhalb desselben Kontextes umgangen.
+## Disposition
 
-## Was bereits vorbereitet ist
+### H3-SR-001 – TRUE POSITIVE
 
-- reproduzierbares Review-Protokoll: vorhanden
-- historischer echter Pre-Rework-Holdout: vorhanden als Git-Blob
-- erlaubte kanonische Review-Inputs: festgelegt
-- bekannte spätere Reviews/Diffs: für den Fresh-Context-Reviewer ausdrücklich gesperrt
-- strukturiertes Finding-Schema: festgelegt
-- Human-Disposition nach Blind-Abgabe: festgelegt
+Der Review erkennt einen realen Prosa-vs.-Kanon-Drift in S4/S7: Die Prosa führt eine „dokumentierte Weitergabe“ als Ursache der K-Schwächung ein. Kanonisch definiert E014 stattdessen den Managementtermin vor Abschluss der späteren relevanten Testserie als entscheidende Chronologie.
 
-## Nächster erforderlicher Nachweis
+Der Fehler steht noch im freigegebenen M2-Manuskript und war in den früheren Same-Context-Befundgruppen nicht enthalten.
 
-`hardening/h3/FRESH_CONTEXT_TASK.md` in einem **neuen, sauberen Chat** ausführen.
+### H3-SR-002 – TRUE POSITIVE
 
-Der Fresh-Context-Reviewer muss:
+Der Review erkennt, dass S4 die technische Eingrenzung „kein vollständiger Systemausfall / kritischer Teilpfad“ vorwegnimmt, obwohl diese Präzisierung kanonisch erst im späteren S6-Schritt liegt.
 
-1. ausschließlich die erlaubten GitHub-Artefakte verwenden,
-2. den historischen Blob direkt prüfen,
-3. keine früheren Findings oder Diffs lesen,
-4. strukturierte Findings ohne Rewrite abgeben.
+Damit wird die geplante Reveal-Reihenfolge real verschoben. Auch dieser Fehler steht noch im freigegebenen M2-Manuskript und wurde zuvor nicht als Befund dokumentiert.
 
-Erst **nach** dieser Abgabe wird im regulären Kontext gegen die historisch bekannten Korrekturen dispositioniert.
+### H3-SR-003 – ACCEPTED STYLE FINDING
 
-## Mögliche nächste Statuswerte
+Der Review lokalisiert in S8 mehrfaches Nach-Erklären des bereits sichtbaren Evidenz-Reversals. Der Befund ist konkret gegen das freigegebene `PROSE_PROFILE.md` begründet und wird als valides Prosa-Rework akzeptiert.
 
-- `CONTAMINATED` – verbotener Kontext wurde verwendet; Test wiederholen.
-- `FAIL` – sauberer Blind-Test liefert für den Zweck keinen ausreichenden Nutzen.
-- `PASS_FOR_PILOT` – sauberer Blind-Test findet reale, anschließend bestätigte Fehler bei vertretbarer False-Positive-Last.
+## Ergebnis
 
-`PASS_FOR_PILOT` bedeutet nicht, dass semantische QA allgemein validiert ist. Es reicht nur als Evidenz, den unabhängigen Review kontrolliert im echten Romanlauf einzusetzen.
+- sauberer Fresh Context: **PASS**
+- bestätigte harte True Positives: **2**
+- zusätzlich valides Stilprofil-Finding: **1**
+- offensichtliche False Positives: **0**
+- zusätzliche reale Fehler gegenüber Same-Context-Review: **JA**
+- automatische Rewrite-Schleife: **NEIN**
+- Quality Score / LLM-as-a-Judge: **NEIN**
 
-## Aktuelle Hardening-Lage
+**H3 Gesamt: PASS_FOR_PILOT.**
+
+`PASS_FOR_PILOT` bedeutet ausdrücklich nicht, dass semantische QA allgemein validiert oder ihre Trefferquote bekannt ist. Der Nachweis reicht dafür, einen bewusst getrennten Fresh-Context-Review kontrolliert im echten Romanlauf einzusetzen.
+
+## Hardening-Lage
 
 - H1 Provenienzgranularität: PASS
 - H2 Review-Template: PASS
-- H3 unabhängiger semantischer Review: **NOT_YET_VALIDATED**
+- H3 unabhängiger semantischer Review: **PASS_FOR_PILOT**
 
-Issue #16 bleibt daher offen.
+Damit ist der in Issue #16 definierte Hardening-Block inhaltlich abgeschlossen. Der nächste reale Belastungstest soll der echte Romanlauf sein, nicht ein weiteres Testbuch.
