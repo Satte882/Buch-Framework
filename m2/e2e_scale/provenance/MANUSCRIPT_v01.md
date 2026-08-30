@@ -2,11 +2,11 @@
 
 status: draft
 artifact: MANUSCRIPT_v01.md
-artifact_ref: d4a4225d76b3f8699660683cda26252ed4a2809c
+artifact_ref: 55753bb0ce177a80886343a8ac4e23a71de05c4a
 generated_via: deterministic_concatenation_of_committed_drafts
-action: assembled_after_G3
+action: rebuilt_after_full_manuscript_review
 date: 2026-08-30
-purpose: Vollständiger 10-Szenen-Manuskriptstand für Audit, Gesamt-Self-Review und Human Gate G4.
+purpose: Vollständiger 10-Szenen-Manuskriptstand für finalen Audit, Gesamt-Self-Review und Human Gate G4.
 gate_basis: G3 APPROVE
 review_status: awaiting_human_G4
 
@@ -18,13 +18,13 @@ review_status: awaiting_human_G4
 - `drafts/v01/S1.md` — blob `07ca8139e15f6d8985fe8b97592685cd8de50599`
 - `drafts/v01/S2.md` — blob `8acdac03ad5611904c2a231e66dbd8f3df40e39a`
 - `drafts/v01/S3.md` — blob `946692dbbbea61dbb0c18dc3af8a955666ada5f4`
-- `drafts/v01/S4.md` — blob `d0764866d7cde14da2183da6db313f3e4f267fc7`
+- `drafts/v01/S4.md` — blob `a6852314805040c7b988ed7fbd2f9c7f5d802215`
 - `drafts/v01/S5.md` — blob `2d9d74d2e1164899d4288e488ece21909392c836`
-- `drafts/v01/S6.md` — blob `79a57d1dda5ac91d87d7f4ff5b7d84e8e94ae9d7`
+- `drafts/v01/S6.md` — blob `8473526ae95ab144f1f553238bc15d55510e4221`
 - `drafts/v01/S7.md` — blob `9dd5b8e039eb969723233bb7063f3531a6bf69c7`
 - `drafts/v01/S8.md` — blob `10274f1b66b2d13f1a8061f1be992edbbd256946`
-- `drafts/v01/S9.md` — blob `75bf8be7c59cb20b77aaebd7eaa3e71eac7c1ffd`
-- `drafts/v01/S10.md` — blob `ff93884ced623592959324869c9fadfa288d6f81`
+- `drafts/v01/S9.md` — blob `cfcaaa5b40a21c72888a93ac62beafc11054fcb6`
+- `drafts/v01/S10.md` — blob `1aced685150cd588e085573a2e38ea4481a73d83`
 
 ## Gültigkeit
 
