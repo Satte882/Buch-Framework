@@ -270,7 +270,7 @@ Mara ging nicht zurück in den betroffenen Bereich. Sie blieb dort, wo die Wege 
 
 Dann kam eine Frau um die Ecke.
 
-Nicht schnell. Zu schnell für einen normalen Gang, zu langsam für Panik. Hinter ihr ein Mitarbeiter der Hausorganisation.
+Sie ging hastig, ohne zu rennen. Hinter ihr kam ein Mitarbeiter der Hausorganisation.
 
 Mara kannte ihr Gesicht aus der Belegungsübersicht, nur nicht von heute Nacht.
 
@@ -372,15 +372,15 @@ Mara schüttelte ihn.
 
 „Da wusste ich noch nichts von Ihnen.“
 
-Das schien Lea nicht zu beruhigen. Vielleicht war es auch nicht dazu gedacht.
+Lea sah wieder in den Flur. Mara ließ es dabei.
 
 Die Sicherheitsorganisation bestätigte den geräumten Abschnitt ein zweites Mal. Mara gab die Rückmeldung weiter und hielt die Absperrung bestehen.
 
 Der äußere Druck fiel langsam ab.
 
-Der Versuch blieb verloren. Nils würde am Morgen erklären müssen, warum. Lea würde erklären müssen, warum sie noch im Bereich gewesen war. Mara würde erklären müssen, warum sie nicht sofort voll eskaliert hatte.
+Am Morgen würden Fragen warten: Nils wegen des verlorenen Versuchs, Lea wegen ihrer Restanwesenheit, Mara wegen der Minuten vor der Eskalation.
 
-Jede dieser Fragen hatte einen Preis.
+Keine davon machte die Nacht einfacher.
 
 Sie sah auf das Funkgerät in ihrer Hand.
 
