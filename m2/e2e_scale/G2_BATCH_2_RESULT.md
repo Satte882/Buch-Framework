@@ -8,11 +8,11 @@ decision: OK
 decided_by: human
 decision_token: `G2-BATCH2-OK`
 date: 2026-08-30
-g2_gate_status: NOT_YET_DECIDED
-next_step: Gesamtcheck über S1-S10; erst danach Human Gate G2.
+g2_gate_status: APPROVED_AFTER_OVERALL_REVIEW
+next_step: Gesamtcheck S1-S10 wurde durchgeführt; Human Gate G2 wurde anschließend mit `G2-APPROVE` freigegeben.
 
 ## Bedeutung
 
-Der Mensch hat S6–S10 als zweiten ergonomischen Review-Batch innerhalb von G2 akzeptiert. Diese Entscheidung ist ausdrücklich **kein** `G2-APPROVE`, erzeugt kein neues Gate und gibt noch keine Prosa frei.
+Der Mensch hat S6–S10 als zweiten ergonomischen Review-Batch innerhalb von G2 akzeptiert. Die Batch-Entscheidung selbst ist kein eigenes Gate. Anschließend wurde der Gesamtcheck S1–S10 vorbereitet und separat durch den Menschen als `G2-APPROVE` freigegeben.
 
-Batch 2 gilt damit als fachlich geprüft für den weiteren M2-Lauf. Die kanonischen Szenen- und Character-State-Artefakte bleiben unverändert; der Gesamtcheck über alle zehn Szenen kann weiterhin Rework auslösen.
+Die Batch-Artefakte wurden durch das Batch-OK nicht verändert; die administrative Umstellung der Szenen auf `human_reviewed_ready` erfolgt erst als Folge des echten Human Gate G2.
