@@ -14,6 +14,8 @@ import scene_readiness  # noqa: E402
 
 
 class M2PipelineIntegrationTest(unittest.TestCase):
+    """Exercise the current SPERRFRIST scale fixture through the existing v0.2 checker."""
+
     def test_sperrfrist_is_ready_for_prose_after_human_g2(self) -> None:
         pipeline_config = pipeline_check.load_config(ROOT / "config" / "pipeline_contract.yml")
         scene_config = scene_readiness.load_config(ROOT / "config" / "scene_readiness.yml")
