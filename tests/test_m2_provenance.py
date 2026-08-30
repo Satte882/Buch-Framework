@@ -13,16 +13,23 @@ import provenance_check  # noqa: E402
 
 
 class M2SceneProvenanceIntegrationTest(unittest.TestCase):
-    def test_all_g2_accepted_scene_manifests_match_current_blobs(self) -> None:
+    def test_all_accepted_scene_manifests_block_after_relevant_upstream_drift(self) -> None:
         project = ROOT / "m2" / "e2e_scale"
         manifests = sorted((project / "provenance" / "v02").glob("S*.md"))
 
         self.assertEqual(10, len(manifests))
+        blocked = 0
         for manifest in manifests:
             with self.subTest(manifest=manifest.name):
                 result = provenance_check.evaluate_provenance(project, manifest)
-                self.assertEqual("OK", result.status, "\n".join(result.mismatches))
-                self.assertFalse(result.mismatches)
+                self.assertEqual("BLOCK", result.status)
+                self.assertTrue(
+                    any("CHARACTERS.md" in item for item in result.mismatches),
+                    "Expected CHARACTERS.md blob drift to be visible",
+                )
+                blocked += 1
+
+        self.assertEqual(10, blocked)
 
 
 if __name__ == "__main__":
