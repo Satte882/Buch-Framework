@@ -14,11 +14,13 @@ import provenance_check  # noqa: E402
 
 
 class M2G3SampleIntegrationTest(unittest.TestCase):
-    def test_sperrfrist_g3_sample_has_no_deterministic_prose_fail(self) -> None:
+    def _sample_text(self) -> str:
         project = ROOT / "m2" / "e2e_scale"
         paths = [project / "drafts" / "v01" / name for name in ("S1.md", "S5.md", "S8.md")]
-        text = "\n\n".join(path.read_text(encoding="utf-8") for path in paths)
+        return "\n\n".join(path.read_text(encoding="utf-8") for path in paths)
 
+    def test_sperrfrist_g3_sample_has_no_deterministic_prose_fail(self) -> None:
+        text = self._sample_text()
         config = prosa_audit.load_config(ROOT / "config" / "prosa_rules.yml")
         findings = prosa_audit.audit_text(text, config)
         totals = prosa_audit.counts(findings)
@@ -27,6 +29,13 @@ class M2G3SampleIntegrationTest(unittest.TestCase):
             print(f"M2 G3 FINDING: {finding.severity} {finding.rule_id} {finding.chapter} {finding.excerpt}")
 
         self.assertEqual(0, totals["FAIL"])
+
+    def test_sperrfrist_g3_sample_does_not_leak_framework_labels(self) -> None:
+        text = self._sample_text()
+        forbidden_labels = ("Quelle A", "Quelle B", "BT001", "BT018", "BT031", "G2-", "G3-")
+        for label in forbidden_labels:
+            with self.subTest(label=label):
+                self.assertNotIn(label, text)
 
     def test_sperrfrist_g3_draft_provenance_matches_current_upstream(self) -> None:
         project = ROOT / "m2" / "e2e_scale"
