@@ -1,80 +1,108 @@
-# Framework-Pipeline v0.1
+# Framework-Pipeline v0.2
 
-Diese Datei definiert die **dünne End-to-End-Wirbelsäule** des Buch-Frameworks. Sie ist dem unveränderlichen Ziel aus `ZIEL.md` untergeordnet.
+Diese Datei definiert die End-to-End-Wirbelsäule des Buch-Frameworks. Die konkrete Arbeitsweise steht in `ARBEITSWEISE.md`; `ZIEL.md` bleibt die unveränderliche oberste Randbedingung.
 
 > Aus einer Buchidee reproduzierbar ein veröffentlichungsreifes Manuskript entwickeln, indem KI die wiederholbaren Analyse-, Entwicklungs- und Prüfaufgaben übernimmt und der Mensch an den inhaltlich irreversiblen Entscheidungen bewusst freigibt.
 
-## Warum die nächste Vertiefung bei Szenen liegt
+## Kernänderung gegenüber v0.1
 
-Die Priorisierung ist nicht nur eine Einschätzung. Die historische Ausbau-Matrix von `NORMALFALL` (`Satte882/Buch`, Commit `be6a8881f8cfd5ff79e9ce6730b9d58f680eec0c`) dokumentiert nach einer bereits **vollständigen Story** eine Manuskriptfassung von 27.370 Wörtern und einen zusätzlichen Ausbauplan von 49.630 Wörtern. Die Diagnose dort lautet ausdrücklich: Das Problem lag in der **systematischen Verdichtung auf Szenenebene**; Konflikt, psychologische Konsequenz, Figurenreaktion, Suspense und situatives Erleben waren oft zu knapp ausgespielt.
+v0.1 koppelte Entwicklungsebenen zu stark an Human Gates und sprang im M1-Testfall nach der Storyarchitektur zu schnell auf fertige Szenenkarten.
 
-Daraus folgt für v0.1:
+v0.2 trennt deshalb strikt:
 
-> Vor weiteren tiefen Spezialscannern wird zuerst verhindert, dass eine nur plot-komplette, aber noch nicht prose-ready Szene in teure Prosa übersetzt wird.
+- **Entwicklungstiefe:** Thema → Bausteine → Ereignisse/Sequenzen → Beats → Szenenkarten → Prosa.
+- **Freigabetiefe:** nur sechs gebündelte Human-Gates G0–G5.
 
-Diese Priorität ist empirisch für `NORMALFALL` begründet, aber noch keine allgemeine Aussage über jedes Buchprojekt.
+> **Viele Entwicklungsebenen, wenige menschliche Freigaben.**
 
-## Pipeline und verbindliche Artefakte
+## Verbindliche Entwicklungsrichtung
 
-| Stufe | Input | Verbindliches Arbeitsartefakt | Menschlicher Gate | Tiefe v0.1 |
-|---|---|---|---|---|
-| 0 Idee | Buchidee | `project/BOOK_IDEA.md` nach `templates/BOOK_IDEA.md` | **G0 – Idee freigeben** | **Contract + Pipeline-Check implementiert** |
-| 1 Story | freigegebene Idee | `project/STORY_PACKAGE.md` nach `templates/STORY_PACKAGE.md` | **G1 – Storyarchitektur freigeben** | **Contract + Pipeline-Check implementiert** |
-| 2 Figuren + Recherche-Basis | Story Package | `project/CHARACTERS.md` + `project/RESEARCH_REGISTER.md` | **G2 – Voraussetzungen für Szenen freigeben** | **Minimal-Baseline + Pipeline-Check implementiert** |
-| 3 Szenen | Story + Figuren-/Recherche-Basis | `project/scenes/<scene_id>.md` nach `templates/SCENE_PLAN.md` + szenenbezogene Character States | **G3 – Scene Readiness** | **v0.1 implementiert + Upstream-Referenzen geprüft** |
-| 4 Prosa | freigegebene Szene(n) | kanonisches Manuskript / Prosa-Batch | **G4 – Prosa-Stichprobe bzw. Batch freigeben** | Contract definiert |
-| 5 Qualität | Manuskript | Prosa-Audit-Report + später semantischer Review | **G5 – Manuskriptqualität freigeben** | Prosa-Audit v0.1 implementiert |
-| 6 Produktion | freigegebenes Manuskript | DOCX/PDF/KDP-Produktionsartefakte | **G6 – Veröffentlichung freigeben** | Contract definiert, tiefe Produktion später |
+`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Beats → Szenenkarten → Prosa → Gesamtqualität → Produktion`
 
-Jeder Gate wird mit `templates/GATE_RECORD.md` dokumentiert. Ein Gate ist eine **menschliche Entscheidung**, kein automatisch erzeugtes Score-Feld.
+Dabei gilt die Horizontalregel:
 
-## Ausführbarer Upstream-Pfad
+> Erst eine Ebene über das gesamte Buch ausreichend schließen, dann systematisch tiefer gehen.
 
-`scripts/pipeline_check.py` prüft den Pfad von G0 bis vor G3 als zusammenhängende Kette. Dabei werden nicht nur einzelne Dateien auf Pflichtfelder geprüft, sondern auch Übergänge und Referenzen:
+Das Framework soll nicht standardmäßig einzelne frühe Szenen bis zur Prosa fertigstellen, während spätere Teile noch auf Plotebene offen sind.
 
-- G0, G1 und G2 müssen als menschliche `APPROVE`-Records vorliegen;
-- `working_title` muss zwischen Idee und Story Package konsistent sein;
-- `CHARACTERS.md` muss auf die aktuelle Story-Package-Version zeigen;
-- offene Recherche darf im Register bestehen, aber eine von der konkreten Szene referenzierte Recherche muss `resolved` oder `not_applicable` sein;
-- `character_state_refs` müssen auf reale, zur Szene passende Character-State-Dateien zeigen;
-- eine mechanisch vollständige Szene erhält nur `READY_FOR_G3`, niemals automatisch `APPROVE`.
+## Pipeline und Human Gates
 
-Damit existiert erstmals ein echter End-to-End-Test der frühen Framework-Kette statt nur einzelner Methodenbeschreibungen.
+| Phase | Interne Arbeitsartefakte | Human Gate | Gate schützt |
+|---|---|---|---|
+| Konzept | `BOOK_IDEA.md` / Konzeptartefakt | **G0 – Konzept** | Prämisse, Leitfrage, Leser-Versprechen, zentrale Nicht-Ziele |
+| Story-Architektur | `STORY_PACKAGE.md`, vollständige Bausteine, vollständige Ereignisse/Sequenzen, Figurenkern, Rechercheabhängigkeiten | **G1 – Story-Architektur** | Gesamtkausalität, Konflikt, große Wendungen, Informationsarchitektur, Figurenkern |
+| Szenen-Architektur | vollständige Beats, vollständige Szenenkarten, Character States, blockierende Rechercheentscheidungen | **G2 – Prose Ready** | ob beim Schreiben keine relevante Storyentscheidung mehr improvisiert werden muss |
+| Prosa-Stichprobe | repräsentativer Prosa-Batch aus G2-freigegebenen Szenen | **G3 – Prosa-Stil** | Stil, Rhythmus, Erlebnisdichte, sichtbare KI-Prosa-Muster |
+| Gesamtmanuskript | vollständige Prosa, Qualitätsreviews, Rework, Audit | **G4 – Manuskript** | inhaltliche und qualitative Gesamtfreigabe |
+| Produktion | DOCX/PDF/KDP-/andere Produktionsausgaben | **G5 – Produktion** | konkreter finaler Produktionsstand |
 
-## Regel für Human Gates
+Jeder Human Gate erlaubt nur `APPROVE`, `REWORK` oder `STOP` und bezieht sich auf konkrete Artefaktstände.
 
-Ein Gate darf nur drei Entscheidungen festhalten:
+## Keine Gates zwischen jeder Arbeitsebene
 
-- `APPROVE` – nächste Stufe darf beginnen.
-- `REWORK` – definierte Punkte müssen vor dem nächsten Gate behoben werden.
-- `STOP` – Projekt/Stufe wird bewusst nicht fortgeführt.
+Standardmäßig gibt es **keinen** separaten Human Gate zwischen:
 
-Offene irreversible Storyentscheidungen dürfen nicht durch den Gate hindurch in die nächste, teurere Stufe geschoben werden.
+- Bausteinen und Ereignissen/Sequenzen,
+- Beats und Szenenkarten,
+- globaler Figurenarbeit und szenenspezifischen Character States,
+- dem Erfassen und Bearbeiten einzelner Recherchefragen.
 
-## Abhängigkeitsreihenfolge vor Scene Readiness
+Diese Zwischenstufen werden durch Arbeitskontrollen begleitet und gemeinsam im nächsten fachlich sinnvollen Gate bewertet.
 
-Die frühere Reihenfolge „Szenen zuerst, Figurenmodell danach“ wäre zirkulär, weil Scene Readiness bereits Wissen, Glauben, Beziehungen und Informationsgrenzen der Figuren braucht. Deshalb gilt ab v0.1:
+Ein zusätzlicher Gate ist nur gerechtfertigt, wenn er eine konkrete irreversible Entscheidung schützt, die im nächsten gebündelten Gate zu spät käme.
 
-1. Story Package freigeben.
-2. Minimalen Figuren-Baseline-Stand und Recherche-Register anlegen.
-3. Pro Szene den **Character-State-Stub** ausfüllen.
-4. Erst dann Scene Readiness prüfen.
+## Arbeitskontrollen zwischen Gates
 
-Das ist bewusst **noch kein tiefes Figuren-Konsistenzsystem**. Es liefert nur die Informationen, die eine Szene benötigt, damit beim Schreiben keine relevanten Figuren- oder Wissensentscheidungen improvisiert werden müssen.
+Deterministische bzw. mechanische Checks dürfen prüfen:
 
-## Vertiefungsregel für das Framework
+- Pflichtfelder,
+- IDs und Referenzen,
+- vollständige Zuordnung von Bausteinen → Ereignissen → Beats → Szenen,
+- Character-State-Referenzen,
+- Status blockierender Recherchefragen,
+- Git-/Upstream-Referenzen,
+- Invalidierungsstatus.
 
-Neue Automatisierung wird nur gebaut, wenn sie mindestens eine dieser Bedingungen erfüllt:
+ChatGPT darf zusätzlich semantische Selbstprüfungen durchführen. Diese gelten **nicht als unabhängiger Review**. Inhaltliche Storyqualität wird im Human Gate und bei Bedarf durch einen bewusst entkoppelten Red-Team-Review bewertet.
 
-1. Sie verhindert nachweisbar teures Downstream-Rework.
-2. Sie ersetzt wiederholbare, häufige Handarbeit.
-3. Sie schützt eine irreversible oder schwer rückholbare Qualitätsentscheidung.
-4. Sie schließt eine konkrete Lücke auf dem Weg zu `ZIEL.md`.
+## Figuren und Recherche als Querschnitt
 
-Ein Baustein wird **nicht** deshalb vertieft, weil er technisch leicht automatisierbar ist.
+Figuren und Recherche laufen über mehrere Entwicklungsebenen:
 
-## Aktueller Schwerpunkt nach v0.1
+- Figurenkern und große Beziehungen werden in der Story-Architektur festgelegt.
+- Wissensstände und Beziehungszustände werden bis zur Szenenarchitektur konkretisiert.
+- Recherche beginnt bei sichtbarer Unsicherheit und wird nur dann blockierend, wenn ihre Antwort eine aktuell zu treffende Plot-, Figuren-, Szenen-, Informations- oder Konsequenzentscheidung verändern kann.
 
-Der Upstream-Pfad **Idee → G0 → Story → G1 → Figuren/Recherche → G2 → erste Szene → READY_FOR_G3** ist jetzt technisch geschlossen und durch einen synthetischen End-to-End-Test abgesichert.
+Austauschbare Oberflächendetails dürfen offen bleiben.
 
-Der nächste Ausbau sollte deshalb nicht wieder innerhalb G0–G3 neue Detailtiefe erzeugen. Der nächste strukturell offene Übergang ist **G3 → Prosa → G4**: Wie wird aus einer freigegebenen Szene ein kontrollierter Prosa-Batch, dessen narratives Gewicht früh geprüft werden kann, bevor ein kompletter Roman zu dünn oder methodisch übererklärt geschrieben wird?
+## Gate-Batching bei großen Romanen
+
+Ein Human Gate ist eine **Freigabephase**, keine Pflicht zu einer einzigen riesigen Prüfsitzung.
+
+Bei vielen Szenen darf G2 beispielsweise in mehrere Review-Batches aufgeteilt werden. Nach den Teilreviews folgt ein Gesamtcheck und ein fachlicher G2-Abschluss. Es werden dafür keine künstlichen zusätzlichen Gate-Typen eingeführt.
+
+Die optimale Batch-Größe ist noch eine bekannte Skalierungsfrage und wird erst mit einem realen längeren Buch kalibriert.
+
+## Prosa beginnt nach G2
+
+Systematische Prosaerzeugung startet erst, wenn die Szenenarchitektur prose-ready ist.
+
+Verbindliche Gate-Frage:
+
+> **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
+
+G3 prüft danach zunächst einen repräsentativen Prosa-Batch. Erst nach erfolgreicher Stil-/Prosa-Freigabe wird auf das vollständige Manuskript skaliert.
+
+## Backtracking
+
+Wenn eine tiefere Ebene eine bessere oder notwendige Storyänderung sichtbar macht, wird nicht downstream improvisiert. Die Änderung wandert zuerst zur kanonischen Upstream-Ebene, betroffene Ableitungen werden `stale`/`invalidated`, anschließend werden nur die betroffenen Freigabephasen erneut durchlaufen.
+
+## Historischer v0.1-Checker
+
+`scripts/pipeline_check.py` und `config/pipeline_contract.yml` bilden derzeit noch den früheren v0.1-Pfad mit separatem Figuren-/Recherche-Gate und altem G0–G3-Mapping ab.
+
+Dieser technische Stand bleibt bis zur Migration ein **Legacy-Checker** und ist für die neue Gate-Semantik nicht autoritativ. Die Migration muss die neue Arbeitsweise abbilden, ohne zusätzliche Infrastruktur einzuführen.
+
+## Leitregel
+
+> **Mehr interne Entwicklungstiefe, weniger externe Prozessschritte. Vom Großen ins Kleine, horizontal über das ganze Buch, Prosa zuletzt.**
