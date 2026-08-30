@@ -1,5 +1,9 @@
 # FEHLALARM – M1-Testfall
 
+status: frozen_regression_fixture
+m1_result: PASS
+frozen_on: 2026-08-30
+
 ## Zweck
 
 `FEHLALARM` ist **kein Buchprojekt** und kein Entwurf für einen späteren Roman. Der Ordner existiert ausschließlich, um den vollständigen M1-Pfad des Frameworks einmal real im Chat-/GitHub-Betriebsmodell durchzuspielen.
@@ -14,13 +18,13 @@ Er bleibt an diesem Pfad als **eingefrorener Regression-/Referenzfall** erhalten
 
 Warum er erhalten bleibt:
 
-- Der Fall enthält einmal real durchlaufene Artefakte und Human Gates von G0 bis G6.
+- Der Fall enthält einmal real durchlaufene Artefakte und Human Gates von G0 bis G5.
 - Künftige Änderungen an Contracts, Checkern, Invalidierungslogik, Prosa-Audit oder Produktionsschritten können gegen einen bekannten vollständigen Fall geprüft werden.
 - Die Git-Historie und Provenienzreferenzen bleiben verständlich; ein späteres Verschieben würde unnötig Pfade und Referenzen brechen.
 
 ## Statusmodell
 
-Während M1 läuft:
+Während M1 lief:
 
 `status: active_m1_fixture`
 
@@ -28,7 +32,7 @@ Nach `M1 Gesamt: PASS`:
 
 `status: frozen_regression_fixture`
 
-Der Abschlussbericht setzt diesen Status verbindlich.
+Der M1-Abschlussbericht dokumentiert den PASS gegen `M1_ACCEPTANCE.md`.
 
 ## Was Regression hier bedeutet
 
