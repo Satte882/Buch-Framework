@@ -8,15 +8,47 @@ Diese Leitplanken operationalisieren das Entwicklungsprinzip aus `ZIEL.md`:
 
 > **Nicht maximale Automatisierung ist das Ziel, sondern reproduzierbar hohe Buchqualität bei möglichst wenig unnötiger manueller Arbeit.**
 
+Die verbindliche fachliche Arbeitsweise steht in `ARBEITSWEISE.md`.
+
 ## Standardarchitektur v0.x
 
 Für v0.x gilt als Default:
 
 1. **ChatGPT-Chat** für generative und semantische Arbeit.
 2. **GitHub-Dateien** als Source of Truth und Arbeitsartefakte.
-3. **Human Gates** an irreversiblen Entscheidungen.
+3. **Human Gates** nur an irreversiblen oder teuer rückholbaren Entscheidungen.
 4. **Kleine deterministische Python-Checks** nur für wiederholbare, eindeutig prüfbare Regeln.
 5. **GitHub Actions** nur für deterministische Tests, Checks und Builds.
+
+## Kein Gate pro Artefakt
+
+Eine neue Entwicklungsebene, Datei oder Template erzeugt **nicht automatisch einen neuen Human Gate**.
+
+Verbindliche Prüffrage vor jedem zusätzlichen Gate:
+
+> **Welche konkrete irreversible Entscheidung schützt dieser zusätzliche Stopp, die nicht sinnvoll im nächsten gebündelten Gate geprüft werden kann?**
+
+Gibt es darauf keine klare Antwort, wird der Gate nicht eingeführt.
+
+Für v0.x werden die internen Ebenen bewusst in sechs Freigabephasen gebündelt: Konzept, Story-Architektur, Prose Ready, Prosa-Stil, Manuskript, Produktion.
+
+## Gate-Batching statt Gate-Vermehrung
+
+Ein großer Human Gate darf aus mehreren Review-Batches bestehen. Das ist bei langen Romanen ausdrücklich erwünscht, wenn ein einziger Prüfblock zu groß wird.
+
+Beispiel: Szenen 1–15, 16–30 und 31–45 können getrennt geprüft werden und trotzdem Teil derselben fachlichen `Prose Ready`-Freigabephase bleiben.
+
+Es werden dafür nicht automatisch neue Gate-Typen wie `G2a`, `G2b`, `G2c` eingeführt.
+
+## Selbstprüfung ist keine unabhängige Qualitätssicherung
+
+ChatGPT darf eigene Artefakte mechanisch und semantisch vorprüfen. Dabei gilt:
+
+- Pflichtfelder, IDs, Referenzen und Vollständigkeit dürfen deterministisch geprüft werden.
+- Inhaltliche Selbstprüfung darf Hinweise liefern.
+- Dieselbe KI ersetzt damit weder Human Gate noch einen bewusst entkoppelten Red-Team-Review.
+
+Diese Grenze verhindert, dass eine interne Selbstprüfung als unabhängige Qualitätskontrolle missverstanden wird.
 
 ## Bedeutung von „Engine“
 
@@ -72,6 +104,12 @@ Chat ist bevorzugt bei:
 - kontextabhängigem Lektorat,
 - Interpretation von Qualitätsbefunden.
 
+## Recherche: KISS-Blockierregel
+
+Eine offene Recherchefrage blockiert die aktuelle Entwicklungsebene nur dann, wenn ihre Antwort eine **jetzt zu treffende Plot-, Figuren-, Szenen-, Informations- oder Konsequenzentscheidung** verändern kann.
+
+Für v0.x wird dafür bewusst kein Score und keine zusätzliche Matrix gebaut. Erst reales wiederkehrendes Fehlverhalten rechtfertigt mehr Mechanik.
+
 ## Persistenz
 
 Neue persistente Infrastruktur ist nicht erlaubt, solange Folgendes ausreicht:
@@ -111,4 +149,4 @@ Ein fachlicher Bereich erhält erst tiefere technische Automatisierung, wenn min
 
 ## Leitregel
 
-> **So viel Struktur wie nötig, so wenig Infrastruktur wie möglich.**
+> **So viel Entwicklungstiefe wie für Qualität nötig, so wenige Prozessstopps und so wenig Infrastruktur wie möglich.**
