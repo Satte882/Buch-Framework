@@ -1,32 +1,60 @@
 # Buch-Framework
 
-Dieses Repository extrahiert die **wiederverwendbare Entwicklungs- und Produktionslogik** aus `Satte882/Buch` (`NORMALFALL`).
+Dieses Repository enthält die **wiederverwendbare Entwicklungs- und Produktionslogik** für eigenständige Buchprojekte.
 
 ## Verbindliches Projektziel
 
-Das unveränderliche Projektziel steht in [`ZIEL.md`](ZIEL.md) und ist die oberste Randbedingung für alle weiteren Arbeiten:
+Das unveränderliche Projektziel steht in [`ZIEL.md`](ZIEL.md):
 
 > **Aus einer Buchidee reproduzierbar ein veröffentlichungsreifes Manuskript entwickeln, indem KI die wiederholbaren Analyse-, Entwicklungs- und Prüfaufgaben übernimmt und der Mensch an den inhaltlich irreversiblen Entscheidungen bewusst freigibt.**
 
-Ziel ist nicht, `NORMALFALL` zu kopieren. Ziel ist ein Framework, mit dem weitere eigenständige Bücher reproduzierbar von der Buchidee bis zum produktionsreifen Manuskript entwickelt werden können.
-
 ## Verbindliche Arbeitsweise
 
-Die fachliche Arbeitsweise steht in [`ARBEITSWEISE.md`](ARBEITSWEISE.md):
-
-> **Mehr interne Entwicklungstiefe, weniger externe Prozessschritte. Vom Großen ins Kleine, horizontal über das ganze Buch, Prosa zuletzt.**
+Die fachliche Arbeitsweise steht in [`ARBEITSWEISE.md`](ARBEITSWEISE.md), die verbindliche Buch-Repository-Struktur in [`PROJECT_STRUCTURE.md`](PROJECT_STRUCTURE.md).
 
 Die normale Entwicklungsrichtung lautet:
 
-`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Beats → Szenenkarten → Prosa → Gesamtqualität → Produktion`
+`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Szenen → Beats → Prosa → Gesamtqualität → Produktion`
 
-Dabei werden Entwicklungsebenen und Human Gates bewusst getrennt. Eine neue Datei oder Planungsebene erzeugt nicht automatisch einen neuen Freigabepunkt.
+Dabei gilt:
 
-### Sechs Human-Gate-Phasen
+> **Vom Groben ins Feine, horizontal über das ganze Buch, Prosa zuletzt.**
+
+## Verbindliche Projektstruktur
+
+Neue echte Buchprojekte werden nicht mit parallelen Top-Level-Ordnern für jede Planungsebene aufgebaut. Die Ordnerhierarchie folgt der fachlichen Ableitung:
+
+```text
+BUCH-REPO/
+├── BOOK_IDEA.md
+├── STORY_PACKAGE.md
+├── CHARACTERS.md
+├── RESEARCH_REGISTER.md
+├── gates/
+└── BAUSTEINE/
+    └── Bxx/
+        ├── BAUSTEIN.md
+        ├── EVENTS.md
+        └── SZENEN/
+            └── Sxxx/
+                ├── SZENE.md
+                ├── BEATS.md
+                ├── CHARACTER_STATES.md
+                └── PROSA.md
+```
+
+**Meta-Ebene:** Buchidee, Gesamtarchitektur, Figuren, Research und Gates.  
+**Story-Ebene:** Baustein → Events → Szene → Beats/States → Prosa.
+
+Prosa ist die unterste Ebene und kein paralleler Arbeitsstrang.
+
+Die vollständigen Regeln, einschließlich globaler Index-/Checker-Sichten, stehen in [`PROJECT_STRUCTURE.md`](PROJECT_STRUCTURE.md).
+
+## Sechs Human-Gate-Phasen
 
 1. **G0 – Konzept**
-2. **G1 – Story-Architektur**: Story Package + Bausteine + Ereignisse/Sequenzen + Figurenkern + relevante Rechercheabhängigkeiten
-3. **G2 – Prose Ready**: Beats + Szenenkarten + Character States + blockierende Recherche
+2. **G1 – Story-Architektur**: Story Package + alle Bausteine + alle Ereignisse/Sequenzen + Figurenkern + relevante Rechercheabhängigkeiten
+3. **G2 – Prose Ready**: vollständige Szenenlandschaft + Beats + Character States + blockierende Recherche
 4. **G3 – Prosa-Stil**: repräsentativer Prosa-Batch
 5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit
 6. **G5 – Produktion**: konkretes Produktionsartefakt
@@ -41,32 +69,46 @@ Das reale Betriebsmodell steht in [`BETRIEBSMODELL.md`](BETRIEBSMODELL.md):
 
 Kanonische Ebenen, Backtracking und Invalidierung sind in [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) festgelegt. Neue Technik muss die Leitplanken aus [`KISS_LEITPLANKEN.md`](KISS_LEITPLANKEN.md) erfüllen.
 
-Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.md). Der erste vollständige Meilenstein wird gegen [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) abgenommen.
+Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.md).
 
-## Arbeitsartefakte v0.2
+## Arbeitsartefakte
 
-Vorhanden bzw. vorgesehen sind:
+Meta-/Querschnittsartefakte:
 
-- `templates/BOOK_IDEA.md` – Konzept,
-- `templates/STORY_PACKAGE.md` – Storykern und Makroarchitektur,
-- `templates/STORY_BLOCKS.md` – dramaturgische Bausteine über das ganze Buch,
-- `templates/EVENTS.md` – Ereignisse und optionale Sequenzgruppen,
-- `templates/CHARACTERS.md` – globale Figuren-Baseline als Querschnitt,
-- `templates/RESEARCH_REGISTER.md` – Recherche-Register als Querschnitt,
-- `templates/BEATS.md` – Beat-Ebene vor Szenenkarten,
-- `templates/CHARACTER_STATE.md` – szenenspezifischer Figurenstatus,
-- `templates/SCENE_PLAN.md` – Szenenkarte / Prose-Readiness-Artefakt,
-- `templates/GATE_RECORD.md` – explizite menschliche Freigabe.
+- `templates/BOOK_IDEA.md`
+- `templates/STORY_PACKAGE.md`
+- `templates/CHARACTERS.md`
+- `templates/RESEARCH_REGISTER.md`
+- `templates/GATE_RECORD.md`
+
+Story-/Szenenartefakte werden in neuen echten Buchprojekten gemäß `PROJECT_STRUCTURE.md` verschachtelt:
+
+- `BAUSTEIN.md`
+- `EVENTS.md`
+- `SZENE.md`
+- `BEATS.md`
+- `CHARACTER_STATES.md`
+- `PROSA.md`
+
+Historische M1/M2-Fixtures dürfen ihr flaches Testlayout behalten.
+
+## Globale Index-/Checker-Sichten
+
+Für CI, Reviews oder Kompatibilität dürfen zusätzlich globale Dateien wie `STORY_BLOCKS.md`, `EVENTS.md` oder `BEATS.md` existieren.
+
+In einem hierarchischen echten Buchprojekt sind sie **abgeleitete Gesamtansichten**, nicht die fachliche Source of Truth. Änderungen erfolgen zuerst in der verschachtelten Storystruktur; globale Sichten werden danach aktualisiert.
+
+Der bestehende Pipeline-Checker v0.2 nutzt für die historischen Fixtures weiterhin diese Aggregatverträge. Das ändert nicht die verbindliche Projektstruktur neuer Buchprojekte.
 
 ## Wichtige Qualitätsgrenzen
 
 ### Selbstprüfung
 
-ChatGPT darf mechanische und semantische Selbstprüfungen durchführen. Die semantische Selbstprüfung derselben KI ist jedoch **kein unabhängiger Review**. Inhaltliche Qualitätsrisiken gehören in den Human Gate und bei Bedarf in einen bewusst entkoppelten Red-Team-Review.
+ChatGPT darf mechanische und semantische Selbstprüfungen durchführen. Die semantische Selbstprüfung derselben KI ist jedoch **kein unabhängiger Review**. Bei hohem semantischem Risiko wird ein bewusst entkoppelter Fresh-Context-/Red-Team-Review verwendet.
 
 ### Recherche
 
-Eine offene Recherchefrage blockiert nur dann, wenn ihre Antwort eine **aktuell zu treffende Plot-, Figuren-, Szenen-, Informations- oder Konsequenzentscheidung** verändern kann. Für v0.x gibt es dafür bewusst keinen zusätzlichen Score und keinen eigenen Recherche-Gate.
+Eine offene Recherchefrage blockiert nur dann, wenn ihre Antwort eine **aktuell zu treffende Plot-, Figuren-, Szenen-, Informations- oder Konsequenzentscheidung** verändern kann.
 
 ### Prosa
 
@@ -76,56 +118,16 @@ Systematische Prosa beginnt erst nach G2. Die zentrale Prose-Readiness-Frage lau
 
 ## Bestehende technische Bausteine
 
-### Scene Readiness / Pipeline-Checker v0.2
+Vorhanden sind unter anderem:
 
-Vorhanden sind:
+- Pipeline-/Scene-Readiness-Checker,
+- Provenienz-/Invalidierungsprüfung,
+- Prosa-Audit,
+- Review-Templates,
+- Fresh-Context-Semantic-Review-Protokoll.
 
-- `config/pipeline_contract.yml`,
-- `scripts/pipeline_check.py`,
-- `tests/test_pipeline_check.py`,
-- `config/scene_readiness.yml`,
-- `scripts/scene_readiness.py`,
-- `tests/test_scene_readiness.py`.
-
-Der Pipeline-Checker bildet die v0.2-Arbeitsweise deterministisch bis **G2 – Prose Ready** ab. Er arbeitet phasenweise: Solange ein früherer Human Gate fehlt oder blockiert, fordert er noch keine Artefakte der späteren Phase an. Er prüft insbesondere:
-
-- `BOOK_IDEA` + vorhandenen G0-Human-Record,
-- Story Package + vollständige Baustein→Event-Abdeckung + vorhandenen gebündelten G1-Human-Record,
-- vollständige Event→Beat→Szenen-Abdeckung,
-- `beat_refs` der aktiven Szenenkarten,
-- referenzierte Character States,
-- Research-Referenzen und `blocking_now`,
-- vorhandenen gebündelten G2-Human-Record mit den tatsächlich aktiven Szenen-/State-Artefakten.
-
-Nur Szenen, die aus `BEATS.md` als geplante Szenen referenziert werden, zählen zum aktiven v0.2-Pfad. Historische Szenendateien werden dadurch nicht versehentlich als neuer M1-Nachweis behandelt.
-
-Eine offene Recherchefrage blockiert den Checker nur bei `status: open` **und** `blocking_now: yes`. Der Checker setzt niemals einen Human Gate und bewertet keine semantische Storyqualität. Ein erfolgreicher vollständiger Lauf endet mechanisch mit `READY_FOR_PROSE`, nicht mit `APPROVE`.
-
-### Prosa-Audit v0.1
-
-Vorhanden sind:
-
-- `PROSA_REGELMATRIX.md`,
-- `config/prosa_rules.yml`,
-- `scripts/prosa_audit.py`,
-- `tests/test_prosa_audit.py`,
-- NORMALFALL-Korpus und Vollmanuskript-Rauschtest.
-
-Der Scanner entscheidet nicht selbst über literarische Qualität. Breite Strukturmuster wie Stakkato und Dialog-Pingpong sind nach dem Vollmanuskript-Test nur INFO; semantische Muster bleiben kontextuelle Review-Aufgabe.
-
-## Empirische Basis
-
-Verbindliche Analysen und Korpora:
-
-- `ANALYSE_NORMALFALL.md`
-- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md`
-- `tests/corpus/normalfall_beispiele.md`
-- `tests/corpus/normalfall_kontrollbeispiele.md`
-- `tests/corpus/normalfall_provenienz.md`
-- `tests/corpus/scene_readiness_normalfall.json`
+Diese Technik dient dem Prozess. Sie darf die fachliche Ableitungshierarchie nicht umkehren.
 
 ## Leitprinzip
 
-> **Den Prozess wiederverwenden, nicht den Plot kopieren.**
-
-Das Framework soll klare Story- und Qualitätsgates liefern, ohne zukünftige Bücher in dieselbe sichtbare Formel zu pressen.
+> **Den Prozess wiederverwenden, nicht den Plot kopieren. Meta → Bausteine → Events → Szenen → Beats → Prosa.**
