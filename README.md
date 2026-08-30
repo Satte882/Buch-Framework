@@ -8,9 +8,30 @@ Das unveränderliche Projektziel steht in [`ZIEL.md`](ZIEL.md) und ist die obers
 
 > **Aus einer Buchidee reproduzierbar ein veröffentlichungsreifes Manuskript entwickeln, indem KI die wiederholbaren Analyse-, Entwicklungs- und Prüfaufgaben übernimmt und der Mensch an den inhaltlich irreversiblen Entscheidungen bewusst freigibt.**
 
-**Jede weitere Änderung in diesem Repository muss auf dieses Ziel einzahlen.** Methoden, Architektur, Tools und Implementierungsdetails dürfen sich ändern; das Projektziel selbst nicht.
-
 Ziel ist nicht, `NORMALFALL` zu kopieren. Ziel ist ein Framework, mit dem weitere eigenständige Bücher reproduzierbar von der Buchidee bis zum produktionsreifen Manuskript entwickelt werden können.
+
+## Verbindliche Arbeitsweise
+
+Die fachliche Arbeitsweise steht in [`ARBEITSWEISE.md`](ARBEITSWEISE.md):
+
+> **Mehr interne Entwicklungstiefe, weniger externe Prozessschritte. Vom Großen ins Kleine, horizontal über das ganze Buch, Prosa zuletzt.**
+
+Die normale Entwicklungsrichtung lautet:
+
+`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Beats → Szenenkarten → Prosa → Gesamtqualität → Produktion`
+
+Dabei werden Entwicklungsebenen und Human Gates bewusst getrennt. Eine neue Datei oder Planungsebene erzeugt nicht automatisch einen neuen Freigabepunkt.
+
+### Sechs Human-Gate-Phasen
+
+1. **G0 – Konzept**
+2. **G1 – Story-Architektur**: Story Package + Bausteine + Ereignisse/Sequenzen + Figurenkern + relevante Rechercheabhängigkeiten
+3. **G2 – Prose Ready**: Beats + Szenenkarten + Character States + blockierende Recherche
+4. **G3 – Prosa-Stil**: repräsentativer Prosa-Batch
+5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit
+6. **G5 – Produktion**: konkretes Produktionsartefakt
+
+Bei langen Büchern darf ein Gate aus mehreren Review-Batches bestehen. Dadurch wird Review-Last portioniert, ohne künstlich neue Gate-Typen zu erzeugen.
 
 ## Betriebsmodell
 
@@ -20,106 +41,69 @@ Das reale Betriebsmodell steht in [`BETRIEBSMODELL.md`](BETRIEBSMODELL.md):
 
 Kanonische Ebenen, Backtracking und Invalidierung sind in [`SOURCE_OF_TRUTH.md`](SOURCE_OF_TRUTH.md) festgelegt. Neue Technik muss die Leitplanken aus [`KISS_LEITPLANKEN.md`](KISS_LEITPLANKEN.md) erfüllen.
 
-## End-to-End-Wirbelsäule
+Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.md). Der erste vollständige Meilenstein wird gegen [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) abgenommen.
 
-Die verbindliche Pipeline steht in [`FRAMEWORK_PIPELINE.md`](FRAMEWORK_PIPELINE.md):
+## Arbeitsartefakte v0.2
 
-`Buchidee → Story Package → Figuren-/Recherche-Basis → Szenenplanung → Scene Readiness → Prosa → Qualitätsprüfung → Produktion`
+Vorhanden bzw. vorgesehen sind:
 
-Jede Stufe besitzt ein konkretes Arbeitsartefakt und einen menschlichen Gate. Die Framework-Tiefe wird nur dort ausgebaut, wo sie nachweisbar Downstream-Rework spart oder eine irreversible Entscheidung schützt.
+- `templates/BOOK_IDEA.md` – Konzept,
+- `templates/STORY_PACKAGE.md` – Storykern und Makroarchitektur,
+- `templates/STORY_BLOCKS.md` – dramaturgische Bausteine über das ganze Buch,
+- `templates/EVENTS.md` – Ereignisse und optionale Sequenzgruppen,
+- `templates/CHARACTERS.md` – globale Figuren-Baseline als Querschnitt,
+- `templates/RESEARCH_REGISTER.md` – Recherche-Register als Querschnitt,
+- `templates/BEATS.md` – Beat-Ebene vor Szenenkarten,
+- `templates/CHARACTER_STATE.md` – szenenspezifischer Figurenstatus,
+- `templates/SCENE_PLAN.md` – Szenenkarte / Prose-Readiness-Artefakt,
+- `templates/GATE_RECORD.md` – explizite menschliche Freigabe.
 
-Der erste vollständige Meilenstein wird gegen [`M1_ACCEPTANCE.md`](M1_ACCEPTANCE.md) abgenommen. **M1 beweist die Kette, nicht die Tiefe.**
+## Wichtige Qualitätsgrenzen
 
-## Aktueller Status
+### Selbstprüfung
 
-### G0–G3 v0.1 – erste ausführbare Upstream-Kette
+ChatGPT darf mechanische und semantische Selbstprüfungen durchführen. Die semantische Selbstprüfung derselben KI ist jedoch **kein unabhängiger Review**. Inhaltliche Qualitätsrisiken gehören in den Human Gate und bei Bedarf in einen bewusst entkoppelten Red-Team-Review.
 
-Die Pipeline von der Buchidee bis zu einer **für den menschlichen Scene-Readiness-Gate vorbereiteten ersten Szene** ist jetzt mechanisch ausführbar.
+### Recherche
 
-Vorhanden sind:
+Eine offene Recherchefrage blockiert nur dann, wenn ihre Antwort eine **aktuell zu treffende Plot-, Figuren-, Szenen-, Informations- oder Konsequenzentscheidung** verändern kann. Für v0.x gibt es dafür bewusst keinen zusätzlichen Score und keinen eigenen Recherche-Gate.
 
-- `templates/BOOK_IDEA.md` – G0-Vertrag,
-- `templates/STORY_PACKAGE.md` – G1-Vertrag,
-- `templates/CHARACTERS.md` – minimale globale Figuren-Baseline,
-- `templates/RESEARCH_REGISTER.md` – Recherche-Register; offene Recherche darf bestehen, solange sie die konkrete Szene nicht blockiert,
-- `templates/CHARACTER_STATE.md` – szenenbezogener Figurenstatus,
-- `templates/SCENE_PLAN.md` – Scene-Readiness-Vertrag,
-- `templates/GATE_RECORD.md` – explizite menschliche Freigabe,
-- `config/pipeline_contract.yml` – maschinenlesbarer G0–G2-Vertrag,
-- `scripts/pipeline_check.py` – prüft Artefakte, Gate-Reihenfolge, Titel-/Versionskonsistenz, Character-State-Referenzen und Recherche-Referenzen,
-- `tests/test_pipeline_check.py` – synthetischer End-to-End-Test von G0 bis `READY_FOR_G3`.
+### Prosa
 
-Der Checker erzeugt **keine** menschliche Freigabe. Ohne vorhandene `G0`, `G1` und `G2`-Records mit `decision: APPROVE`, `decided_by: human` und `open_blockers: no` wird die Kette blockiert. Eine mechanisch vollständige Szene endet nur bei `READY_FOR_G3`.
+Systematische Prosa beginnt erst nach G2. Die zentrale Prose-Readiness-Frage lautet:
 
-Aufruf für G0–G2:
+> **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
 
-```bash
-python scripts/pipeline_check.py project
-```
+## Bestehende technische Bausteine
 
-Aufruf bis zur ersten G3-fähigen Szene:
+### Scene Readiness / Pipeline-Checker v0.1
 
-```bash
-python scripts/pipeline_check.py project --scene scenes/S-001.md
-```
+`scripts/pipeline_check.py`, `config/pipeline_contract.yml` und die zugehörigen Tests bilden noch das ältere Gate-Mapping mit separatem Figuren-/Recherche-Gate ab. Sie bleiben bis zur Migration als **Legacy-v0.1-Checker** erhalten und sind für die neue fachliche Gate-Semantik nicht autoritativ.
 
-Mögliche Ergebnisse:
+Die Migration soll die v0.2-Arbeitsweise abbilden, ohne zusätzliche Runtime-, Provider- oder Agenten-Infrastruktur einzuführen.
 
-- `BLOCK` – Upstream-Entscheidung, Gate oder Referenz fehlt beziehungsweise widerspricht sich.
-- `READY_FOR_SCENE_PLANNING` – G0–G2 sind konsistent und menschlich freigegeben.
-- `READY_FOR_G3` – zusätzlich ist die konkrete Szene mechanisch vollständig; G3 selbst bleibt eine menschliche Entscheidung.
-
-### G3→G4 Chat-Prosa-Probe – realer REWORK-Pfad
-
-Unter `m1/prose_probe_normalfall/` wird der erste reale Chat-/GitHub-Übergang von einer bereits realisierten NORMALFALL-Szenenarchitektur zu neu erzeugter Prosa getestet.
-
-Revision 1 wurde menschlich mit **G4 = REWORK** bewertet. Die Entscheidung ist als Gate-Record gespeichert. Gründe:
-
-- auffällig gleichförmiger Stakkato-Rhythmus,
-- redundantes Nicht-Angriffs-Signal.
-
-Die Nacharbeit wurde gezielt und ohne Storyänderung durchgeführt:
-
-- vorher: 42 Prosaabsätze, davon 27 mit höchstens 7 Wörtern,
-- Revision 2: 18 Prosaabsätze, davon 1 mit höchstens 7 Wörtern,
-- redundantes Signal entfernt,
-- `sondern`: 0.
-
-Revision 2 ist erneut für G4 vorgelegt. Sie bleibt `draft`, bis eine neue menschliche Entscheidung `APPROVE | REWORK | STOP` vorliegt.
-
-### Scene Readiness v0.1
-
-[`SCENE_READINESS.md`](SCENE_READINESS.md) definiert das Gate zwischen Szenenplanung und Prosa.
-
-Die Priorität ist historisch belegt: Die NORMALFALL-Ausbau-Matrix dokumentierte nach bereits vollständiger Story 27.370 Wörter und einen Ausbauplan von 49.630 Wörtern, weil viele Szenen plot-komplett, aber auf Konflikt, Konsequenz, Figurenreaktion, Suspense und situatives Erleben zu stark verdichtet waren.
-
-Die retrospektive Prüfung wurde bewusst nicht schönkalibriert: Kapitel 40 bleibt als bekannte False Negative im Korpus, weil seine Szenenkarte wahrscheinlich Scene Readiness bestanden hätte und trotzdem später deutlich mehr narratives Gewicht brauchte.
-
-### Prosa-Audit v0.1 – Downstream-Qualitätsbaustein
+### Prosa-Audit v0.1
 
 Vorhanden sind:
 
-- `PROSA_REGELMATRIX.md` – fachliche Source of Truth für Regel-Scope, Evidenz, Severity und Promotion,
-- `config/prosa_rules.yml` – buchneutrale Prosa-Profil-Konfiguration,
-- `scripts/prosa_audit.py` – Scanner ohne automatische Textänderungen,
-- `tests/test_prosa_audit.py` – Unit-, Development- und Hold-out-Tests,
-- `tests/corpus/normalfall_split.json` – festgeschriebener Dev/Hold-out-Split,
-- `.github/workflows/prosa-audit.yml` – gemeinsame Framework-CI inklusive Vollmanuskript-Rauschtest gegen NORMALFALL.
+- `PROSA_REGELMATRIX.md`,
+- `config/prosa_rules.yml`,
+- `scripts/prosa_audit.py`,
+- `tests/test_prosa_audit.py`,
+- NORMALFALL-Korpus und Vollmanuskript-Rauschtest.
 
-Der Vollmanuskript-Rauschtest verhinderte, dass technisch korrekte, aber praktisch zu laute Strukturdetektoren als REVIEW-Regeln bestehen blieben: Stakkato und Dialog-Pingpong wurden nach 403 bzw. 268 Treffern auf INFO zurückgestuft.
-
-Semantische Muster wie Erklär-Echo, sichtbare Methodikprosa und übermäßige rhetorische Symmetrie bleiben bewusst außerhalb mechanischer Entscheidungen. Ein späterer LLM-Kontextreview ist als manueller Freigabe-Gate vorgesehen, nicht als CI- oder Auto-Rewrite-Schleife.
+Der Scanner entscheidet nicht selbst über literarische Qualität. Breite Strukturmuster wie Stakkato und Dialog-Pingpong sind nach dem Vollmanuskript-Test nur INFO; semantische Muster bleiben kontextuelle Review-Aufgabe.
 
 ## Empirische Basis
 
 Verbindliche Analysen und Korpora:
 
-- `ANALYSE_NORMALFALL.md` – Entwicklungs-, Story-, Qualitäts- und Produktionsprozess
-- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md` – tiefe Analyse der KI-typischen Formulierungs-, Satzbau-, Rhythmus- und Erklärmuster
-- `tests/corpus/normalfall_beispiele.md` – reale Vorher/Nachher-Korrekturen aus der Historie
-- `tests/corpus/normalfall_kontrollbeispiele.md` – reale auffällige Stellen, die nach kontextueller Prüfung bestehen blieben
-- `tests/corpus/normalfall_provenienz.md` – Herkunft und Bestandsprüfung der positiven Korpusbeispiele
-- `tests/corpus/scene_readiness_normalfall.json` – retrospektive Scene-Readiness-Prüfung an acht Ausbau-Fällen
+- `ANALYSE_NORMALFALL.md`
+- `ANALYSE_ANTI_KI_PROSA_NORMALFALL.md`
+- `tests/corpus/normalfall_beispiele.md`
+- `tests/corpus/normalfall_kontrollbeispiele.md`
+- `tests/corpus/normalfall_provenienz.md`
+- `tests/corpus/scene_readiness_normalfall.json`
 
 ## Leitprinzip
 
