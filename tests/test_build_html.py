@@ -11,6 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 class HtmlBuildTests(unittest.TestCase):
     def test_fehlalarm_v02_production_artifact_rebuilds_byte_for_byte(self) -> None:
+        # This anchors the committed production file to the exact accepted G4 manuscript text.
         manuscript = REPO_ROOT / "m1/e2e_minibook/MANUSCRIPT_v02.md"
         output = REPO_ROOT / "m1/e2e_minibook/production/FEHLALARM_v02.html"
 
