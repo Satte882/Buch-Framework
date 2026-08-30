@@ -608,9 +608,9 @@ Die Person hob die Tasse, stellte sie wieder ab, ohne zu trinken.
 
 Nora antwortete nicht sofort.
 
-„Nicht zitiert oder gar nicht verwendet?“
+„Darf ich es nur nicht zitieren, oder soll es ganz aus dem Text bleiben?“
 
-„Nicht so verwendet, dass man auf den Beteiligtenkreis zurückrechnen kann.“
+„Verwenden Sie es für die Prüfung. Im Text darf nichts stehen, das den Beteiligtenkreis eingrenzt.“
 
 „Kann ich den Kern unabhängig davon belegen?“
 
@@ -1080,9 +1080,7 @@ Er hob den Blick.
 
 „Mach ich.“
 
-Kein Einwand. Keine Kränkung.
-
-Nur die Grenze.
+Jonas nickte nur. Die Grenze blieb.
 
 David ging zur Tür.
 
@@ -1098,7 +1096,7 @@ Vier Absätze.
 
 Weniger Geschichte als am Morgen.
 
-Zum ersten Mal eine Fassung, die tatsächlich veröffentlicht werden konnte.
+Zum ersten Mal war klar, wie der Text aussehen konnte, falls die letzte Brücke noch kam.
 
 ---
 
@@ -1496,15 +1494,11 @@ Nora setzte den Cursor an den Anfang und begann die engere Fassung noch einmal z
 
 ## S9 – Zu spät
 
-Die Meldung erschien zuerst auf Davids Bildschirm.
-
-Er sagte nichts.
-
-Er drehte den Monitor zu Nora.
+Die Meldung erschien zuerst auf Davids Bildschirm. Er sagte nichts, drehte den Monitor zu Nora.
 
 Die Konkurrenz hatte veröffentlicht.
 
-Große Überschrift. Persönliche Verantwortung weit oben. Der technische Befund direkt damit verbunden.
+Die Überschrift war groß, die persönliche Verantwortung stand weit oben, der technische Befund direkt damit verbunden.
 
 Nora las die ersten Absätze im Stehen.
 
@@ -1532,15 +1526,7 @@ Eine anonyme Quelle. Verweise auf interne Unterlagen. Keine Dokumentation, die N
 
 Nora zog den Laptop näher.
 
-Sie las den Text noch einmal, diesmal nur auf der Suche nach etwas, das ihre eigene Beleglage veränderte.
-
-Ein Datum.
-
-Eine zitierte Aussage.
-
-Ein Dokumenthinweis.
-
-Etwas, das den Gegenbeleg aus der eigenen Chronologie verschob.
+Sie las den Text noch einmal, diesmal nur auf der Suche nach etwas, das ihre eigene Beleglage veränderte. Sie suchte nach einem Datum, einer zitierbaren Aussage oder einem Dokumenthinweis, der den Gegenbeleg aus ihrer Chronologie verschob.
 
 Nichts davon war da.
 
@@ -1574,7 +1560,7 @@ David sah sie an, als hätte er Widerspruch erwartet.
 
 Nora las weiter.
 
-Die Konkurrenz beschrieb den technischen Teil weiter, als sie es selbst tun würden. Vielleicht hatten sie dafür andere Quellen. Vielleicht nicht.
+Die Konkurrenz beschrieb den technischen Teil weiter, als sie es selbst tun würden. Ob sie dafür andere Quellen hatten, ließ sich aus dem Text nicht erkennen.
 
 „Wir übernehmen nichts davon ohne eigene Prüfung.“
 
@@ -1678,49 +1664,23 @@ David stand auf.
 
 „Mach ich.“
 
-Er ging.
+Er ging. Auf seinem Bildschirm blieb die Konkurrenzgeschichte offen; daneben lag ihre eigene Fassung, später und enger, noch nicht veröffentlicht.
 
-Auf seinem Bildschirm blieb die Konkurrenzgeschichte offen.
-
-Nora schloss sie nicht.
-
-Daneben lag ihre eigene Fassung.
-
-Später.
-
-Enger.
-
-Noch nicht veröffentlicht.
-
-Aber die Gründe dafür waren dieselben wie fünf Minuten zuvor.
+Die Gründe dafür waren dieselben wie fünf Minuten zuvor.
 
 ---
 
 ## S10 – Veröffentlichen
 
-Um achtzehn Uhr änderte sich nichts im Raum.
+Die Uhr oben rechts auf Noras Bildschirm sprang auf 18:01.
 
-Kein Signal. Kein Ton.
+Im Raum änderte sich nichts. Kein Signal, kein Ton. Nur die Sperrfrist war vorbei.
 
-Nur die Uhr oben rechts auf Noras Bildschirm.
-
-18:00.
-
-Sie wartete noch, bis die Minute vollständig umgesprungen war, dann öffnete sie die finale Fassung.
+Nora öffnete die finale Fassung.
 
 David stand hinter ihr. Mira saß auf der anderen Seite des Tisches. Jonas hatte seinen Laptop geschlossen.
 
-Nora las den Einstieg.
-
-Technischer Befund.
-
-Versionskontext.
-
-Aktueller Rolloutbezug in der belegten Reichweite.
-
-Unternehmensstellungnahme.
-
-Keine persönliche Vorwissensbehauptung.
+Nora las den Einstieg noch einmal: technischer Befund, Versionskontext, aktueller Rolloutbezug in der belegten Reichweite, Unternehmensstellungnahme. Die persönliche Vorwissensbehauptung stand nicht mehr im Text.
 
 Mira beugte sich vor. „Die Formulierung zum Teilpfad ist unverändert?“
 
@@ -1752,13 +1712,7 @@ Jonas hob kurz die Hand. „Die Versionskennung im zweiten Absatz ist richtig.�
 
 „Gut.“
 
-Nora setzte den Cursor auf den Freigabebutton.
-
-Für einen Moment passierte gar nichts.
-
-Dann klickte sie.
-
-Der Bildschirm lud neu.
+Nora setzte den Cursor auf den Freigabebutton, wartete einen Moment und klickte. Der Bildschirm lud neu.
 
 Die Geschichte war online.
 
@@ -1776,11 +1730,7 @@ Nora aktualisierte die Seite ein zweites Mal.
 
 Keine nachträgliche Zuspitzung. Kein versehentlich stehen gebliebener Absatz. Keine identifizierenden Details.
 
-Der Text war enger als die Konkurrenzgeschichte.
-
-Und öffentlich.
-
-Davids Telefon vibrierte.
+Der Text war enger als die Konkurrenzgeschichte und jetzt öffentlich. Davids Telefon vibrierte.
 
 Er sah auf das Display.
 
@@ -1792,11 +1742,7 @@ Er sah auf das Display.
 
 Er steckte das Telefon nicht weg.
 
-Noras eigenes Gerät klingelte.
-
-Die gespeicherte Nummer der Quelle.
-
-Sie nahm ab.
+Noras eigenes Gerät klingelte; auf dem Display stand die gespeicherte Nummer der Quelle. Sie nahm ab.
 
 „Ja.“
 
@@ -1934,12 +1880,6 @@ Die technische Frage war öffentlich.
 
 Die persönliche Verantwortungsfrage nicht.
 
-Nora öffnete eine neue Notiz und schrieb einen Satz hinein:
+Nora öffnete eine neue Notiz und schrieb: Weitere Recherche nur bei neuer Evidenz.
 
-Weitere Recherche nur bei neuer Evidenz.
-
-Dann schloss sie das Dossier vom Morgen.
-
-Nicht erledigt.
-
-Aber veröffentlicht war nur, was sie tragen konnten.
+Dann schloss sie das Dossier vom Morgen. Erledigt war der Fall nicht. Veröffentlicht war nur, was sie tragen konnten.
