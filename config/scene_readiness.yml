@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "format_note": "JSON syntax is used intentionally; JSON is valid YAML 1.2 and keeps the checker dependency-free.",
   "required_fields": [
     "scene_id",
@@ -26,6 +26,7 @@
     "consequence_carrier",
     "space_or_procedure_anchors",
     "relationship_or_psychology_carrier",
+    "beat_refs",
     "character_state_refs",
     "research_refs"
   ],
@@ -34,7 +35,7 @@
     "research_status": ["ready", "not_applicable"],
     "story_decisions_open": ["no"],
     "narrative_weight": ["low", "medium", "high"],
-    "experience_status": ["human_reviewed_ready"]
+    "experience_status": ["pending_human_review", "human_reviewed_ready"]
   },
   "placeholder_tokens": [
     "<",
@@ -54,5 +55,5 @@
     "research_refs"
   ],
   "not_applicable_prefixes": ["n/a -", "none -", "not_applicable -"],
-  "principle": "The checker validates completeness and explicit dependency closure. It does not judge literary quality; final Scene Readiness remains a human gate."
+  "principle": "The checker validates completeness and explicit dependency closure before or after the bundled G2 human review. It does not judge literary quality and never creates approvals."
 }
