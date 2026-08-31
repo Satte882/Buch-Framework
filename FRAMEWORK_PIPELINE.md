@@ -33,9 +33,9 @@ Events liegen beim jeweiligen Baustein. Prosa liegt bei der konkreten Szene und 
 |---|---|---|---|
 | Konzept | `BOOK_IDEA.md` / Konzeptartefakt | **G0 – Konzept** | Prämisse, Leitfrage, Leser-Versprechen, zentrale Nicht-Ziele |
 | Story-Architektur | `STORY_PACKAGE.md`, vollständige Bausteine, vollständige Ereignisse/Sequenzen, Figurenkern, Rechercheabhängigkeiten | **G1 – Story-Architektur** | Gesamtkausalität, Konflikt, große Wendungen, Informationsarchitektur, Figurenkern |
-| Szenen-Architektur | vollständige Szenen, vollständige Beats, Character States, blockierende Rechercheentscheidungen | **G2 – Prose Ready** | ob beim Schreiben keine relevante Storyentscheidung mehr improvisiert werden muss |
-| Prosa-Stichprobe | repräsentativer Prosa-Batch aus G2-freigegebenen Szenen | **G3 – Prosa-Stil** | Stil, Rhythmus, Erlebnisdichte, sichtbare KI-Prosa-Muster |
-| Gesamtmanuskript | vollständige Prosa, Qualitätsreviews, Rework, Audit | **G4 – Manuskript** | inhaltliche und qualitative Gesamtfreigabe |
+| Szenen-Architektur | vollständige Szenen, vollständige Beats, Character States, blockierende Rechercheentscheidungen | **G2 – Prose Ready** | ob beim Schreiben keine relevante Storyentscheidung mehr improvisiert werden muss **und ob die Szenenfolge als Ganzes ausreichend unterschiedliche dramaturgische Träger besitzt** |
+| Prosa-Stichprobe | repräsentativer Prosa-Batch aus G2-freigegebenen Szenen | **G3 – Prosa-Stil** | Stil, Rhythmus, Erlebnisdichte, sichtbare KI-Prosa-Muster **auch über mehrere aufeinanderfolgende Szenen** |
+| Gesamtmanuskript | vollständige Prosa, Qualitätsreviews, Rework, Audit | **G4 – Manuskript** | inhaltliche und qualitative Gesamtfreigabe nach Review **und Adjudikation** |
 | Produktion | DOCX/PDF/KDP-/andere Produktionsausgaben | **G5 – Produktion** | konkreter finaler Produktionsstand |
 
 Jeder Human Gate erlaubt nur `APPROVE`, `REWORK` oder `STOP` und bezieht sich auf konkrete Artefaktstände.
@@ -66,6 +66,44 @@ Deterministische bzw. mechanische Checks dürfen prüfen:
 
 ChatGPT darf zusätzlich semantische Selbstprüfungen durchführen. Diese gelten **nicht als unabhängiger Review**. Inhaltliche Storyqualität wird im Human Gate und bei Bedarf durch einen bewusst entkoppelten Fresh-Context-/Red-Team-Review bewertet.
 
+## Whole-Book Scene-Shape vor G2
+
+Der ABWEICHUNG-Pilot hat gezeigt: Viele Szenen können einzeln korrekt und prose-ready sein, während ihre Summe monoton wirkt, weil zu viele Storyfunktionen über denselben dramaturgischen Träger erzählt werden.
+
+Deshalb gehört vor G2 zusätzlich ein **Whole-Book Scene-Shape Review** zur Szenen-Architektur.
+
+Für jede Szene wird im Review ein `Primary Dramatic Carrier` klassifiziert. Diese Klassifikation darf als nicht-kanonische Review-Projektion geführt werden; sie benötigt keine zusätzliche Pflichtdatei.
+
+Beispielklassen:
+
+- `clinical_action`
+- `resource_conflict`
+- `personal_confrontation`
+- `solo_analysis`
+- `data_review`
+- `governance_design`
+- `audit_investigation`
+- `relationship_scene`
+- `implementation_test`
+- `aftermath`
+
+Die konkrete Taxonomie ist zweitrangig. Entscheidend ist die Verteilung über das Buch.
+
+### Review-Heuristiken
+
+Folgende Werte sind **Warnsignale, keine automatischen Romanregeln**:
+
+- mehr als 2 direkt aufeinanderfolgende Szenen mit praktisch demselben Primary Carrier,
+- mehr als 4 Meeting-/Review-/Governance-/Data-Discussion-Szenen in einem Fenster von 8 Szenen,
+- mehrere neue Regel-/Governance-Stufen hintereinander, ohne dass Anwendung, Folge, Konflikt oder Beziehung dazwischen erlebbar wird,
+- wiederholt dieselbe Erkenntnismechanik über mehrere Szenen, obwohl die Storyinformation jeweils neu ist.
+
+Eine Überschreitung blockiert G2 nicht mathematisch. Sie verlangt eine bewusste Prüfung der Ermüdungs-/Redundanzwirkung. Nur ein belastbarer semantischer Befund führt zu `REWORK`.
+
+Zusätzliche G2-Frage:
+
+> **Ist die Szenenfolge als Leseerlebnis ausreichend variiert, oder wiederholt die Architektur über längere Strecken denselben dramaturgischen Träger?**
+
 ## Figuren und Recherche als Querschnitt
 
 Figuren und Recherche laufen über mehrere Entwicklungsebenen:
@@ -80,17 +118,66 @@ Austauschbare Oberflächendetails dürfen offen bleiben.
 
 Ein Human Gate ist eine **Freigabephase**, keine Pflicht zu einer einzigen riesigen Prüfsitzung.
 
-Bei vielen Szenen darf G2 in mehrere Review-Batches aufgeteilt werden. Nach den Teilreviews folgt ein Gesamtcheck und ein fachlicher G2-Abschluss. Es werden dafür keine künstlichen zusätzlichen Gate-Typen eingeführt.
+Bei vielen Szenen darf G2 in mehrere Review-Batches aufgeteilt werden. Nach den Teilreviews folgt ein Gesamtcheck und ein fachlicher G2-Abschluss. Dieser Gesamtcheck umfasst ausdrücklich auch die Scene-Shape-Verteilung über Batch-Grenzen hinweg. Es werden dafür keine künstlichen zusätzlichen Gate-Typen eingeführt.
 
 ## Prosa beginnt nach G2
 
 Systematische Prosaerzeugung startet erst, wenn die Szenen-/Beat-Architektur prose-ready ist.
 
-Verbindliche Gate-Frage:
+Verbindliche Gate-Fragen:
 
 > **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
 
-G3 prüft danach zunächst einen repräsentativen Prosa-Batch. Erst nach erfolgreicher Stil-/Prosa-Freigabe wird auf das vollständige Manuskript skaliert.
+und auf Whole-Book-Ebene:
+
+> **Sind die geplanten Szenenträger ausreichend variiert, damit nicht erst im Vollmanuskript eine strukturelle Monotonie sichtbar wird?**
+
+## G3 prüft Einzelstil und Sequenzrhythmus
+
+G3 darf nicht ausschließlich aus isolierten Vorzeigeszenen bestehen.
+
+Standard für längere Romane:
+
+- 2–3 repräsentative Einzelszenen für unterschiedliche Prosa-Anforderungen,
+- **zusätzlich ein zusammenhängender Mittelteil-Run von mindestens 6 aufeinanderfolgenden Szenen**.
+
+Der zusammenhängende Run prüft insbesondere:
+
+- Dialogrhythmus über Szenengrenzen,
+- Wiederholung von Meeting-/Review-Choreografien,
+- Expositionsdichte,
+- wiederkehrende Übergangs-/Schlussmechaniken,
+- Wechsel zwischen Handlung, Analyse, Beziehung und Konsequenz.
+
+Erst nach erfolgreicher G3-Freigabe wird auf das vollständige Manuskript skaliert.
+
+## Review ist Befundlieferung, Gate ist Entscheidung
+
+Ein Fresh-Context-/Red-Team-Review liefert unabhängige Findings, aber **keine unanfechtbare Gate-Entscheidung**.
+
+Nach jedem relevanten Review werden Findings dispositioniert:
+
+- Evidenz gegen den tatsächlich geprüften Target verifizieren,
+- Severity prüfen,
+- kleinste notwendige Rework-Ebene bestimmen,
+- widersprüchliche Reviews ausdrücklich adjudizieren,
+- bewusst akzeptierte Trade-offs dokumentieren.
+
+Nur **bestätigte** Blocker/Major-Findings blockieren den nächsten Human Gate. Ein Raw-Review-Urteil wie `REWORK_REQUIRED` darf nicht automatisch eine Rework-Schleife auslösen, wenn die zugrunde liegende Evidenz nicht trägt.
+
+## Backtracking und Stop-Regel
+
+Wenn eine tiefere Ebene eine bessere oder notwendige Storyänderung sichtbar macht, wird nicht downstream improvisiert. Die Änderung wandert zuerst zur kanonischen Upstream-Ebene, betroffene Ableitungen werden `stale`/`invalidated`, anschließend werden nur die betroffenen Freigabephasen erneut durchlaufen.
+
+Zusätzlich gilt aus dem ABWEICHUNG-Pilot:
+
+> `repeated manuscript-level major → inspect scene architecture → controlled G2 backtrack`
+
+Wenn nach einem reinen Prosa-Rework derselbe Scene-Repetition-/Pacing-Major erneut **bestätigt** wird, folgt kein weiterer bloßer Satzprosa-Pass auf unveränderter Szenenarchitektur.
+
+Umgekehrt gilt gegen Reviewer-Overfitting:
+
+> `raw finding → adjudicate evidence → rework only if confirmed`
 
 ## Source of Truth und Projektlayout
 
@@ -105,18 +192,14 @@ Globale Dateien wie `STORY_BLOCKS.md`, `EVENTS.md` und `BEATS.md` dürfen als **
 
 Historische M1/M2-Fixtures dürfen ihr flaches Layout behalten.
 
-## Backtracking
-
-Wenn eine tiefere Ebene eine bessere oder notwendige Storyänderung sichtbar macht, wird nicht downstream improvisiert. Die Änderung wandert zuerst zur kanonischen Upstream-Ebene, betroffene Ableitungen werden `stale`/`invalidated`, anschließend werden nur die betroffenen Freigabephasen erneut durchlaufen.
-
 ## Deterministischer v0.2-Checker
 
 `scripts/pipeline_check.py` und `config/pipeline_contract.yml` bilden weiterhin den mechanischen Pfad bis G2 ab. Historische Fixtures nutzen dafür die flachen Aggregatdateien. Neue hierarchische Buchprojekte dürfen kompatible globale Indexsichten bereitstellen, solange die fachliche Source of Truth in der Hierarchie bleibt.
 
-Der Checker bewertet keine Storyqualität und erzeugt keine Human-Entscheidung.
+Der Checker bewertet keine Storyqualität, keine Scene-Shape-Ermüdung und erzeugt keine Human-Entscheidung.
 
 Ein vollständiger mechanisch konsistenter G0→G2-Lauf endet mit `READY_FOR_PROSE`. Das bedeutet ausschließlich, dass die deterministischen Verträge erfüllt sind und ein menschliches G2-`APPROVE` als Record vorhanden ist.
 
 ## Leitregel
 
-> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Mehr interne Entwicklungstiefe, wenige Gates, Prosa zuletzt.**
+> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Mehr interne Entwicklungstiefe, wenige Gates, Prosa zuletzt – aber Whole-Book-Verteilung vor Skalierung prüfen.**
