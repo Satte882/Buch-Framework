@@ -65,6 +65,17 @@ Die vollständigen Regeln, einschließlich globaler Index-/Checker-Sichten, steh
 
 Bei langen Büchern darf ein Gate aus mehreren Review-Batches bestehen. Dadurch wird Review-Last portioniert, ohne künstlich neue Gate-Typen zu erzeugen.
 
+### Titel- und Kapitelbenennung vor G5
+
+Nach der inhaltlichen G4-Freigabe und vor dem finalen G5-Build wird das fertige Buch als Produkt benannt. Der verbindliche Ablauf steht in [`TITLE_AND_CHAPTER_NAMING.md`](TITLE_AND_CHAPTER_NAMING.md).
+
+Kernlogik:
+
+- Buchtitel, formaler Untertitel und Leitsatz/Tagline werden ausdrücklich getrennt.
+- interne Szenennamen sind nur Kandidaten für leserseitige Kapitelüberschriften.
+- Kapitel werden zuerst **lokal** treffend benannt und danach in einem **Whole-Book-Titelpass** als vollständige Folge auf Rhythmus, Wiederholung, Spoiler und dramaturgischen Verlauf optimiert.
+- dafür wird kein zusätzliches Human-Gate eingeführt; das freigegebene Titelpaket gehört zu G5.
+
 ## Whole-Book Scene-Shape vor G2
 
 Eine Szene kann einzeln prose-ready sein und trotzdem in einer monotonen Gesamtfolge liegen. Deshalb wird vor G2 die vollständige Szenenfolge zusätzlich nach ihrem dominanten **Primary Dramatic Carrier** betrachtet.
@@ -187,7 +198,8 @@ Vorhanden sind unter anderem:
 - Provenienz-/Invalidierungsprüfung,
 - Prosa-Audit,
 - Review-Templates,
-- Fresh-Context-Semantic-Review-Protokoll.
+- Fresh-Context-Semantic-Review-Protokoll,
+- Titel-/Untertitel-/Kapitelbenennungs-Workflow.
 
 Diese Technik dient dem Prozess. Sie darf die fachliche Ableitungshierarchie nicht umkehren.
 
