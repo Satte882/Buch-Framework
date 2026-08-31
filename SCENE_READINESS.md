@@ -8,15 +8,18 @@ Sie ist ab v0.2 Bestandteil von **G2 – Prose Ready** und kein eigener zusätzl
 
 Die verbindliche Arbeitsweise steht in `ARBEITSWEISE.md`:
 
-`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Beats → Szenenkarten → Prosa`
+`Thema/Buchidee → Bausteine → Ereignisse/Sequenzen → Szenen → Beats → Prosa`
 
-Die Beat-Ebene wird zuerst horizontal über das gesamte Buch ausreichend geschlossen; daraus werden anschließend Szenenkarten und Character States abgeleitet.
+Die Szenenlandschaft wird zuerst horizontal über das gesamte Buch geschlossen; anschließend werden die Beats innerhalb dieser Szenen ausreichend konkretisiert.
 
 ## Warum Scene Readiness relevant bleibt
 
-Scene Readiness soll einen zentralen Fehler aus der NORMALFALL-Entwicklung früher sichtbar machen: Eine Szene kann plot-funktional vollständig wirken und trotzdem noch relevante Entscheidungen offenlassen oder ihr narratives Gewicht nur als Zusammenfassung tragen.
+Scene Readiness soll zwei Fehlerklassen früh sichtbar machen:
 
-Die historische Begründung steht in der Ausbau-Matrix von `Satte882/Buch`, Commit `be6a8881f8cfd5ff79e9ce6730b9d58f680eec0c`: Nach bereits vollständiger Story lag das Manuskript bei 27.370 Wörtern; diagnostiziert wurde eine systematische Verdichtung auf Szenenebene und ein Ausbauplan von 49.630 Wörtern.
+1. Eine Szene wirkt plot-funktional vollständig, lässt aber noch relevante Entscheidungen offen oder trägt ihr narratives Gewicht nur als Zusammenfassung.
+2. Viele Szenen sind einzeln korrekt, verwenden aber über längere Strecken denselben dramaturgischen Träger und erzeugen dadurch erst im Vollmanuskript Monotonie.
+
+Der zweite Punkt wurde im Real-Pilot `Satte882/ABWEICHUNG` bestätigt: semantisch saubere Szenen und Beats bestanden lokale Reviews, während Whole-Manuscript-Reviews eine wiederkehrende Meeting-/Governance-Choreografie als Major sichtbar machten. Ein reiner Prosa-Rework reichte nicht; erst ein kontrollierter Scene-/Beat-Backtrack löste die Ursache.
 
 ## Was der Checker entscheidet – und was nicht
 
@@ -31,7 +34,8 @@ Der Checker entscheidet ausdrücklich **nicht**:
 - ob emotionale Wirkung ausreicht,
 - ob Dialog gut ist,
 - ob die geplante Länge passt,
-- ob die Szene literarisch „gut“ ist.
+- ob die Szene literarisch „gut“ ist,
+- ob die Verteilung der Szenenformen über das ganze Buch ermüdend wirkt.
 
 Eine semantische Selbstprüfung derselben KI ist ebenfalls kein unabhängiger Review.
 
@@ -40,9 +44,10 @@ Eine semantische Selbstprüfung derselben KI ist ebenfalls kein unabhängiger Re
 Vor einer G2-Freigabe müssen für die betroffenen Szenen mindestens vorhanden sein:
 
 1. G1-freigegebene Story-Architektur,
-2. ausreichende horizontale Beat-Abdeckung,
-3. szenenbezogene Character States,
-4. geschlossene Recherchefragen, die eine aktuelle Beat-/Szenen-/Informations-/Konsequenzentscheidung verändern können.
+2. vollständige Szenenlandschaft,
+3. ausreichende horizontale Beat-Abdeckung,
+4. szenenbezogene Character States, soweit im Projekt geführt,
+5. geschlossene Recherchefragen, die eine aktuelle Beat-/Szenen-/Informations-/Konsequenzentscheidung verändern können.
 
 Recherche ist nur dann blockierend, wenn sie gemäß `ARBEITSWEISE.md` tatsächlich eine jetzt zu treffende relevante Entscheidung verändern kann. Austauschbare Oberflächendetails dürfen offen bleiben.
 
@@ -59,7 +64,7 @@ Recherche ist nur dann blockierend, wenn sie gemäß `ARBEITSWEISE.md` tatsächl
 
 - Leserwissen vor/nach der Szene ist klar.
 - nicht zu verratende Informationen sind benannt oder begründet nicht relevant.
-- Character-State-Referenzen sind vorhanden.
+- Character-State-Referenzen sind vorhanden, falls das Projekt diese separat führt.
 
 ### 3. Recherche/Plausibilität
 
@@ -79,23 +84,63 @@ Die Szene muss nicht ausformuliert sein, aber die tragenden Romanebenen brauchen
 
 Nicht jede Dimension ist in jeder Szene relevant. `n/a` ist möglich, aber nur mit Begründung.
 
-## Gate-Frage
+## Whole-Book Scene-Shape Review
+
+Scene Readiness endet nicht mehr mit 40 isolierten Einzel-PASSes. Vor G2 wird die **gesamte Szenenfolge** zusätzlich als Verteilung betrachtet.
+
+### Primary Dramatic Carrier
+
+Jede Szene erhält für die Review-Sicht genau einen dominanten `Primary Dramatic Carrier`. Diese Klassifikation ist eine **nicht-kanonische Review-Projektion** und muss nicht als neue Pflichtdatei im Buchrepo gespeichert werden.
+
+Mögliche Carrier:
+
+- `clinical_action`
+- `resource_conflict`
+- `personal_confrontation`
+- `solo_analysis`
+- `data_review`
+- `governance_design`
+- `audit_investigation`
+- `relationship_scene`
+- `implementation_test`
+- `aftermath`
+
+Die Liste ist erweiterbar. Entscheidend ist nicht das Label, sondern die erkennbare dramaturgische Hauptform.
+
+### Verteilungsheuristiken
+
+Warnsignale:
+
+- mehr als **2 direkt aufeinanderfolgende Szenen** mit praktisch demselben Carrier,
+- in einem Fenster von **8 Szenen mehr als 4** mit Hauptform Meeting/Review/Governance/Data Discussion,
+- mehrere Regel-/Governance-Stufen hintereinander, ohne dass ihre Wirkung zunächst als Anwendung, Folge, Konflikt oder Beziehung erlebt wird,
+- wiederholt dieselbe Erkenntnismechanik wie `Daten/Regel → Prüfung → Gegenposition → Klärung`.
+
+Diese Werte sind **keine automatischen Blocker**. Ein Überschreiten verlangt nur eine bewusste semantische Prüfung:
+
+> Entsteht aus der Verteilung reale Ermüdung/Redundanz, oder ist die Wiederholung dramaturgisch begründet und in der konkreten Ausführung ausreichend verschieden?
+
+Nur ein belastbarer Befund führt zu `REWORK`.
+
+## G2-Gate-Fragen
+
+Ein G2-Review beantwortet künftig beide Fragen:
 
 > **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
 
-Wenn nein: `REWORK`.
+und:
 
-Wenn ja, prüft der Mensch zusätzlich:
+> **Ist die Szenenfolge als Leseerlebnis ausreichend variiert, oder wiederholt die Architektur über längere Strecken denselben dramaturgischen Träger?**
 
-> **Ist das dramaturgische Gewicht der Szene ausreichend als erlebbare Handlung geplant – oder besteht die Gefahr, dass die Prosa nur Plot zusammenfasst?**
+Wenn eine relevante Storyentscheidung offen ist: `REWORK`.
 
-Diese zweite Frage ist absichtlich nicht automatisiert.
+Wenn die Whole-Book-Verteilung einen bestätigten strukturellen Major zeigt: ebenfalls `REWORK`.
 
 ## G2-Batching
 
 Bei einem kleinen M1-Testfall können alle Szenenkarten gemeinsam geprüft werden. Bei einem langen Roman darf G2 in mehrere Review-Batches aufgeteilt werden.
 
-Das erzeugt keine neuen Gate-Typen. Nach den Teilreviews folgt ein Gesamtcheck und ein fachlicher G2-Abschluss.
+Das erzeugt keine neuen Gate-Typen. Nach den Teilreviews folgt zwingend ein **Gesamtcheck über alle Batch-Grenzen hinweg**, inklusive Scene-Shape-Verteilung.
 
 ---
 
@@ -128,11 +173,15 @@ Der letzte Fall bleibt absichtlich im Korpus. Er zeigt eine Grenze:
 
 > **Scene Readiness kann verhindern, dass unfertige Storyentscheidungen in Prosa wandern. Es kann nicht garantieren, dass eine fertig geplante Szene in der ersten Prosa-Fassung bereits ihr volles narratives Gewicht erhält.**
 
-Daraus folgt kein neues Wortzahl-Gate. Die spätere **G3-Prosa-Stil-Freigabe** muss Gewicht/Pacing anhand echten Texts prüfen.
+ABWEICHUNG ergänzt eine zweite Grenze:
+
+> **Lokale Scene Readiness garantiert nicht automatisch eine gute Whole-Book-Verteilung der Szenenformen.**
+
+Daraus folgt kein neues Wortzahl- oder automatisches Scene-Shape-Gate. G2 muss den Whole-Book-Verlauf semantisch prüfen; G3 testet anschließend echten Sequenzrhythmus in Prosa.
 
 ## Keine nachträgliche Schönkalibrierung
 
-Die Kriterien werden nicht so erweitert, dass Kapitel 40 rückwirkend künstlich zum BLOCK wird. Neue Kriterien dürfen nur entstehen, wenn mehrere echte Fälle denselben vermeidbaren Fehler zeigen und die Regel zukünftige Arbeit besser macht, statt nur den historischen Datensatz perfekt zu erklären.
+Die Kriterien werden nicht so erweitert, dass historische Fälle rückwirkend künstlich zum BLOCK werden. Neue Kriterien dürfen nur entstehen, wenn echte Projektverläufe denselben vermeidbaren Fehler zeigen und die Regel zukünftige Arbeit besser macht, statt nur einen Datensatz perfekt zu erklären.
 
 ## Nutzung
 
