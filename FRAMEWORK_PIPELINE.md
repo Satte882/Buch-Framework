@@ -35,7 +35,7 @@ Events liegen beim jeweiligen Baustein. Prosa liegt bei der konkreten Szene und 
 | Story-Architektur | `STORY_PACKAGE.md`, vollständige Bausteine, vollständige Ereignisse/Sequenzen, Figurenkern, Rechercheabhängigkeiten | **G1 – Story-Architektur** | Gesamtkausalität, Konflikt, große Wendungen, Informationsarchitektur, Figurenkern |
 | Szenen-Architektur | vollständige Szenen, vollständige Beats, Character States, blockierende Rechercheentscheidungen | **G2 – Prose Ready** | ob beim Schreiben keine relevante Storyentscheidung mehr improvisiert werden muss **und ob die Szenenfolge als Ganzes ausreichend unterschiedliche dramaturgische Träger besitzt** |
 | Prosa-Stichprobe | repräsentativer Prosa-Batch aus G2-freigegebenen Szenen | **G3 – Prosa-Stil** | Stil, Rhythmus, Erlebnisdichte, sichtbare KI-Prosa-Muster **auch über mehrere aufeinanderfolgende Szenen** |
-| Gesamtmanuskript | vollständige Prosa, Qualitätsreviews, Rework, Audit | **G4 – Manuskript** | inhaltliche und qualitative Gesamtfreigabe nach Review **und Adjudikation** |
+| Gesamtmanuskript | vollständige Prosa, Qualitätsreviews, Rework, Adjudikation, **finaler horizontaler Prosa-/Rhythmuspass**, Regression/Fresh-Context-Check | **G4 – Manuskript** | inhaltliche und qualitative Gesamtfreigabe des tatsächlich finalisierten Manuskript-Snapshots |
 | Produktion | DOCX/PDF/KDP-/andere Produktionsausgaben | **G5 – Produktion** | konkreter finaler Produktionsstand |
 
 Jeder Human Gate erlaubt nur `APPROVE`, `REWORK` oder `STOP` und bezieht sich auf konkrete Artefaktstände.
@@ -48,7 +48,8 @@ Standardmäßig gibt es **keinen** separaten Human Gate zwischen:
 - Ereignissen/Sequenzen und Szenen,
 - Szenen und Beats,
 - globaler Figurenarbeit und szenenspezifischen Character States,
-- dem Erfassen und Bearbeiten einzelner Recherchefragen.
+- dem Erfassen und Bearbeiten einzelner Recherchefragen,
+- Gesamtmanuskript-Review und finalem Prosa-/Rhythmuspass.
 
 Diese Zwischenstufen werden durch Arbeitskontrollen begleitet und gemeinsam im nächsten fachlich sinnvollen Gate bewertet.
 
@@ -151,6 +152,23 @@ Der zusammenhängende Run prüft insbesondere:
 
 Erst nach erfolgreicher G3-Freigabe wird auf das vollständige Manuskript skaliert.
 
+## G4 endet mit einem finalen horizontalen Prosa-/Rhythmuspass
+
+Ein erfolgreicher Gesamtmanuskript-Review allein garantiert noch nicht, dass die sprachliche Oberfläche frei von über das Buch verteilten Produktionsformeln ist. `NORMALFALL` hat gezeigt, dass genau am Ende noch wiederkehrende Satzbau-, Dialog- und Erklärmuster sichtbar werden können, obwohl jede Einzelstelle lokal funktioniert.
+
+Deshalb ist vor dem finalen G4-Freeze der Ablauf aus [`FINAL_PROSE_RHYTHM_PASS.md`](FINAL_PROSE_RHYTHM_PASS.md) verbindlich:
+
+1. Baseline-Audit des vollständigen Manuskripts;
+2. horizontale semantische Prüfung von Dialog-Pingpong, Stakkato, Kontrast-/Negationsmustern, Erklär-Echos, Filterformulierungen, Mikro-Choreografie, Methodik-/Beweisführungsprosa und Symmetrie;
+3. chirurgisches, kontextuelles Rework ohne stille Storyänderung;
+4. Regression gegen Szenenfolge, Story-Anker und Hard Guards;
+5. Fresh-Context-Lesecheck von Opening, zusammenhängendem Mittelteil und Finale/Nachhall;
+6. erst dann G4-Freeze auf den neuen Manuskript-Snapshot.
+
+Für `de_anti_ki_prosa_v1` sind insbesondere `sondern = 0` und `— = 0` deterministische Hard Guards.
+
+Der Pass ist **kein neues Gate**. Er schließt die Qualitätsarbeit innerhalb von G4 ab.
+
 ## Review ist Befundlieferung, Gate ist Entscheidung
 
 Ein Fresh-Context-/Red-Team-Review liefert unabhängige Findings, aber **keine unanfechtbare Gate-Entscheidung**.
@@ -179,6 +197,18 @@ Umgekehrt gilt gegen Reviewer-Overfitting:
 
 > `raw finding → adjudicate evidence → rework only if confirmed`
 
+### Reines Prosa-Rework nach G4/G5
+
+Wird nach einer G4- oder G5-Freigabe ein relevantes Problem ausschließlich in Satzbau, Rhythmus, Dialogtakt oder anderer Prosaoberfläche bestätigt, gilt:
+
+- G2/G3 bleiben gültig, solange Story-, Szenen- und Beat-Architektur unangetastet bleiben;
+- G4 wird für den neuen Manuskript-Snapshot wieder geöffnet;
+- vorhandene G5-Artefakte werden `stale`;
+- nach bestandenem finalem Prosa-/Rhythmuspass und Regression wird G4 erneut menschlich freigegeben;
+- G5 wird anschließend deterministisch aus genau diesem neuen G4-Snapshot neu gebaut.
+
+Damit wird weder unnötig bis zur Storyarchitektur zurückgesprungen noch ein veraltetes Produktionsartefakt fälschlich als final geführt.
+
 ## Source of Truth und Projektlayout
 
 Für neue echte Buchprojekte gilt `PROJECT_STRUCTURE.md`:
@@ -189,6 +219,8 @@ Für neue echte Buchprojekte gilt `PROJECT_STRUCTURE.md`:
 - Beats/Character States/Prosa unter der zugehörigen Szene.
 
 Globale Dateien wie `STORY_BLOCKS.md`, `EVENTS.md` und `BEATS.md` dürfen als **abgeleitete Index-/Checker-Sichten** existieren. Sie sind in hierarchischen Projekten keine zweite fachliche Source of Truth.
+
+Für den finalen Prosa-/Rhythmuspass gilt entsprechend: Änderungen erfolgen zuerst in den szenenspezifischen `PROSA.md`-Quellen; ein konsolidiertes Manuskript wird danach neu erzeugt.
 
 Historische M1/M2-Fixtures dürfen ihr flaches Layout behalten.
 
@@ -202,4 +234,4 @@ Ein vollständiger mechanisch konsistenter G0→G2-Lauf endet mit `READY_FOR_PRO
 
 ## Leitregel
 
-> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Mehr interne Entwicklungstiefe, wenige Gates, Prosa zuletzt – aber Whole-Book-Verteilung vor Skalierung prüfen.**
+> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Mehr interne Entwicklungstiefe, wenige Gates, Prosa zuletzt – aber Whole-Book-Verteilung und finale Prosaoberfläche horizontal prüfen.**
