@@ -20,6 +20,10 @@ Dabei gilt:
 
 > **Vom Groben ins Feine, horizontal über das ganze Buch, Prosa zuletzt.**
 
+Aus dem Real-Pilot `ABWEICHUNG` gilt zusätzlich:
+
+> **Whole-Book-Muster vor Vollprosa prüfen; Raw-Reviews vor Rework adjudizieren.**
+
 ## Verbindliche Projektstruktur
 
 Neue echte Buchprojekte werden nicht mit parallelen Top-Level-Ordnern für jede Planungsebene aufgebaut. Die Ordnerhierarchie folgt der fachlichen Ableitung:
@@ -54,12 +58,69 @@ Die vollständigen Regeln, einschließlich globaler Index-/Checker-Sichten, steh
 
 1. **G0 – Konzept**
 2. **G1 – Story-Architektur**: Story Package + alle Bausteine + alle Ereignisse/Sequenzen + Figurenkern + relevante Rechercheabhängigkeiten
-3. **G2 – Prose Ready**: vollständige Szenenlandschaft + Beats + Character States + blockierende Recherche
-4. **G3 – Prosa-Stil**: repräsentativer Prosa-Batch
-5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit
+3. **G2 – Prose Ready**: vollständige Szenenlandschaft + Beats + Character States + blockierende Recherche **+ Whole-Book Scene-Shape Review**
+4. **G3 – Prosa-Stil**: 2–3 repräsentative Einzelszenen **+ zusammenhängender Mittelteil-Run von mindestens 6 Szenen**
+5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit + unabhängige Reviews **+ Finding-Adjudikation**
 6. **G5 – Produktion**: konkretes Produktionsartefakt
 
 Bei langen Büchern darf ein Gate aus mehreren Review-Batches bestehen. Dadurch wird Review-Last portioniert, ohne künstlich neue Gate-Typen zu erzeugen.
+
+## Whole-Book Scene-Shape vor G2
+
+Eine Szene kann einzeln prose-ready sein und trotzdem in einer monotonen Gesamtfolge liegen. Deshalb wird vor G2 die vollständige Szenenfolge zusätzlich nach ihrem dominanten **Primary Dramatic Carrier** betrachtet.
+
+Beispiele:
+
+- clinical_action
+- personal_confrontation
+- solo_analysis
+- data_review
+- governance_design
+- audit_investigation
+- relationship_scene
+- implementation_test
+- aftermath
+- resource_conflict
+
+Die Klassifikation ist eine **Review-Projektion**, keine neue kanonische Pflichtdatei.
+
+Warnsignale wie mehr als zwei gleiche Carrier hintereinander oder eine starke Häufung von Meeting-/Review-/Governance-Szenen lösen **keinen automatischen Blocker** aus. Sie verlangen eine semantische Prüfung der konkreten Ermüdungs-/Redundanzwirkung.
+
+Details: [`SCENE_READINESS.md`](SCENE_READINESS.md) und [`REVIEW_TEMPLATE.md`](REVIEW_TEMPLATE.md).
+
+## G3 prüft auch Sequenzrhythmus
+
+Drei isolierte Vorzeigeszenen können manuskriptweite Wiederholungsmuster übersehen.
+
+Deshalb liest G3 bei längeren Romanen zusätzlich einen **zusammenhängenden Mittelteil-Run von mindestens 6 Szenen** und prüft dort unter anderem:
+
+- Dialogrhythmus über Szenengrenzen,
+- wiederkehrende Szenenchoreografie,
+- Expositionsdichte,
+- Übergangs-/Schlussmechaniken,
+- Verhältnis von Handlung, Analyse, Beziehung und Konsequenz.
+
+## Review-Adjudikation
+
+Ein Fresh-Context-/Red-Team-Review ist ein **Befundlieferant**, kein automatischer Gate-Entscheider.
+
+Nach dem Review werden Findings gegen den tatsächlich geprüften Target adjudiziert:
+
+- Evidenz stimmt?
+- Severity trägt?
+- kleinste Rework-Ebene korrekt?
+- Widerspruch zu spezifischerem Review?
+- bewusster Trade-off oder echter Fehler?
+
+Nur **bestätigte** Blocker/Major-Findings blockieren den nächsten Human Gate.
+
+Stop-Regeln:
+
+`repeated manuscript-level major → inspect scene architecture → controlled G2 backtrack`
+
+`raw finding → adjudicate evidence → rework only if confirmed`
+
+Details: [`SEMANTIC_REVIEW_PROTOCOL.md`](SEMANTIC_REVIEW_PROTOCOL.md).
 
 ## Betriebsmodell
 
@@ -115,6 +176,8 @@ Eine offene Recherchefrage blockiert nur dann, wenn ihre Antwort eine **aktuell 
 Systematische Prosa beginnt erst nach G2. Die zentrale Prose-Readiness-Frage lautet:
 
 > **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
+
+Zusätzlich muss die Szenenfolge auf Whole-Book-Ebene ausreichend variiert sein.
 
 ## Bestehende technische Bausteine
 
