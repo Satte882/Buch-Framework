@@ -52,9 +52,9 @@ Für v0.x gelten sechs Freigabephasen:
 |---|---|---|
 | **G0 – Konzept** | Thema, Prämisse, Leitfrage, Leser-Versprechen, zentrale Nicht-Ziele | Buchidee / Konzept |
 | **G1 – Story-Architektur** | ob die Gesamtgeschichte trägt | Story Package, alle Bausteine, alle Ereignisse/Sequenzen, Figurenkern, relevante Rechercheabhängigkeiten |
-| **G2 – Prose Ready** | ob die Geschichte vollständig genug für Prosa geplant ist | alle Szenen, alle Beats, Character States, für diese Planung blockierende Recherche |
-| **G3 – Prosa-Stil** | ob ein repräsentativer Prosa-Batch sprachlich und erzählerisch trägt | Prosa-Stichprobe aus G2-freigegebenen Szenen |
-| **G4 – Manuskript** | ob das Gesamtmanuskript inhaltlich und qualitativ abgenommen wird | vollständige Prosa, Reviews, Rework, Qualitätsprüfungen |
+| **G2 – Prose Ready** | ob die Geschichte vollständig genug für Prosa geplant ist **und die Szenenfolge als Ganzes ausreichend variiert** | alle Szenen, alle Beats, Character States, für diese Planung blockierende Recherche, Whole-Book Scene-Shape Review |
+| **G3 – Prosa-Stil** | ob der Prosaansatz sprachlich und erzählerisch trägt | repräsentative Einzelszenen **plus zusammenhängender Mittelteil-Run** aus G2-freigegebenen Szenen |
+| **G4 – Manuskript** | ob das Gesamtmanuskript inhaltlich und qualitativ abgenommen wird | vollständige Prosa, Reviews, Rework, Qualitätsprüfungen, Finding-Adjudikation |
 | **G5 – Produktion** | ob das konkrete Produktionsartefakt freigegeben wird | DOCX/PDF/KDP- bzw. andere Produktionsausgaben |
 
 Zwischen **Bausteinen → Ereignissen/Sequenzen**, **Ereignissen → Szenen** und **Szenen → Beats** gibt es standardmäßig keinen separaten Human Gate.
@@ -118,17 +118,86 @@ Bei einem Roman mit vielen Szenen darf G2 beispielsweise in mehrere Review-Batch
 
 Dadurch steigt die Review-Ergonomie, ohne künstlich `G2a`, `G2b`, `G2c` als neue Prozessgates einzuführen.
 
-## 7. Prosa beginnt zuletzt
+**Wichtig:** Der Abschlusscheck darf nicht nur die Batch-Ergebnisse addieren. Er muss die vollständige Szenenfolge über Batch-Grenzen hinweg betrachten und insbesondere die Verteilung der dramaturgischen Träger prüfen.
 
-Prosa wird systematisch erst erzeugt, wenn G2 bestätigt hat, dass die relevanten Szenen inklusive Beats, Character States und blockierender Recherche prose-ready sind.
+## 7. G2 prüft zusätzlich die Scene-Shape-Verteilung
 
-Gate-Frage:
+Der Real-Pilot ABWEICHUNG hat gezeigt, dass lokale Korrektheit keine ausreichende Whole-Book-Variation garantiert.
+
+Deshalb wird für G2 jede Szene in der Review-Sicht einem dominanten `Primary Dramatic Carrier` zugeordnet, z. B.:
+
+- klinische Handlung,
+- Ressourcenkonflikt,
+- persönliche Konfrontation,
+- Solo-Analyse,
+- Datenreview,
+- Governance-/Regeldesign,
+- Audit/Investigation,
+- Beziehungsszene,
+- Implementationstest,
+- Nachhall.
+
+Die Klassifikation ist eine **Review-Projektion**, keine neue kanonische Storydatei.
+
+Warnsignale, nicht automatische Blocker:
+
+- mehr als 2 direkt aufeinanderfolgende Szenen mit praktisch demselben Carrier,
+- mehr als 4 Meeting-/Review-/Governance-/Data-Szenen in 8 aufeinanderfolgenden Szenen,
+- mehrere Regel-/Governance-Stufen ohne erlebte Anwendung/Folge/Konflikt dazwischen,
+- wiederholt dieselbe Erkenntnismechanik über mehrere Szenen.
+
+G2 fragt deshalb zusätzlich:
+
+> **Ist die Szenenfolge als Leseerlebnis ausreichend variiert, oder wiederholt die Architektur über längere Strecken denselben dramaturgischen Träger?**
+
+Ein Zählwert allein erzeugt kein `REWORK`. Entscheidend ist die konkrete Ermüdungs-/Redundanzwirkung.
+
+## 8. Prosa beginnt zuletzt
+
+Prosa wird systematisch erst erzeugt, wenn G2 bestätigt hat, dass die relevanten Szenen inklusive Beats, Character States und blockierender Recherche prose-ready sind und kein bestätigter Whole-Book-Scene-Shape-Major offen ist.
+
+Gate-Frage auf Szenenebene:
 
 > **Könnte ein Autor diese Szene jetzt schreiben, ohne dabei noch eine relevante Plot-, Figuren-, Recherche-, Informations- oder Konsequenzentscheidung erfinden zu müssen?**
 
-Ein repräsentativer Prosa-Batch testet anschließend früh Stil, Rhythmus, Erlebnisdichte und sichtbare KI-Muster. Erst nach G3 wird auf den vollständigen Prosaumfang skaliert.
+Ein repräsentativer Prosa-Batch testet anschließend früh Stil, Rhythmus, Erlebnisdichte und sichtbare KI-Muster.
 
-## 8. Backtracking bleibt erlaubt
+### G3-Sample
+
+Für längere Romane umfasst G3 standardmäßig:
+
+1. 2–3 repräsentative Einzelszenen mit unterschiedlichen Anforderungen,
+2. zusätzlich einen **zusammenhängenden Mittelteil-Run von mindestens 6 aufeinanderfolgenden Szenen**.
+
+Der Mittelteil-Run soll Muster erkennen, die in isolierten Szenen unsichtbar bleiben:
+
+- Dialogrhythmus über Szenengrenzen,
+- wiederkehrende Meeting-/Review-Choreografie,
+- Expositionsdichte,
+- Übergangs- und Schlussmechaniken,
+- Verhältnis von Handlung, Analyse, Beziehung und Konsequenz.
+
+Erst nach G3 wird auf den vollständigen Prosaumfang skaliert.
+
+## 9. Review-Befund und Gate-Entscheidung trennen
+
+Ein Fresh-Context-/Red-Team-Review ist ein **Befundlieferant**, kein automatischer Entscheider.
+
+Nach dem Blind-Review wird jeder relevante Befund im regulären Arbeitskontext dispositioniert:
+
+- passt die Evidenz tatsächlich zum geprüften Target?
+- ist die Severity belastbar?
+- ist der Befund neu, bereits behoben, akzeptierter Trade-off oder False Positive?
+- welche kleinste Rework-Ebene wäre nötig?
+- widerspricht ein anderer unabhängiger Review mit spezifischerer Prüfung?
+
+Nur bestätigte Blocker/Major-Findings blockieren das nächste Human Gate.
+
+Das Raw-Urteil eines Reviewers bleibt dokumentiert, darf aber nach evidenzbasierter Adjudikation zurückgewiesen oder herabgestuft werden.
+
+> **Review liefert Befunde. Der Prozess entscheidet über ihre Konsequenz.**
+
+## 10. Backtracking bleibt erlaubt
 
 Die Reihenfolge ist kein Wasserfall-Verbot für Lernen.
 
@@ -142,7 +211,23 @@ Wenn eine tiefere Ebene einen echten Storyfehler sichtbar macht:
 
 > **Die Planung darf sich verbessern. Die Prosa darf sie nicht heimlich überschreiben.**
 
-## 9. KISS-Regel für Freigaben
+### Stop-Regel gegen Prosa-Endlosschleifen
+
+Wenn ein unabhängiger Vollmanuskript-Review nach einem reinen Prosa-Rework **denselben Scene-Repetition-/Pacing-Major erneut meldet und dieser bestätigt wird**:
+
+`repeated manuscript-level major → inspect scene architecture → controlled G2 backtrack`
+
+Kein weiterer bloßer Satzprosa-Pass auf unveränderter Szenenarchitektur.
+
+### Stop-Regel gegen Reviewer-Overfitting
+
+Wenn ein neuer Raw-Major bekannte oder strukturell bereits veränderte Szenen falsch klassifiziert oder einem spezifischeren bestandenen Review widerspricht:
+
+`raw finding → adjudicate evidence → rework only if confirmed`
+
+Kein automatischer Rework nur deshalb, weil ein Reviewer `REWORK_REQUIRED` ausgibt.
+
+## 11. KISS-Regel für Freigaben
 
 Vor einem zusätzlichen Human Gate muss die Frage beantwortet werden:
 
@@ -152,4 +237,4 @@ Gibt es darauf keine klare Antwort, wird kein neuer Gate eingeführt.
 
 ## Leitformel
 
-> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Vom Großen ins Kleine, horizontal über das ganze Buch, Prosa zuletzt.**
+> **Meta → Bausteine → Events → Szenen → Beats → Prosa. Vom Großen ins Kleine, horizontal über das ganze Buch, Prosa zuletzt – und Whole-Book-Muster vor Skalierung prüfen.**
