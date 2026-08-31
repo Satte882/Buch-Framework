@@ -2,34 +2,57 @@
 
 ## Zweck
 
-Dieses Protokoll definiert einen reproduzierbaren, bewusst **vom Erzeugungskontext getrennten** Review für Story-/Szenen-/Prosa-Artefakte.
+Dieses Protokoll definiert einen reproduzierbaren semantischen Review für Story-/Szenen-/Prosa-Artefakte.
 
 Es ist keine automatische Qualitätssicherung, kein Score und kein Ersatz für Human Gates.
 
-Ziel ist ausschließlich:
+Ziel ist:
 
-> Kann ein entkoppelter Reviewer auf Basis der kanonischen Quellen konkrete semantische Fehler oder Drift finden, die anschließend menschlich bzw. im regulären Arbeitskontext dispositioniert werden können?
+> Kann ein Reviewer auf Basis eines fixierten Zielstands und klar definierter kanonischer Quellen konkrete semantische Fehler, Drift oder belastbare Whole-Manuscript-Risiken finden, die anschließend menschlich dispositioniert werden können?
 
-Der Real-Pilot `Satte882/ABWEICHUNG` hat zwei zusätzliche Anforderungen bestätigt:
+Der Real-Pilot `Satte882/ABWEICHUNG` hat drei Anforderungen bestätigt:
 
 1. Whole-Manuscript-Reviews müssen Muster **über Szenengrenzen hinweg** beurteilen können.
 2. Ein Raw-Review ist ein Befundlieferant, keine unanfechtbare Gate-Entscheidung. Findings brauchen Adjudikation.
+3. Für produktive Buch-Gates ist ein vollständig kontextfreier Reviewer nicht nötig und erzeugt unnötige operative Hürden. Entscheidend ist **Evidenzdisziplin**, nicht Gedächtnislosigkeit.
 
-## 1. Was „unabhängig“ hier bedeutet
+## 1. Zwei Review-Modi
 
-Ein Review zählt nur dann als unabhängiger Test, wenn der Reviewer **nicht** erhält:
+### A. `EVIDENCE_BOUND_REVIEW` – Standard für produktive Buch-Gates
+
+Dieser Modus ist der Standard für G1–G5-nahe semantische Reviews und Re-Reviews.
+
+Vorwissen über das Buch, frühere Diskussionen oder bekannte Schwachstellen **darf vorhanden sein**. Das Review bleibt gültig, solange folgende Regeln eingehalten werden:
+
+- Bewertet wird ausschließlich der explizit fixierte Zielstand.
+- Jedes Finding muss **neu aus dem Zielstand hergeleitet** werden.
+- Jedes Finding muss mit kanonischer Evidenz aus den für den Auftrag zugelassenen Quellen belegbar sein.
+- Frühere Findings, Reviews, Diffs, Chat-Erinnerungen oder Lessons Learned dürfen **nicht als Beweis** für ein aktuelles Finding verwendet werden.
+- Ein früher bekanntes Problem darf erneut gefunden werden, aber nur dann zählen, wenn es im Zielstand tatsächlich noch vorhanden und dort konkret belegbar ist.
+- Ein früher bekanntes Problem, das im Zielstand nicht mehr nachweisbar ist, ist kein Finding.
+
+Damit gilt:
+
+> Vorwissen ist zulässig. Fremde oder historische Evidenz ist es nicht.
+
+Ein versehentlich eingesehener früherer Review macht einen produktiven Review **nicht** ungültig. Der Reviewer ignoriert diesen Input als Evidenz und prüft die Frage erneut am Zielstand.
+
+### B. `CLEAN_FRESH_CONTEXT` – optionaler Blind-/Holdout-Modus
+
+Dieser strengere Modus wird nur verwendet, wenn ausdrücklich ein **Methodentest, Benchmark oder Holdout** durchgeführt werden soll.
+
+Dann erhält der Reviewer nicht:
 
 - den Erzeugungsdialog,
-- Chain-of-Thought oder interne Erzeugungsbegründungen,
 - frühere semantische Review-Befunde,
-- bereits bekannte Korrekturlisten,
+- bekannte Korrekturlisten,
 - Diffs zwischen fehlerhaftem und korrigiertem Stand,
 - Abschlussberichte, die bekannte Fehler nennen,
-- Issue-Kommentare mit Review-Ergebnissen.
+- Issue-/PR-Kommentare mit Review-Ergebnissen.
 
-Erlaubt sind ausschließlich die vorher festgelegten **kanonischen Quellen**, der zu prüfende Zielstand und dieses Review-Protokoll bzw. ein daraus abgeleiteter Review-Auftrag.
+Nur in diesem Modus gilt: Wenn verbotener Benchmark-Kontext vorab bekannt wird, kann der Test als `CONTAMINATED` markiert werden.
 
-Ein neuer Chat allein genügt nicht, wenn ihm bekannte Findings oder Diffs wieder mitgegeben werden.
+`CONTAMINATED` ist damit **kein regulärer Produktionsstatus**, sondern ausschließlich ein Integritätsstatus für echte Blind-/Holdout-Experimente.
 
 ## 2. Zulässige Inputs
 
@@ -47,18 +70,22 @@ Bei einem **Whole-Manuscript-Review** muss die vollständige Prosa in narrativer
 
 Der Reviewer darf fehlende Quellen melden, aber nicht still durch allgemeines Wissen oder Vermutungen ersetzen.
 
-## 3. Verbotene Inputs
+## 3. Evidenzhygiene
 
-Für einen Blind-/Holdout-Test insbesondere nicht lesen:
+### Im produktiven Modus
 
-- frühere `SEMANTIC_*_REVIEW.md`-Dateien,
-- Completion Reports mit bekannten Befunden,
-- spätere korrigierte Versionen des Zielartefakts,
-- Git-Diffs zum korrigierten Stand,
-- Issue-/Chat-Historie des Erzeugungslaufs,
-- Lessons-Learned-Dateien, die bekannte Fehler des Zielstands verraten.
+Frühere Review-Dateien, Completion Reports, Diffs, Issue-/Chat-Historie oder Lessons Learned sind **keine zulässige Finding-Evidenz**.
 
-Wenn ein verbotener Input versehentlich eingesehen wurde, ist der Test als `CONTAMINATED` zu markieren und darf nicht als unabhängige Validierung zählen.
+Falls solche Informationen bereits bekannt sind oder versehentlich gesehen wurden:
+
+1. Review nicht abbrechen.
+2. Die Information nicht als Beweis verwenden.
+3. Das vermutete Problem ausschließlich am fixierten Zielstand neu prüfen.
+4. Finding nur aufnehmen, wenn der Zielstand selbst ausreichende Evidenz liefert.
+
+### Im Blind-/Holdout-Modus
+
+Für einen ausdrücklich als Holdout definierten Test gelten die im jeweiligen Auftrag genannten verbotenen Quellen weiterhin strikt. Ein Verstoß kann dort `CONTAMINATED` auslösen, weil sonst die Benchmark-Aussage beschädigt wäre.
 
 ## 4. Review-Fragen
 
@@ -110,7 +137,8 @@ Nicht als Finding zählen:
 - neue Twists oder Figurenideen,
 - Optimierungen ohne konkretes Problem,
 - bereits bewusst akzeptierte Trade-offs, sofern die zugelassenen Quellen dies zeigen,
-- bloße Zählwerte ohne nachvollziehbare literarische/strukturelle Wirkung.
+- bloße Zählwerte ohne nachvollziehbare literarische/strukturelle Wirkung,
+- ein Problem nur deshalb, weil es aus einem früheren Review bekannt ist.
 
 ## 6. Finding-Schema
 
@@ -131,7 +159,7 @@ Keine Rewrite-Lösung im Review selbst.
 
 ## 7. Human-Disposition / Adjudikation danach
 
-Erst nach Abschluss des Blind-Reviews wird jeder Befund im regulären Arbeitskontext dispositioniert.
+Erst nach Abschluss des Reviews wird jeder Befund im regulären Arbeitskontext dispositioniert.
 
 ```text
 disposition: confirmed | rejected | duplicate_known | accepted_tradeoff | needs_more_evidence
@@ -145,7 +173,7 @@ Die Adjudikation prüft mindestens:
 1. **Target-Evidenz:** Beschreibt das Finding den tatsächlich geprüften Stand korrekt?
 2. **Severity:** Trägt die angeführte Evidenz wirklich `major/blocker`, oder nur ein Minor-/Restrisiko?
 3. **Rework-Ebene:** Ist die empfohlene Ebene die kleinste sinnvolle?
-4. **Review-Konflikt:** Widerspricht das Finding einem anderen unabhängigen Review, der dieselbe Frage spezifischer geprüft hat?
+4. **Review-Konflikt:** Widerspricht das Finding einem anderen Review, der dieselbe Frage spezifischer geprüft hat?
 5. **Trade-off:** Ist die Häufung/Entscheidung bewusst und für das konkrete Buch vertretbar?
 
 Der Reviewer darf seine eigenen Befunde nicht selbst als „bestätigt“ deklarieren.
@@ -166,7 +194,7 @@ Kein weiterer bloßer Satzprosa-Pass auf unveränderter Szenenarchitektur.
 
 ### Reviewer-Overfitting
 
-Wenn ein Raw-Major seine eigene Evidenz falsch klassifiziert, bereits strukturell veränderte Szenen als unverändert beschreibt oder einem spezifischeren bestandenen unabhängigen Review widerspricht:
+Wenn ein Raw-Major seine eigene Evidenz falsch klassifiziert, bereits strukturell veränderte Szenen als unverändert beschreibt oder einem spezifischeren bestandenen Review widerspricht:
 
 `raw finding → adjudicate evidence → rework only if confirmed`
 
@@ -174,28 +202,36 @@ Kein automatischer Rework nur aufgrund eines neuen Reviewer-Labels.
 
 ## 9. Validierungsmetrik
 
-Für einen Holdout mit historisch bekannten Fehlern wird **erst nach Abgabe des Blind-Reviews** verglichen:
+Für einen **Holdout mit historisch bekannten Fehlern** wird erst nach Abgabe des Blind-Reviews verglichen:
 
 - bekannte historische Fehlergruppen gefunden: n / N
 - zusätzliche neue Findings: n
 - davon nach Human-Disposition bestätigt: n
 - False Positives / rejected: n
 - Severity-Downgrades: n
-- kontaminierter Test: yes/no
+- kontaminierter Holdout: yes/no
+
+Diese Metrik betrifft Methodentests, nicht reguläre Produktionsreviews.
 
 Kein Gesamt-Quality-Score.
 
-Ein einzelner Test kann zeigen, ob das Verfahren grundsätzlich nützlich ist. Er beweist noch keine allgemeine Trefferquote für ganze Romane.
-
 ## 10. Statuslogik
 
-- `NOT_YET_VALIDATED` – Protokoll vorhanden, aber noch kein sauberer Fresh-Context-Test.
-- `CONTAMINATED` – Reviewer kannte verbotene Findings/Diffs; Ergebnis zählt nicht.
-- `FAIL` – sauberer Test durchgeführt, aber Verfahren liefert keinen hinreichend belastbaren Nutzen oder zu viele falsche Befunde für den vorgesehenen Zweck.
-- `PASS_FOR_PILOT` – sauberer Test findet reale, menschlich bestätigte Fehler mit vertretbarer False-Positive-Last. Bedeutet: im echten Roman kontrolliert einsetzen, nicht „voll validiert“.
+### Produktive Reviews
 
-Für einen konkreten Gate-Review können zusätzlich projektbezogene Readiness-Werte verwendet werden. Diese sind **Review-Ausgaben**, nicht Human-Gate-Tokens.
+- `EVIDENCE_BOUND_REVIEW` – gültiger Review gegen fixierten Zielstand; Vorwissen erlaubt, Findings ausschließlich aus kanonischer Target-Evidenz hergeleitet.
+- `REVIEW_INCOMPLETE` – Zielstand oder notwendige Quellen nicht vollständig geprüft.
+- `REVIEW_INVALID_TARGET` – Zielcommit/-artefakt stimmt nicht mit dem Auftrag überein.
+
+### Blind-/Holdout-Methodentests
+
+- `CLEAN_FRESH_CONTEXT` – sauberer Blind-/Holdout-Test.
+- `CONTAMINATED` – nur für einen ausdrücklich als blind definierten Test; Benchmark-Kontext war vor Review bekannt.
+- `FAIL` – Holdout durchgeführt, Verfahren liefert keinen hinreichend belastbaren Nutzen.
+- `PASS_FOR_PILOT` – Holdout findet reale, menschlich bestätigte Fehler mit vertretbarer False-Positive-Last.
+
+Für konkrete Gate-Reviews können zusätzlich projektbezogene Readiness-Werte verwendet werden. Diese sind Review-Ausgaben, nicht Human-Gate-Tokens.
 
 ## 11. KISS-Regel
 
-> Erst unabhängigen Review als klar begrenzte zweite Lesung nutzen, dann Findings evidenzbasiert adjudizieren. Keine Scores, Judges, Agenten oder automatischen Rewrite-Loops bauen, solange der einfache Fresh-Context-Review plus Human-Disposition den Zweck erfüllt.
+> Für Buchproduktion zählt ein fixierter Zielstand plus evidenzgebundene zweite Lesung. Blindheit ist optional und nur für Methodentests nötig. Findings werden anschließend menschlich adjudiziert; keine Scores, Judges oder automatischen Rewrite-Loops bauen, solange dieser einfache Ablauf den Zweck erfüllt.
