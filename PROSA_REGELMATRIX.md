@@ -85,6 +85,7 @@ Zu tracken sind insbesondere:
 | Rule ID | Scope Owner | Muster | Korpus-Evidenz | Detektor v0.1 | Severity | Schwelle / Entscheidung | Evidenzstatus | Auto-Rewrite |
 |---|---|---|---|---|---|---|---|---|
 | `forbidden_sondern` | **Prosa-Profil** | Wort `sondern` | Positiv 01–10; historischer CI-Guard in NORMALFALL | Regex/Wortgrenze | **FAIL** | jedes nicht ausgenommene `\bsondern\b` | `established_project_rule` | nein |
+| `forbidden_em_dash` | **Prosa-Profil** | Geviertstrich `—` im deutschsprachigen Romantext | historischer Typografie- und CI-Guard in NORMALFALL | Literalzeichen | **FAIL** | jedes nicht ausgenommene `—`; notwendiger Gedankenstrich ist `–` | `established_project_rule` | nein |
 | `softener_density` | **Prosa-Profil** | Häufung von `vielleicht`, `möglicherweise`, `vermutlich`, `offenbar`, `schien`, `wirkte`, `könnte`, `soweit`, `zumindest` | Positiv 49; zahlreiche akzeptierte Einzel-/Doppelfälle K01–K20 | Rolling word window | **INFO** | 120-Wort-Fenster; `reporting_floor=2` dient nur der Reportbegrenzung, **nicht** als Qualitätsgrenze | `insufficient_for_review_threshold` | nein |
 | `negation_sequence` | **Prosa-Profil** | kurze aufeinanderfolgende `Nicht`/`Kein`-Absätze | positive Negations-/Erklärfälle; Kontrollen K27–K31 | Absatzstruktur | **REVIEW** | ab 2 direkt aufeinanderfolgenden kurzen Negationsabsätzen, max. 12 Wörter je Absatz | `provisional_small_sample` | nein |
 | `staccato_sequence` | **Prosa-Profil** | Kette sehr kurzer narrativer Absätze | mehrere gekürzte Stakkato-Fälle; mehrere akzeptierte kurze Formen; Vollmanuskript-Test: 403 Treffer | Absatzstruktur | **INFO** | ab 3 narrativen Absätzen mit max. 7 Wörtern; Dialog ausgeschlossen; rein deskriptiv | `insufficient_for_review_threshold` | nein |
@@ -93,13 +94,23 @@ Zu tracken sind insbesondere:
 | `binary_contrast_without_sondern` | **Prosa-Profil** | semantische Ausweichform `Nicht X. Y.` u. ä. | mehrere positive Kontrastfälle; gemischte legitime Negationen | – in v0.1 | später REVIEW | kein mechanischer Grenzwert | `semantic_only` | nein |
 | `explanation_echo` | **Prosa-Profil** | bereits verständliche Handlung/Dialog wird nachträglich erklärt | Positiv u. a. 22, 23, 25, 36, 39, 40 | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
 | `method_or_proof_prose` | **Prosa-Profil** | sichtbare Methodik-/Beweisführung in Romanprosa | Positiv u. a. 38, 41 | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
-| `over_symmetry` | **Prosa-Profil** | zu saubere rhetorische Spiegelung/Dreierstruktur | Positiv 11–15, Kontrollen mit legitimer kurzer Parallelität | – in v0.1 | später REVIEW | kontextuell | `semantic_only` | nein |
+| `over_symmetry` | **Prosa-Profil** | zu saubere rhetorische Spiegelung/Dreierstruktur | Positiv 11–15, Kontrollen mit legitimer kurzer Parallelität | – in v0.1 | später REVIEW | kein mechanischer Grenzwert | `semantic_only` | nein |
 
 ### Warum `sondern` kein Core-Rule ist
 
 Der Core muss jedes Buch analysieren können, ohne selbst zu behaupten, dass ein bestimmtes deutsches Wort „schlecht“ sei. `sondern = 0` ist deshalb Eigentum des **Prosa-Profils `de_anti_ki_prosa_v1`**. Das Framework kann später andere Prosa-Profile laden.
 
 Die Regel bleibt in diesem Profil absichtlich hart, weil NORMALFALL sie bereits produktiv als Zero-Tolerance-Guard verwendet hat. Ausnahmen sind möglich, aber ausschließlich explizit in `config/prosa_rules.yml` mit `match` und `reason`. Es gibt keinen Inline-`noqa`-Marker im Romantext.
+
+### Warum `—` im deutschen Prosa-Profil ein Hard Guard ist
+
+Der Geviertstrich ist nicht grundsätzlich ein sprachlicher Fehler. Für das deutschsprachige Romanprofil wurde jedoch bereits bei `NORMALFALL` bewusst der **Halbgeviertstrich `–`** als Gedankenstrich festgelegt und `—` per CI ausgeschlossen.
+
+Deshalb gilt profilbezogen:
+
+> `— = 0` im finalen Romantext.
+
+Das ist eine deterministische Typografie-Regel, keine semantische Stilbewertung. Sie verhindert zugleich, dass ein im deutschsprachigen Buchsatz ungewolltes und bei LLM-Prosa auffällig häufiges Zeichen unbemerkt in die finale Ausgabe gelangt.
 
 ## Ausnahmen
 
