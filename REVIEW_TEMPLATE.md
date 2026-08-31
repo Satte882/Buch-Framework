@@ -47,11 +47,14 @@ Pro Szene nur entscheidungsrelevante Punkte:
 |---|---|
 | Szene | ID + Arbeitstitel |
 | Story-Funktion | Warum die Szene im Gesamtverlauf existiert |
+| **Primary Dramatic Carrier** | dominante dramaturgische Form, z. B. clinical_action, personal_confrontation, data_review, governance_design, implementation_test, aftermath |
 | zentrale Entscheidung / Veränderung | Was sich irreversibel oder relevant verschiebt |
 | Leserwissen danach | Was der Leser nach der Szene belastbar weiß / nicht weiß |
 | relevante Evidenz / Reveal | Welche Informationsstränge verändert werden |
 | Character-/Relationship-Shift | Nur relevante Zustandsänderungen |
 | offene fachliche Frage | Nur falls sie den Gate-Entscheid beeinflusst |
+
+Der `Primary Dramatic Carrier` ist eine **Review-Projektion**, keine neue kanonische Story-Wahrheit. Er dient dazu, die Verteilung der Szenenformen über das ganze Buch sichtbar zu machen.
 
 ## Review-Sicht B – Information / Reveal
 
@@ -91,6 +94,24 @@ Am Ende jedes Batches ein kompakter Übergabezustand:
 - **offene Blocker:** Nur aktuell wirklich blockierende Punkte.
 - **Startbedingung nächster Batch:** Welcher Zustand darf nicht versehentlich übersprungen oder zurückgesetzt werden?
 
+## Review-Sicht E – Whole-Book Scene-Shape
+
+Nach allen G2-Batches folgt eine **Gesamtsicht über S001–Sxxx**, nicht nur eine Addition der Batch-OKs.
+
+Minimaler Output:
+
+| Szene | Primary Carrier | direkt vorher gleicher Carrier? | Meeting/Review/Governance/Data? | bewusste Begründung bei Häufung |
+|---|---|---|---|---|
+
+Zusätzlich prüfen:
+
+- mehr als 2 direkt aufeinanderfolgende Szenen mit praktisch gleichem Carrier,
+- mehr als 4 Meeting-/Review-/Governance-/Data-Szenen in einem Fenster von 8 Szenen,
+- neue Regel-/Governance-Stufen ohne Anwendung/Folge/Konflikt dazwischen,
+- wiederholt dieselbe Erkenntnismechanik über mehrere Szenen.
+
+**Wichtig:** Diese Werte sind Warnsignale. Sie erzeugen nicht automatisch `REWORK`. Ein Finding braucht eine konkrete Ermüdungs-/Redundanzwirkung.
+
 ## Review-Abschluss
 
 Am Ende eines Review-Pakets:
@@ -100,11 +121,34 @@ Batch: <Szenenbereich>
 Review-Zweck: <z. B. G2 fachliche Teilprüfung>
 Cross-Scene-Widersprüche: <n>
 Cross-Batch-Widersprüche: <n / n.a.>
+Scene-Shape-Risiken: <n / keine / Gesamtcheck ausstehend>
 offene Blocker: <Liste / keine>
 Rework erforderlich: <ja/nein + konkret>
 neue Storyentscheidung erforderlich: <ja/nein>
 Human-Entscheidung: <noch offen / internes Batch-OK / Gate-Entscheidung>
 ```
+
+Beim **finalen G2-Abschluss** zusätzlich:
+
+```text
+Whole-Book Scene-Shape Review: <PASS | REWORK_REQUIRED>
+begründete Überschreitungen der Heuristiken: <Liste / keine>
+bestätigte strukturelle Majors: <n>
+```
+
+## G3-Sequenzcheck
+
+Für längere Romane darf der G3-Review nicht nur isolierte Vorzeigeszenen betrachten.
+
+Zusätzlich zu 2–3 repräsentativen Einzelszenen wird ein **zusammenhängender Mittelteil-Run von mindestens 6 Szenen** gelesen.
+
+Der Review dokumentiert mindestens:
+
+- wiederkehrende Dialogrhythmen,
+- wiederkehrende Szenenchoreografien,
+- Expositionshäufung,
+- gleiche Übergangs-/Schlussmechaniken,
+- Verhältnis Handlung / Analyse / Beziehung / Konsequenz.
 
 ## Grenzen
 
@@ -116,8 +160,9 @@ Es darf nicht:
 - eine Storyentscheidung als geklärt markieren, die upstream offen ist,
 - semantische Relevanz automatisch entscheiden,
 - einen Human Gate ersetzen,
-- aus einem internen Batch-OK einen neuen Gate `G2a/G2b/...` machen.
+- aus einem internen Batch-OK einen neuen Gate `G2a/G2b/...` machen,
+- aus einem bloßen Zählwert automatisch einen literarischen Fehler ableiten.
 
 ## KISS-Regel
 
-> Zeige dem Menschen nur die Informationen, die er für die konkrete Entscheidung braucht – aber jede relevante Zustandsänderung genau einmal.
+> Zeige dem Menschen nur die Informationen, die er für die konkrete Entscheidung braucht – aber jede relevante Zustandsänderung und jedes manuskriptweite Verteilungsmuster genau einmal.
