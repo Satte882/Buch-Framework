@@ -52,6 +52,32 @@ Dieser Lauf war methodisch entscheidend: Die synthetischen Tests waren korrekt, 
 
 **Entscheidung:** Die Schwellen werden nicht nachträglich auf NORMALFALL hochoptimiert. Stattdessen werden `staccato_sequence` und `dialogue_pingpong` in v0.1 auf **INFO** zurückgestuft. Ihre Detektoren bleiben als Messinstrument erhalten, bis mehr passendes positives und negatives Material oder ein präziserer Detektor vorliegt. `negation_sequence` bleibt wegen des deutlich kleineren Kandidatenvolumens vorläufig REVIEW.
 
+## Whole-Manuscript-Aggregation
+
+Der Real-Pilot `Satte882/ABWEICHUNG` hat eine wichtige Grenze lokaler Scanner-Severity bestätigt:
+
+> Ein einzelner `dialogue_pingpong`-Treffer kann lokal nur INFO sein. Wenn dieselbe Rhythmusmechanik jedoch über viele Szenen und ähnliche Szenentypen verteilt dominiert, kann daraus **semantisch** ein manuskriptweites Major-Risiko entstehen.
+
+Daraus folgt **keine** automatische Severity-Promotion im Scanner.
+
+Stattdessen gilt für G3/G4:
+
+1. lokale Scanner-Treffer bleiben in ihrer technischen Severity unverändert;
+2. zusätzlich werden Treffer **pro Szene und über Sequenzen** aggregiert;
+3. der unabhängige Whole-Manuscript-Review bewertet Verteilung, Vorhersagbarkeit und Ermüdungswirkung;
+4. nur ein semantisch bestätigter Befund darf daraus einen Major machen.
+
+Zu tracken sind insbesondere:
+
+- `dialogue_pingpong`-Dichte pro Szene und über zusammenhängende Szenenfolgen,
+- `staccato_sequence`-Häufung über Szenengrenzen,
+- wiederkehrende Blick-/Übergangsformeln,
+- gleiche Eröffnungs-/Schlussmechaniken,
+- semantische `explanation_echo`-/Kontrast-/Symmetrie-Muster,
+- Verhältnis von körperlicher/handlungsgetragener Präsenz zu Analyse-/Policy-Szenen.
+
+**KISS:** v0.1 verlangt dafür keine neue automatisierte literarische Score-Engine. Vorhandene Zählungen dienen als Orientierung; die Entscheidung bleibt semantisch und wird anschließend adjudiziert.
+
 ---
 
 ## Regelmatrix
@@ -101,13 +127,17 @@ Er läuft später ausschließlich:
 1. manuell, wenn ein Prosa-Batch zur menschlichen Freigabe vorgelegt wird;
 2. manuell, beim finalen Prosa-Gate des Gesamtmanuskripts.
 
+Bei längeren Romanen umfasst G3 neben repräsentativen Einzelszenen zusätzlich einen **zusammenhängenden Mittelteil-Run von mindestens 6 Szenen**, damit globale Muster früher sichtbar werden.
+
 Er läuft **nicht**:
 
 - bei jedem Commit,
 - als CI-API-Aufruf,
 - als automatische Umschreibepipeline.
 
-Input soll später sein: Treffer/Kandidat + lokaler Kontext + passende positive Korpusfälle + passende Kontrollfälle. Output: `wahrscheinlich problematisch`, `wahrscheinlich legitim` oder `unklar`, mit kurzer Begründung. Keine automatische Manuskriptänderung.
+Input soll später sein: Treffer/Kandidat + lokaler Kontext + passende positive Korpusfälle + passende Kontrollfälle; bei Whole-Manuscript-Prüfungen zusätzlich die Verteilung über Szenen/Sequenzen. Output: konkretes Finding oder `unklar`, mit kurzer Evidenz. Keine automatische Manuskriptänderung.
+
+Raw-Findings werden anschließend gemäß `SEMANTIC_REVIEW_PROTOCOL.md` adjudiziert. Ein Reviewer darf seine eigene Severity nicht automatisch in einen Gate-Blocker verwandeln.
 
 ## Promotion einer Regel
 
@@ -119,6 +149,7 @@ Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
 - **REVIEW → FAIL:** nur bei sehr hoher Eindeutigkeit **und** bewusster Projekt-/Profilentscheidung.
 - Ein kleines Hold-out allein macht eine Regel niemals „stark“.
 - False Positives bei REVIEW sind zulässig; REVIEW bedeutet bewusst „ansehen“, nicht „ändern“.
+- Eine manuskriptweite semantische Häufung ändert nicht automatisch die technische Rule-Severity des Scanners.
 
 ## Definition of Done für v0.1
 
@@ -131,4 +162,6 @@ Eine Musterfamilie darf nur in dieser Richtung aufsteigen:
 - Dev/Hold-out-Zuordnung ist festgeschrieben;
 - Tests unterscheiden Softwarekorrektheit von literarischer Evidenz;
 - ein Vollmanuskript-Rauschtest ist Teil der Validierung;
-- LLM-Review ist nicht Teil von CI und nicht automatisch aktiv.
+- Whole-Manuscript-Aggregation wird in G3/G4 semantisch mitgelesen;
+- LLM-Review ist nicht Teil von CI und nicht automatisch aktiv;
+- Finding-Adjudikation bleibt vom Raw-Review getrennt.
