@@ -60,10 +60,32 @@ Die vollständigen Regeln, einschließlich globaler Index-/Checker-Sichten, steh
 2. **G1 – Story-Architektur**: Story Package + alle Bausteine + alle Ereignisse/Sequenzen + Figurenkern + relevante Rechercheabhängigkeiten
 3. **G2 – Prose Ready**: vollständige Szenenlandschaft + Beats + Character States + blockierende Recherche **+ Whole-Book Scene-Shape Review**
 4. **G3 – Prosa-Stil**: 2–3 repräsentative Einzelszenen **+ zusammenhängender Mittelteil-Run von mindestens 6 Szenen**
-5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit + unabhängige Reviews **+ Finding-Adjudikation**
+5. **G4 – Manuskript**: vollständiger Text + Qualitätsarbeit + unabhängige Reviews **+ Finding-Adjudikation + finaler horizontaler Prosa-/Rhythmuspass**
 6. **G5 – Produktion**: konkretes Produktionsartefakt
 
 Bei langen Büchern darf ein Gate aus mehreren Review-Batches bestehen. Dadurch wird Review-Last portioniert, ohne künstlich neue Gate-Typen zu erzeugen.
+
+### Finaler Prosa- und Rhythmuspass in G4
+
+Die Anti-KI-/Rhythmus-Lessons aus `NORMALFALL` werden nicht nur dokumentiert, sondern vor dem finalen G4-Freeze als eigener **horizontaler Arbeitspass** angewendet. Der verbindliche Ablauf steht in [`FINAL_PROSE_RHYTHM_PASS.md`](FINAL_PROSE_RHYTHM_PASS.md).
+
+Geprüft werden insbesondere:
+
+- Satzbau- und Stakkatoformeln,
+- Dialog-Pingpong,
+- Negations-/Kontrastmuster,
+- erklärende Nachsätze nach bereits verständlichen Beats,
+- Filterformulierungen und wiederkehrende Mikro-Choreografie,
+- sichtbare Methodik-/Beweisführungsprosa,
+- rhetorische Symmetrie,
+- Hard Guards des aktiven Prosa-/Sprachprofils.
+
+Für das deutsche Profil `de_anti_ki_prosa_v1` gilt zusätzlich deterministisch:
+
+- `sondern = 0` im finalen Prosatext,
+- Geviertstrich `— = 0`; notwendiger Gedankenstrich ist `–`.
+
+Der Pass ist **kein siebtes Human-Gate**. Er ist Teil der G4-Qualitätsarbeit. Wird nach G4/G5 ein relevantes reines Prosa-/Rhythmusproblem entdeckt, wird G4 für den neuen Manuskript-Snapshot wieder geöffnet; bestehende G5-Ausgaben sind bis zum Neubuild stale.
 
 ### Titel- und Kapitelbenennung vor G5
 
@@ -190,13 +212,20 @@ Systematische Prosa beginnt erst nach G2. Die zentrale Prose-Readiness-Frage lau
 
 Zusätzlich muss die Szenenfolge auf Whole-Book-Ebene ausreichend variiert sein.
 
+Vor dem G4-Freeze gilt außerdem:
+
+> **Der Leser soll die Szene sehen, nicht das Muster, mit dem sie erzeugt wurde.**
+
+Deshalb wird das vollständige Manuskript horizontal nach `FINAL_PROSE_RHYTHM_PASS.md` geprüft und erst nach Regression/Fresh-Context-Check eingefroren.
+
 ## Bestehende technische Bausteine
 
 Vorhanden sind unter anderem:
 
 - Pipeline-/Scene-Readiness-Checker,
 - Provenienz-/Invalidierungsprüfung,
-- Prosa-Audit,
+- Prosa-Audit und Prosa-Regelmatrix,
+- finaler Prosa-/Rhythmuspass,
 - Review-Templates,
 - Fresh-Context-Semantic-Review-Protokoll,
 - Titel-/Untertitel-/Kapitelbenennungs-Workflow.
