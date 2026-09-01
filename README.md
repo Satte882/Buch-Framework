@@ -232,6 +232,24 @@ Vorhanden sind unter anderem:
 
 Diese Technik dient dem Prozess. Sie darf die fachliche Ableitungshierarchie nicht umkehren.
 
+## Post-Release-Marketing
+
+Das Framework endet fachlich mit **G5 – Produktion**. Marketing wird danach als eigene Post-Release-Strecke geführt und ist ausdrücklich **kein G6**.
+
+Standardreihenfolge:
+
+`G5 Produktion → Veröffentlichung / reale Produktdetailseite → Post-Release-Marketing → Lernen / Optimieren`
+
+Wiederverwendbare Marketing-Workflows liegen unter [`marketing/`](marketing/README.md).
+
+Für Amazon KDP ist der erste dokumentierte Baustein:
+
+- [`marketing/AMAZON_KDP_A_PLUS.md`](marketing/AMAZON_KDP_A_PLUS.md) – A+-Inhalte als modulare Scroll-Dramaturgie; inklusive Amazon-Constraints, Produktionsmethode, QA und Lessons Learned aus `ABWEICHUNG` und `NORMALFALL`.
+
+Kernregel:
+
+> **A+ soll nicht erklären, wie das Buch gebaut wurde. Es soll dem Leser gerade genug vom Buch zeigen, dass er wissen will, wie es weitergeht.**
+
 ## Leitprinzip
 
 > **Den Prozess wiederverwenden, nicht den Plot kopieren. Meta → Bausteine → Events → Szenen → Beats → Prosa.**
